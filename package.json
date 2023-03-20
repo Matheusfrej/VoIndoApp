@@ -18,12 +18,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@rocketseat/eslint-config": "^1.2.0",
     "@tsconfig/react-native": "^2.0.3",
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.28",
     "@types/react-test-renderer": "^18.0.0",
     "@types/styled-components": "^5.1.26",
     "@types/styled-components-react-native": "^5.2.1",
+    "eslint": "^8.36.0",
     "typescript": "^5.0.2"
   },
   "private": true
