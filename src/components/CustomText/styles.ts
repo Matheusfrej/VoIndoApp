@@ -1,4 +1,4 @@
-import { Text } from '@react-native-material/core'
+import { Text } from 'react-native'
 
 import styled, { css } from 'styled-components'
 
@@ -40,7 +40,7 @@ export const StyledText = styled(Text)<StyledTextProps>`
       `) ||
     (props.type === 'body' &&
       css`
-        font-size: 16px;
+        font-size: 14px;
         font-weight: normal;
         font-family: 'InterRegular';
       `)}
