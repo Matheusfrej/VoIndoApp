@@ -4,12 +4,11 @@
     "slug": "VoIndoFront",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/newIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/newSplash.png",
+      "backgroundColor": "#FCFCFC"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
