@@ -1,12 +1,12 @@
-import { Button } from '@react-native-material/core'
 import styled, { css } from 'styled-components/native'
+import { StyledText } from '../CustomText/styles'
 
 interface StyledButtonProps {
   variantType: string
   color: string
 }
 
-export const StyledButton = styled(Button)<StyledButtonProps>`
+export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
   border-radius: 4px;
   background-color: ${(props) =>
     props.color === 'blue'
@@ -45,4 +45,9 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
         width: 100%;
         padding: 10px 16px;
       `)}
+  font-size: 20px;
+`
+
+export const ButtonText = styled(StyledText)`
+  text-align: center;
 `

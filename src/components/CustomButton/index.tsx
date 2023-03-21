@@ -1,23 +1,26 @@
-import { StyledButton } from './styles'
+import { ButtonText, StyledButton } from './styles'
 
 interface ButtonProps {
   text: string
   variantType: 'default' | 'large' | 'outline' | 'small' | 'block'
   color?: 'blue' | 'orange'
+  onPress: any // chama qualquer função que você passar
 }
 
 export function CustomButton({
   text,
   variantType,
   color = 'orange',
+  onPress,
 }: ButtonProps) {
   return (
     <StyledButton
-      uppercase={false}
-      title={text}
-      variantType={variantType}
       color={color}
-      disableElevation
-    />
+      variantType={variantType}
+      onPress={onPress}
+      underlayColor="orange"
+    >
+      <ButtonText type="subtitle">{text}</ButtonText>
+    </StyledButton>
   )
 }

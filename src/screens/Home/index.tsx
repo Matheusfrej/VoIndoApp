@@ -1,18 +1,19 @@
-import { TouchableHighlight, Image, View } from 'react-native'
+import { Image } from 'react-native'
 
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import {
   CenteredCustomText,
-  FullTouchableHighlight,
   HomeContainer,
   LogoImg,
   WelcomeText,
   WelcomeTexts,
 } from './styles'
 
-export function Home({ navigation }) {
+export function Home({ navigation }: any) {
   const goToHub = () => {
+    console.log('apertou')
+
     navigation.push('hub')
   }
 
@@ -36,9 +37,12 @@ export function Home({ navigation }) {
         </CenteredCustomText>
       </WelcomeTexts>
 
-      <FullTouchableHighlight onPress={goToHub}>
-        <CustomButton text="Iniciar" color="orange" variantType="block" />
-      </FullTouchableHighlight>
+      <CustomButton
+        text="Iniciar"
+        color="orange"
+        variantType="block"
+        onPress={goToHub}
+      />
     </HomeContainer>
   )
 }
