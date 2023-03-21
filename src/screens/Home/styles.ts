@@ -4,7 +4,8 @@ export const HomeContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.color.PRIMARY};
+  gap: 10px;
+  background-color: ${(props) => props.theme.color['BG-2']};
 `
 
 export const Text = styled.Text`
