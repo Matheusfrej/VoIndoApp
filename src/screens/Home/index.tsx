@@ -17,6 +17,8 @@ export function Home({ navigation }: any) {
     navigation.push('hub')
   }
 
+  // comentario
+
   return (
     <HomeContainer>
       <Image source={require('../../../assets/presentation.png')} alt="" />
