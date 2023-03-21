@@ -1,7 +1,8 @@
 import { ThemeProvider } from 'styled-components/native'
-import { Home } from './src/screens/Home'
+// import { Testes } from './src/screens/Testes'
 import defaultTheme from './src/theme/light'
 import { useFonts } from 'expo-font'
+import { Routes } from './src/routes'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -15,7 +16,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Home />
+      <Routes />
     </ThemeProvider>
   )
 }

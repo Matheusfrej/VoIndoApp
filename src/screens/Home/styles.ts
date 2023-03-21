@@ -1,28 +1,34 @@
 import styled from 'styled-components/native'
+import { StyledText } from '../../components/CustomText/styles'
 
 export const HomeContainer = styled.View`
   flex: 1;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  gap: 10px;
-  background-color: ${(props) => props.theme.color['BG-2']};
+  padding: 120px 24px;
 `
 
-export const ContentContainer = styled.View`
-  flex: 1;
-  height: 50%;
+export const LogoImg = styled.Image`
+  width: 90px;
+  margin: 0;
+  padding: 0;
+`
+
+export const WelcomeText = styled.View`
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  align-items: center;
 `
 
-export const Text = styled.Text`
-  font-size: 48px;
-  font-weight: 600;
-  font-family: 'InterSemiBold';
+export const WelcomeTexts = styled.View`
+  text-align: center;
+  gap: 20px;
 `
 
-export const AvatarContainer = styled.View`
+export const CenteredCustomText = styled(StyledText)`
+  text-align: center;
+`
+
+export const FullTouchableHighlight = styled.TouchableHighlight`
   width: 100%;
-  justify-content: flex-end;
-  align-items: flex-end;
 `
