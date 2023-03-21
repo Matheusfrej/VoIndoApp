@@ -6,7 +6,7 @@ interface ButtonProps {
   color?: 'blue' | 'orange'
 }
 
-export function ButtonComponent({
+export function CustomButton({
   text,
   variantType,
   color = 'orange',

@@ -10,4 +10,5 @@ export default {
     'SECONDARY-LIGHT': '#FCB495',
     'BLACK-2': '#3F3D56',
   },
+  space: 4,
 }
