@@ -1,5 +1,6 @@
 // import { CustomButton } from '../../components/CustomButton'
 import { Image } from 'react-native'
+import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import {
   AvatarContainer,
@@ -14,11 +15,11 @@ export function Home() {
       <ContentContainer>
         <Image source={require('../../../assets/logo.png')} alt="" />
         <Text>Home</Text>
-        {/* <CustomButton text="default" variantType="default" color="blue" />
-      <CustomButton text="large" variantType="large" />
-      <CustomButton text="outline" variantType="outline" />
-      <CustomButton text="small" variantType="small" color="blue" />
-      <CustomButton text="block" variantType="block" /> */}
+        <CustomButton text="default" variantType="default" color="blue" />
+        <CustomButton text="large" variantType="large" />
+        <CustomButton text="outline" variantType="outline" />
+        <CustomButton text="small" variantType="small" color="blue" />
+        <CustomButton text="block" variantType="block" />
         <CustomText type="h1">Texto exemplo de h1</CustomText>
         <CustomText type="h2">Texto exemplo de h2</CustomText>
         <CustomText type="h3">Texto exemplo de h3</CustomText>

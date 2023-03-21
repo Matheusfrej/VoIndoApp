@@ -7,6 +7,7 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = styled(Button)<StyledButtonProps>`
+  border-radius: 4px;
   background-color: ${(props) =>
     props.color === 'blue'
       ? props.theme.color.PRIMARY

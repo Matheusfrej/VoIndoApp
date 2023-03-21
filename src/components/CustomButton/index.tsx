@@ -17,6 +17,7 @@ export function CustomButton({
       title={text}
       variantType={variantType}
       color={color}
+      disableElevation
     />
   )
 }
