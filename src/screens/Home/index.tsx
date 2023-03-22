@@ -14,7 +14,7 @@ export function Home({ navigation }: any) {
   const goToHub = () => {
     console.log('apertou')
 
-    navigation.push('hub')
+    navigation.push('home2')
   }
 
   // comentario
