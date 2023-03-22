@@ -25,14 +25,14 @@ export function Apresentation({ navigation }: any) {
         </Title>
 
         <Description>
-          <CustomText type="body">
+          <CustomText type="subtitle">
             Vou te ajudar a encontrar atividades do seu interesse, encontrar
             grupos, desenvolver novas habilidades...
           </CustomText>
         </Description>
 
         <Description>
-          <CustomText type="body"> Pode contar comigo!</CustomText>
+          <CustomText type="subtitle"> Pode contar comigo!</CustomText>
         </Description>
       </TextArea>
 

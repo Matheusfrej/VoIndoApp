@@ -8,7 +8,8 @@ export const Button = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin: 0px 20px;
+  width: 220px;
+  margin: auto;
 `
 
 export const Avatar = styled.View`

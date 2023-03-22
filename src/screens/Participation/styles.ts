@@ -21,6 +21,8 @@ export const TextArea2 = styled.View`
 
 export const Button = styled.View`
   margin: 0px 20px;
+  width: 220px;
+  margin: auto;
 `
 
 export const Avatar = styled.View`
