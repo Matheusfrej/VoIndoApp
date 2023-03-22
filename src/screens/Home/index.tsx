@@ -7,6 +7,7 @@ import {
   HomeContainer,
   LogoImg,
   WelcomeText,
+  Button,
   WelcomeTexts,
 } from './styles'
 
@@ -39,12 +40,14 @@ export function Home({ navigation }: any) {
         </CenteredCustomText>
       </WelcomeTexts>
 
-      <CustomButton
-        text="Iniciar"
-        color="orange"
-        variantType="block"
-        onPress={goToApresentation}
-      />
+      <Button>
+        <CustomButton
+          text="Iniciar"
+          color="orange"
+          variantType="block"
+          onPress={goToApresentation}
+        />
+      </Button>
     </HomeContainer>
   )
 }

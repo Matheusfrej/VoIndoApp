@@ -1,12 +1,12 @@
 import { Image } from 'react-native'
 import { CustomButton } from '../../components/CustomButton'
+import { CustomText } from '../../components/CustomText'
 import {
   Avatar,
   Button,
   Container,
   Title,
   Description,
-  CountMe,
   TextArea,
 } from './styles'
 
@@ -20,14 +20,20 @@ export function Apresentation({ navigation }: any) {
   return (
     <Container>
       <TextArea>
-        <Title> Oi, eu sou a Fulana!</Title>
+        <Title>
+          <CustomText type="h1"> Oi, eu sou a Fulana!</CustomText>
+        </Title>
 
         <Description>
-          Vou te ajudar a encontrar atividades do seu interesse, encontrar
-          grupos, desenvolver novas habilidades...
+          <CustomText type="body">
+            Vou te ajudar a encontrar atividades do seu interesse, encontrar
+            grupos, desenvolver novas habilidades...
+          </CustomText>
         </Description>
 
-        <CountMe> Pode contar comigo!</CountMe>
+        <Description>
+          <CustomText type="body"> Pode contar comigo!</CustomText>
+        </Description>
       </TextArea>
 
       <Button>

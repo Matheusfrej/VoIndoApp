@@ -18,29 +18,14 @@ export const Avatar = styled.View`
 `
 
 export const Title = styled.Text`
-  font-size: 22px;
-  font-weight: 600;
-  font-family: 'InterSemiBold';
   margin: 20px 20px 20px 20px;
   text-align: center;
 `
 
 export const Description = styled.Text`
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'InterSemiBold';
-  margin: 20px 20px 5px 20px;
+  margin: 30px 20px -25px 20px;
   text-align: center;
 `
-
-export const CountMe = styled.Text`
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'InterSemiBold';
-  margin: 0px 20px;
-  text-align: center;
-`
-
 export const TextArea = styled.View`
   flex: 1;
   justify-content: center;
