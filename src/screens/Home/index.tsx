@@ -7,14 +7,16 @@ import {
   HomeContainer,
   LogoImg,
   WelcomeText,
+  Button,
   WelcomeTexts,
 } from './styles'
 
 export function Home({ navigation }: any) {
-  const goToHub = () => {
+  const goToApresentation = () => {
     console.log('apertou')
 
-    navigation.push('home2')
+    navigation.push('apresentation')
+
   }
 
   // comentario
@@ -39,12 +41,14 @@ export function Home({ navigation }: any) {
         </CenteredCustomText>
       </WelcomeTexts>
 
-      <CustomButton
-        text="Iniciar"
-        color="orange"
-        variantType="block"
-        onPress={goToHub}
-      />
+      <Button>
+        <CustomButton
+          text="Iniciar"
+          color="orange"
+          variantType="block"
+          onPress={goToApresentation}
+        />
+      </Button>
     </HomeContainer>
   )
 }
