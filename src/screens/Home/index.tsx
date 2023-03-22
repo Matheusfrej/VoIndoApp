@@ -11,10 +11,10 @@ import {
 } from './styles'
 
 export function Home({ navigation }: any) {
-  const goToHub = () => {
+  const goToApresentation = () => {
     console.log('apertou')
 
-    navigation.push('hub')
+    navigation.push('apresentation')
   }
 
   // comentario
@@ -43,7 +43,7 @@ export function Home({ navigation }: any) {
         text="Iniciar"
         color="orange"
         variantType="block"
-        onPress={goToHub}
+        onPress={goToApresentation}
       />
     </HomeContainer>
   )
