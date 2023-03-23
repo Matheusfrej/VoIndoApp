@@ -15,7 +15,7 @@ interface ActivityCardProps {
 
 export function ActivityCard({
   check = false,
-  profissional = true,
+  profissional = false,
 }: ActivityCardProps) {
   return (
     <CardContainer>

@@ -7,6 +7,7 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
+  margin: 0;
   border-radius: 4px;
   background-color: ${(props) =>
     props.color === 'blue'
@@ -26,7 +27,7 @@ export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
       props.color === 'blue' &&
       css`
         padding: 10px 16px;
-        background-color: transparent;
+        /* background-color: transparent; */
         border: 2px solid ${props.theme.color.PRIMARY};
       `) ||
     (props.variantType === 'outline' &&
@@ -51,10 +52,25 @@ export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
 
 interface ButtonTextProps {
   textSize: number
+  variantType: string
+  textColor: string
 }
 
 export const ButtonText = styled(StyledText)<ButtonTextProps>`
   text-align: center;
-  color: white;
+  ${(props) =>
+    (props.variantType === 'outline' &&
+      props.textColor === 'blue' &&
+      css`
+        color: ${props.theme.color.PRIMARY};
+      `) ||
+    (props.variantType === 'outline' &&
+      props.textColor === 'orange' &&
+      css`
+        color: ${props.theme.color.SECONDARY};
+      `) ||
+    css`
+      color: ${props.theme.color.BG};
+    `};
   font-size: ${(props) => props.textSize}px;
 `

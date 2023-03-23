@@ -45,7 +45,7 @@ export function Home({ navigation }: any) {
           text="Iniciar"
           color="orange"
           variantType="block"
-          onPress={goToApresentation}
+          onPress={goToPresentation}
         />
       </Button>
     </HomeContainer>

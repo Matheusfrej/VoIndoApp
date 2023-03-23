@@ -58,7 +58,9 @@ export function Preferences({ navigation }: any) {
             variantType="block"
             color="orange"
             textSize={14}
-            onPress={goToHub}
+            onPress={() => {
+              navigation.push('activitiesList')
+            }}
           />
         </Options>
       </MainContainer>
