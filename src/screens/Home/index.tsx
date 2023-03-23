@@ -15,7 +15,8 @@ export function Home({ navigation }: any) {
   const goToApresentation = () => {
     console.log('apertou')
 
-    navigation.push('home2')
+    navigation.push('apresentation')
+
   }
 
   // comentario
