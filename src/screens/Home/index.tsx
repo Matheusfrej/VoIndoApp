@@ -16,7 +16,6 @@ export function Home({ navigation }: any) {
     console.log('apertou')
 
     navigation.push('apresentation')
-
   }
 
   // comentario
