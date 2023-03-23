@@ -12,7 +12,7 @@ import {
 } from './styles'
 
 export function Home({ navigation }: any) {
-  const goToApresentation = () => {
+  const goToPresentation = () => {
     console.log('apertou')
 
     navigation.push('home2')
