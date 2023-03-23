@@ -5,9 +5,11 @@ import { Container, Avatar, TextContainer, Buttons } from './styles'
 
 export function Home2({ navigation }: any) {
   const goToHub = () => {
-    console.log('apertou')
-
     navigation.push('hub')
+  }
+
+  const goToPreferences = () => {
+    navigation.push('preferences')
   }
   return (
     <Container>
@@ -19,7 +21,7 @@ export function Home2({ navigation }: any) {
         <CustomButton
           text="Participar de uma atividade"
           variantType="block"
-          onPress={goToHub}
+          onPress={goToPreferences}
         ></CustomButton>
       </Buttons>
 

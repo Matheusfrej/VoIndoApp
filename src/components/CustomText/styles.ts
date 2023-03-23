@@ -1,12 +1,10 @@
-import { Text } from 'react-native'
-
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components/native'
 
 interface StyledTextProps {
   type: string
 }
 
-export const StyledText = styled(Text)<StyledTextProps>`
+export const StyledText = styled.Text<StyledTextProps>`
   ${(props) =>
     (props.type === 'h1' &&
       css`
