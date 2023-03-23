@@ -39,6 +39,7 @@ export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
     (props.variantType === 'small' &&
       css`
         padding: 8px 12px;
+        max-width: 70px;
       `) ||
     (props.variantType === 'block' &&
       css`
@@ -48,6 +49,12 @@ export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
   font-size: 20px;
 `
 
-export const ButtonText = styled(StyledText)`
+interface ButtonTextProps {
+  textSize: number
+}
+
+export const ButtonText = styled(StyledText)<ButtonTextProps>`
   text-align: center;
+  color: white;
+  font-size: ${(props) => props.textSize}px;
 `
