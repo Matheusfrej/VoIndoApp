@@ -5,6 +5,7 @@ import { Home2 } from '../screens/Home2'
 import { Hub } from '../screens/Hub'
 import { Participation } from '../screens/Participation'
 import { Preferences } from '../screens/Preferences'
+import { SearchActivities } from '../screens/SearchActivities'
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
@@ -17,6 +18,7 @@ export function StackRoutes() {
       <Screen name="apresentation" component={Apresentation} />
       <Screen name="participation" component={Participation} />
       <Screen name="preferences" component={Preferences} />
+      <Screen name="searchActivities" component={SearchActivities} />
     </Navigator>
   )
 }

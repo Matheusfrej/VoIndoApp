@@ -17,6 +17,10 @@ export function Preferences({ navigation }: any) {
     navigation.push('hub')
   }
 
+  const goToSearchActivities = () => {
+    navigation.push('searchActivities')
+  }
+
   return (
     <PreferencesContainer>
       <BackButton>
@@ -58,7 +62,7 @@ export function Preferences({ navigation }: any) {
             variantType="block"
             color="orange"
             textSize={14}
-            onPress={goToHub}
+            onPress={goToSearchActivities}
           />
         </Options>
       </MainContainer>
