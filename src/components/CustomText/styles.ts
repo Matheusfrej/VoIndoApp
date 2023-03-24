@@ -2,9 +2,11 @@ import styled, { css } from 'styled-components/native'
 
 interface StyledTextProps {
   type: string
+  centered?: boolean
 }
 
 export const StyledText = styled.Text<StyledTextProps>`
+  text-align: ${(props) => (props.centered ? 'center' : 'left')};
   ${(props) =>
     (props.type === 'h1' &&
       css`

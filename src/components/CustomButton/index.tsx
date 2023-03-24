@@ -5,7 +5,8 @@ interface ButtonProps {
   textSize?: number
   variantType: 'default' | 'large' | 'outline' | 'small' | 'block'
   color?: 'blue' | 'orange'
-  onPress: any // chama qualquer função que você passar
+  style?: any
+  onPress?: any // chama qualquer função que você passar
 }
 
 export function CustomButton({
@@ -13,6 +14,7 @@ export function CustomButton({
   textSize = 18,
   variantType,
   color = 'orange',
+  style,
   onPress,
 }: ButtonProps) {
   return (
@@ -22,7 +24,13 @@ export function CustomButton({
       onPress={onPress}
       underlayColor="orange"
     >
-      <ButtonText type="subtitle" textSize={textSize}>
+      <ButtonText
+        type="subtitle"
+        textSize={textSize}
+        style={style}
+        variantType={variantType}
+        textColor={color}
+      >
         {text}
       </ButtonText>
     </StyledButton>

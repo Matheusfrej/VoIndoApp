@@ -10,7 +10,7 @@ import {
   TextArea,
 } from './styles'
 
-export function Apresentation({ navigation }: any) {
+export function Presentation({ navigation }: any) {
   const goToParticipation = () => {
     console.log('apertou')
 

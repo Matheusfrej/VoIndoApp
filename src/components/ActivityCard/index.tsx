@@ -24,6 +24,7 @@ export function ActivityCard({
   quantity = 0,
   distance = 0,
   organizer = '',
+
 }: ActivityCardProps) {
   return (
     <CardContainer>

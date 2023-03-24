@@ -62,7 +62,9 @@ export function Preferences({ navigation }: any) {
             variantType="block"
             color="orange"
             textSize={14}
-            onPress={goToSearchActivities}
+            onPress={() => {
+              navigation.push('activitiesList')
+            }}
           />
         </Options>
       </MainContainer>
