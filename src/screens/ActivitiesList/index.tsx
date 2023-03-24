@@ -61,7 +61,7 @@ export function ActivitiesList({ navigation }: any) {
           selectionColor={'#000'}
           onFocus={() => setPlaceholderText('')}
         />
-        <CustomButton variantType="outline" text="Filtrar" />
+        <CustomButton variantType="outline" text="Filtrar" textSize={14} />
       </FilterBar>
 
       <NewView>
@@ -69,20 +69,50 @@ export function ActivitiesList({ navigation }: any) {
           contentContainerStyle={{ gap: 32, paddingBottom: 300 }}
           showsVerticalScrollIndicator={false}
         >
-          <ActivityCard check={true} />
-          <ActivityCard />
-          <ActivityCard profissional={true} />
-          <ActivityCard />
-          <ActivityCard check={true} />
-          <ActivityCard />
-          <ActivityCard />
-          <ActivityCard profissional={true} check={true} />
-          <ActivityCard profissional={true} check={true} />
-          <ActivityCard profissional={true} check={true} />
-          <ActivityCard profissional={true} check={true} />
-          <ActivityCard profissional={true} check={true} />
-          <ActivityCard profissional={true} check={true} />
-          <ActivityCard profissional={true} check={true} />
+          <ActivityCard
+            check={true}
+            profissional={false}
+            activity="Caminhada em grupo"
+            organizer="Lucia"
+            distance={100}
+            quantity={8}
+          ></ActivityCard>
+
+          <ActivityCard
+            check={false}
+            profissional={false}
+            activity="Aula de tricô"
+            organizer="Zefa"
+            distance={200}
+            quantity={10}
+          ></ActivityCard>
+
+          <ActivityCard
+            check={true}
+            profissional={true}
+            activity="Hidroginástica"
+            organizer="Mario"
+            distance={800}
+            quantity={4}
+          ></ActivityCard>
+
+          <ActivityCard
+            check={false}
+            profissional={false}
+            activity="Jogar baralho"
+            organizer="Lucia"
+            distance={1000}
+            quantity={3}
+          ></ActivityCard>
+
+          <ActivityCard
+            check={true}
+            profissional={false}
+            activity="Bingo"
+            organizer="Lucia"
+            distance={100}
+            quantity={24}
+          ></ActivityCard>
         </ActivitiesContainer>
       </NewView>
     </ListContainer>

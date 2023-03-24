@@ -4,6 +4,7 @@ import {
   ActivityName,
   CardContainer,
   CardFooterContainer,
+  CardFooterSectionContainer,
   CardSectionContainer,
   ProfessionalText,
 } from './styles'
@@ -24,7 +25,6 @@ export function ActivityCard({
   quantity = 0,
   distance = 0,
   organizer = '',
-
 }: ActivityCardProps) {
   return (
     <CardContainer>
@@ -44,7 +44,7 @@ export function ActivityCard({
       </CardSectionContainer>
 
       <CardFooterContainer>
-        <CardSectionContainer>
+        <CardFooterSectionContainer>
           <CustomText type="body">Organizado por {organizer}</CustomText>
 
           {distance >= 1000 && (
@@ -56,7 +56,7 @@ export function ActivityCard({
           {distance < 1000 && (
             <CustomText type="body">{distance}m de distância</CustomText>
           )}
-        </CardSectionContainer>
+        </CardFooterSectionContainer>
         {profissional && (
           <ProfessionalText>
             Essa atividade é oferecida por um profissional

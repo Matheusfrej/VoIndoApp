@@ -19,10 +19,8 @@ export const TextAndLink = styled.View`
 
 export const FilterBar = styled.View`
   flex-direction: row;
-  align-items: center;
   justify-content: center;
   gap: 20px;
-  height: 60px;
   margin-top: 16px;
   margin-bottom: 32px;
 `

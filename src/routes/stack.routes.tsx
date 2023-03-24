@@ -8,7 +8,6 @@ import { Preferences } from '../screens/Preferences'
 import { ActivitiesList } from '../screens/ActivitiesList'
 import { SearchActivities } from '../screens/SearchActivities'
 
-
 const { Screen, Navigator } = createNativeStackNavigator()
 
 export function StackRoutes() {
