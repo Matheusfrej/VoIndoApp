@@ -17,6 +17,10 @@ export function Preferences({ navigation }: any) {
     navigation.push('hub')
   }
 
+  const goToSearchActivities = () => {
+    navigation.push('searchActivities')
+  }
+
   return (
     <PreferencesContainer>
       <BackButton>

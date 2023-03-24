@@ -18,16 +18,19 @@ export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
     (props.variantType === 'default' &&
       css`
         padding: 10px 16px;
+        color: white;
       `) ||
     (props.variantType === 'large' &&
       css`
         padding: 10px 32px;
+        color: white;
       `) ||
     (props.variantType === 'outline' &&
       props.color === 'blue' &&
       css`
         padding: 10px 16px;
         /* background-color: transparent; */
+
         border: 2px solid ${props.theme.color.PRIMARY};
       `) ||
     (props.variantType === 'outline' &&
@@ -35,17 +38,20 @@ export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
       css`
         padding: 10px 16px;
         background-color: transparent;
+        color: black;
         border: 2px solid ${props.theme.color.SECONDARY};
       `) ||
     (props.variantType === 'small' &&
       css`
         padding: 8px 12px;
         max-width: 70px;
+        color: white;
       `) ||
     (props.variantType === 'block' &&
       css`
         width: 100%;
         padding: 10px 16px;
+        color: white;
       `)}
   font-size: 20px;
 `
@@ -58,6 +64,7 @@ interface ButtonTextProps {
 
 export const ButtonText = styled(StyledText)<ButtonTextProps>`
   text-align: center;
+
   ${(props) =>
     (props.variantType === 'outline' &&
       props.textColor === 'blue' &&

@@ -1,6 +1,6 @@
 // import { CustomButton } from '../../components/CustomButton'
-import { Image, View } from 'react-native'
-import { ActivityCard } from '../../components/ActivityCard'
+import { Image } from 'react-native'
+// import { ActivityCard } from '../../components/ActivityCard'
 // import { CustomText } from '../../components/CustomText'
 import {
   AvatarContainer,
@@ -26,11 +26,11 @@ export function Testes() {
         <CustomText type="subtitle">Texto exemplo de subtitle</CustomText>
         <CustomText type="span">Texto exemplo de span</CustomText>
         <CustomText type="body">Texto exemplo de body</CustomText> */}
-        <View style={{ gap: 10 }}>
+        {/* <View style={{ gap: 10 }}>
           <ActivityCard />
           <ActivityCard check={true} />
           <ActivityCard check={true} profissional={true} />
-        </View>
+      </View> */}
       </ContentContainer>
 
       <AvatarContainer>

@@ -4,10 +4,10 @@ import { CustomText } from '../../components/CustomText'
 import { Button, Container, Title, Avatar, TextArea, TextArea2 } from './styles'
 
 export function Participation({ navigation }: any) {
-  const goToHub = () => {
+  const goToHome2 = () => {
     console.log('apertou')
 
-    navigation.push('hub')
+    navigation.push('home2')
   }
 
   return (
@@ -47,7 +47,7 @@ export function Participation({ navigation }: any) {
         <CustomButton
           text="Entendi"
           variantType="block"
-          onPress={goToHub}
+          onPress={goToHome2}
         ></CustomButton>
       </Button>
 
