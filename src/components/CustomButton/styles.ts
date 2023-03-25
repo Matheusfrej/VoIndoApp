@@ -29,7 +29,7 @@ export const StyledButton = styled.TouchableHighlight<StyledButtonProps>`
       props.color === 'blue' &&
       css`
         padding: 10px 16px;
-        /* background-color: transparent; */
+        background-color: transparent;
 
         border: 2px solid ${props.theme.color.PRIMARY};
       `) ||
