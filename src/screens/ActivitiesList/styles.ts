@@ -12,9 +12,15 @@ export const BackButton = styled.View`
 export const ListHeader = styled.View``
 
 export const TextAndLink = styled.View`
-  width: 350px;
+  width: 80%;
   margin: auto;
   gap: 10px;
+`
+
+export const Title = styled.View`
+  width: 70%;
+  margin: auto;
+  margin-top: -20px;
 `
 
 export const FilterBar = styled.View`
@@ -37,7 +43,7 @@ export const NewView = styled.View`
 export const AcitivitiesTextInput = styled.TextInput`
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  width: 281px;
+  width: 65%;
   font-size: 16px;
   border-radius: 5px;
 `

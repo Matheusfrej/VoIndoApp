@@ -1,4 +1,3 @@
-import { View } from 'react-native'
 import { useState } from 'react'
 import { ActivityCard } from '../../components/ActivityCard'
 import { CustomButton } from '../../components/CustomButton'
@@ -12,6 +11,7 @@ import {
   ListHeader,
   NewView,
   TextAndLink,
+  Title,
 } from './styles'
 
 export function ActivitiesList({ navigation }: any) {
@@ -33,18 +33,11 @@ export function ActivitiesList({ navigation }: any) {
         </BackButton>
 
         <TextAndLink>
-          <View
-            style={{
-              width: 235,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              marginTop: -20,
-            }}
-          >
+          <Title>
             <CustomText type="h3" centered={true}>
               Buscando atividades sugeridas para você
             </CustomText>
-          </View>
+          </Title>
           <CustomText
             type="body"
             style={{ textDecorationLine: 'underline' }}
