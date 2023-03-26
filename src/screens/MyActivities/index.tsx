@@ -1,6 +1,7 @@
 import { ActivityCard } from '../../components/ActivityCard'
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
+import { PastActivityCard } from '../../components/PastActivityCard'
 import {
   ActivityAndButtons,
   BackButton,
@@ -10,6 +11,7 @@ import {
   MyActivitiesCustomText,
   MyActivitiesHeader,
   PastActivities,
+  PastActivityCardContainer,
 } from './styles'
 
 export function MyActivities({ navigation }: any) {
@@ -55,7 +57,7 @@ export function MyActivities({ navigation }: any) {
               text="Cancelar presença"
               textSize={14}
               variantType="outline"
-              color="blue"
+              color="red"
             />
           </ActivityAndButtons>
           <ActivityAndButtons>
@@ -77,13 +79,33 @@ export function MyActivities({ navigation }: any) {
               text="Cancelar presença"
               textSize={14}
               variantType="outline"
-              color="blue"
+              color="red"
             />
           </ActivityAndButtons>
         </ConfirmedActivitiesContainer>
       </MainContentContainer>
       <PastActivities>
         <CustomText type="h3">Atividades Passadas</CustomText>
+        <PastActivityCardContainer
+          horizontal={true}
+          contentContainerStyle={{ gap: 20, paddingRight: 200 }}
+        >
+          <PastActivityCard
+            activity="Oficina de Tricô"
+            check={true}
+            organizer="Lúcia"
+          ></PastActivityCard>
+          <PastActivityCard
+            activity="Jogo de Baralho"
+            check={true}
+            organizer="Maria"
+          ></PastActivityCard>
+          <PastActivityCard
+            activity="Campeonato de Dominó"
+            check={true}
+            organizer="Roberto"
+          ></PastActivityCard>
+        </PastActivityCardContainer>
       </PastActivities>
     </MyActivitiesContainer>
   )

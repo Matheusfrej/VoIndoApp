@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 export const CardContainer = styled.View`
   width: 100%;
   padding: 16px;
-  border: 1px solid black;
+  border: 1px solid ${(props) => props.theme.color.PRIMARY};
   border-radius: 4px;
   gap: 24px;
   justify-content: space-between;

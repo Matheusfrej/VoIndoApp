@@ -15,6 +15,8 @@ export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
         return props.theme.color.PRIMARY
       case 'orange':
         return props.theme.color.SECONDARY
+      case 'red':
+        return props.theme.color.RED
     }
   }};
 
@@ -39,8 +41,13 @@ export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
           return css`
             padding: 10px 16px;
             background-color: transparent;
-            color: black;
             border: 2px solid ${props.theme.color.SECONDARY};
+          `
+        } else if (props.color === 'red') {
+          return css`
+            padding: 10px 16px;
+            background-color: transparent;
+            border: 2px solid ${props.theme.color.RED};
           `
         }
         break
@@ -81,6 +88,10 @@ export const ButtonText = styled(StyledText)<ButtonTextProps>`
         case 'orange':
           return css`
             color: ${props.theme.color.SECONDARY};
+          `
+        case 'red':
+          return css`
+            color: ${props.theme.color.RED};
           `
         default:
           break

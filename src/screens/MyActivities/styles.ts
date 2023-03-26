@@ -38,6 +38,11 @@ export const ActivityAndButtons = styled.View`
 `
 
 export const PastActivities = styled.View`
+  margin: 0 auto;
   margin-left: 24px;
   margin-top: 48px;
+  gap: 20px;
+  margin-bottom: 20px;
 `
+
+export const PastActivityCardContainer = styled.ScrollView``
