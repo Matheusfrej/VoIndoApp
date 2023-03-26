@@ -22,7 +22,7 @@ export function CustomButton({
       color={color}
       variantType={variantType}
       onPress={onPress}
-      underlayColor="orange"
+      activeOpacity={0.4}
     >
       <ButtonText
         type="subtitle"
