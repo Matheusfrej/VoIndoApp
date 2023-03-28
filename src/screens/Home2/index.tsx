@@ -37,7 +37,7 @@ export function Home2({ navigation }: any) {
         <CustomButton
           text="Ver minhas atividades"
           variantType="block"
-          onPress={goToHub}
+          onPress={() => navigation.push('myActivities')}
         ></CustomButton>
       </Buttons>
 

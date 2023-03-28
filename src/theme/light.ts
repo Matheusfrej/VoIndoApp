@@ -9,6 +9,11 @@ export default {
     'SECONDARY-SATURATED': '#EC6C01',
     'SECONDARY-LIGHT': '#FCB495',
     'BLACK-2': '#3F3D56',
+
+    RED: '#E44040',
+    OK: '#22943E',
+    WARNING: '#E7750A',
+    GREY: '#667A8C',
   },
   space: 4,
 }
