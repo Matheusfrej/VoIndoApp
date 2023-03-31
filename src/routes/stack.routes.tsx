@@ -9,6 +9,7 @@ import { ActivitiesList } from '../screens/ActivitiesList'
 // import { SearchActivities } from '../screens/SearchActivities'
 import { MyActivities } from '../screens/MyActivities'
 import { DetailedActivity } from '../screens/DetailedActivity'
+import MapTeste from '../screens/MapTeste'
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
@@ -24,6 +25,7 @@ export function StackRoutes() {
       <Screen name="activitiesList" component={ActivitiesList} />
       <Screen name="myActivities" component={MyActivities} />
       <Screen name="detailedActivity" component={DetailedActivity} />
+      <Screen name="mapTest" component={MapTeste} />
       {/* <Screen name="searchActivities" component={SearchActivities} /> */}
     </Navigator>
   )

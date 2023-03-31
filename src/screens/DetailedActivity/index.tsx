@@ -1,4 +1,5 @@
 import { Image } from 'react-native'
+// import MapView from 'react-native-maps'
 import { AvaliationCard } from '../../components/AvaliationCard'
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
@@ -68,6 +69,7 @@ export function DetailedActivity({ route }: DetailedActivityProps) {
           </CustomText>
           <CustomText type="body"> {local} </CustomText>
           <CustomText type="body"> Ponto de encontro: encontro </CustomText>
+          {/* <MapView style={styles.map}></MapView> */}
         </Where>
 
         <Avaliations>
@@ -94,3 +96,11 @@ export function DetailedActivity({ route }: DetailedActivityProps) {
     </BigContainer>
   )
 }
+
+/* const styles = StyleSheet.create({
+  map: {
+    width: '90%',
+    height: '30%',
+    borderRadius: 10,
+  },
+}) */

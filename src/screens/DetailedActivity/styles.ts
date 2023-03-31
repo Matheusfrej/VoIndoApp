@@ -39,6 +39,7 @@ export const How = styled.View`
 `
 
 export const Where = styled.View`
+  //flex: 1;
   gap: 8px;
 `
 
