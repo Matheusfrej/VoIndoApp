@@ -5,7 +5,7 @@ import { CustomText } from '../../components/CustomText'
 import {
   AcitivitiesTextInput,
   ActivitiesContainer,
-  BackButton,
+  Back,
   FilterBar,
   ListContainer,
   ListHeader,
@@ -16,21 +16,19 @@ import {
 
 export function ActivitiesList({ navigation }: any) {
   const [placeholderText, setPlaceholderText] = useState('Pesquisar atividade')
+  const navigateToDetailedActivity = (
+    check: boolean,
+    activity: string,
+    organizer: string,
+    local: string,
+  ) => {
+    navigation.push('detailedActivity', { check, activity, organizer, local })
+  }
 
   return (
     <ListContainer>
       <ListHeader>
-        <BackButton>
-          <CustomButton
-            text="Voltar"
-            textSize={12}
-            variantType="small"
-            color="orange"
-            onPress={() => {
-              navigation.goBack()
-            }}
-          />
-        </BackButton>
+        <Back> ← Voltar</Back>
 
         <TextAndLink>
           <Title>
@@ -38,13 +36,6 @@ export function ActivitiesList({ navigation }: any) {
               Buscando atividades sugeridas para você
             </CustomText>
           </Title>
-          <CustomText
-            type="body"
-            style={{ textDecorationLine: 'underline' }}
-            centered={true}
-          >
-            Trocar para visualização por localização
-          </CustomText>
         </TextAndLink>
       </ListHeader>
 
@@ -54,7 +45,12 @@ export function ActivitiesList({ navigation }: any) {
           selectionColor={'#000'}
           onFocus={() => setPlaceholderText('')}
         />
-        <CustomButton variantType="outline" text="Filtrar" textSize={14} />
+        <CustomButton
+          variantType="outline"
+          text="Filtrar"
+          textSize={14}
+          color="blue"
+        />
       </FilterBar>
 
       <NewView>
@@ -63,6 +59,14 @@ export function ActivitiesList({ navigation }: any) {
           showsVerticalScrollIndicator={false}
         >
           <ActivityCard
+            onPress={() =>
+              navigateToDetailedActivity(
+                true,
+                'Caminhada em grupo',
+                'Lucia',
+                'Rua real da torre 705',
+              )
+            }
             check={true}
             profissional={false}
             activity="Caminhada em grupo"
@@ -72,6 +76,14 @@ export function ActivitiesList({ navigation }: any) {
           ></ActivityCard>
 
           <ActivityCard
+            onPress={() =>
+              navigateToDetailedActivity(
+                false,
+                'Aula de tricô',
+                'Zefa',
+                'Parque da Jaqueira',
+              )
+            }
             check={false}
             profissional={false}
             activity="Aula de tricô"
@@ -81,6 +93,14 @@ export function ActivitiesList({ navigation }: any) {
           ></ActivityCard>
 
           <ActivityCard
+            onPress={() =>
+              navigateToDetailedActivity(
+                true,
+                'Hidroginástica',
+                'Mario',
+                'Beira Rio',
+              )
+            }
             check={true}
             profissional={true}
             activity="Hidroginástica"
@@ -90,6 +110,14 @@ export function ActivitiesList({ navigation }: any) {
           ></ActivityCard>
 
           <ActivityCard
+            onPress={() =>
+              navigateToDetailedActivity(
+                false,
+                'Jogar baralho',
+                'Lucia',
+                'Marco zero',
+              )
+            }
             check={false}
             profissional={false}
             activity="Jogar baralho"
@@ -99,6 +127,9 @@ export function ActivitiesList({ navigation }: any) {
           ></ActivityCard>
 
           <ActivityCard
+            onPress={() =>
+              navigateToDetailedActivity(true, 'Bingo', 'Lucia', 'Disney')
+            }
             check={true}
             profissional={false}
             activity="Bingo"
