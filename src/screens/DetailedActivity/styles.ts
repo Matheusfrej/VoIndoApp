@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import MapView from 'react-native-maps'
 
 export const BigContainer = styled.ScrollView`
   flex: 1;
@@ -39,8 +40,17 @@ export const How = styled.View`
 `
 
 export const Where = styled.View`
-  //flex: 1;
+  flex: 1;
   gap: 8px;
+`
+
+export const MyMapView = styled.View`
+  height: 150px;
+`
+
+export const WhereMap = styled(MapView)`
+  width: 100%;
+  height: 100%;
 `
 
 export const Avaliations = styled.View`
@@ -48,3 +58,20 @@ export const Avaliations = styled.View`
 `
 
 export const AvaliationCards = styled.ScrollView``
+
+export const WhoParticipated = styled.View`
+  gap: 8px;
+  margin-bottom: 20px;
+`
+
+export const WhoParticipatedList = styled.ScrollView``
+
+export const PersonWhoParticipated = styled.View`
+  flex: 1;
+  gap: 16px;
+  align-items: center;
+`
+
+export const PersonWhoParticipatedAndPossibleCheck = styled.View`
+  align-items: flex-end;
+`

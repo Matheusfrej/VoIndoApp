@@ -1,6 +1,6 @@
 import { Image } from 'react-native'
-// import MapView from 'react-native-maps'
 import { AvaliationCard } from '../../components/AvaliationCard'
+import { Marker } from 'react-native-maps'
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import { Tag } from '../../components/Tag'
@@ -11,10 +11,16 @@ import {
   BigContainer,
   Container,
   How,
+  MyMapView,
+  PersonWhoParticipated,
+  PersonWhoParticipatedAndPossibleCheck,
   Tags,
   Title,
   Where,
+  WhereMap,
   Who,
+  WhoParticipated,
+  WhoParticipatedList,
 } from './styles'
 
 interface DetailedActivityProps {
@@ -69,7 +75,26 @@ export function DetailedActivity({ route }: DetailedActivityProps) {
           </CustomText>
           <CustomText type="body"> {local} </CustomText>
           <CustomText type="body"> Ponto de encontro: encontro </CustomText>
-          {/* <MapView style={styles.map}></MapView> */}
+          <MyMapView>
+            <WhereMap
+              // -8.046485892509358, -34.90411727453414
+              initialRegion={{
+                latitude: -8.046485892509358,
+                longitude: -34.90411727453414,
+                latitudeDelta: 0.0022,
+                longitudeDelta: 0.0021,
+              }}
+            >
+              <Marker
+                coordinate={{
+                  latitude: -8.046485892509358,
+                  longitude: -34.90411727453414,
+                }}
+                title={activity}
+                description="Ponto de encontro"
+              />
+            </WhereMap>
+          </MyMapView>
         </Where>
 
         <Avaliations>
@@ -86,6 +111,55 @@ export function DetailedActivity({ route }: DetailedActivityProps) {
           </AvaliationCards>
         </Avaliations>
 
+        <WhoParticipated>
+          <CustomText type="span" style={{ fontWeight: 'bold' }}>
+            Quem já participou?
+          </CustomText>
+          <WhoParticipatedList
+            horizontal={true}
+            contentContainerStyle={{ gap: 16, paddingRight: 20 }}
+          >
+            <PersonWhoParticipatedAndPossibleCheck>
+              <Image
+                source={require('../../../assets/verificado.png')}
+                alt=""
+                style={{ marginBottom: -16, zIndex: 1 }}
+              />
+              <PersonWhoParticipated>
+                <Image source={require('../../../assets/senhor.png')} alt="" />
+                <CustomText type="body">Mário</CustomText>
+              </PersonWhoParticipated>
+            </PersonWhoParticipatedAndPossibleCheck>
+            <PersonWhoParticipated>
+              <Image source={require('../../../assets/senhora.png')} alt="" />
+              <CustomText type="body">Rita</CustomText>
+            </PersonWhoParticipated>
+            <PersonWhoParticipated>
+              <Image source={require('../../../assets/senhor.png')} alt="" />
+              <CustomText type="body">Mário</CustomText>
+            </PersonWhoParticipated>
+            <PersonWhoParticipatedAndPossibleCheck>
+              <Image
+                source={require('../../../assets/verificado.png')}
+                alt=""
+                style={{ marginBottom: -16, zIndex: 1 }}
+              />
+              <PersonWhoParticipated>
+                <Image source={require('../../../assets/senhora.png')} alt="" />
+                <CustomText type="body">Rita</CustomText>
+              </PersonWhoParticipated>
+            </PersonWhoParticipatedAndPossibleCheck>
+            <PersonWhoParticipated>
+              <Image source={require('../../../assets/senhor.png')} alt="" />
+              <CustomText type="body">Mário</CustomText>
+            </PersonWhoParticipated>
+            <PersonWhoParticipated>
+              <Image source={require('../../../assets/senhora.png')} alt="" />
+              <CustomText type="body">Rita</CustomText>
+            </PersonWhoParticipated>
+          </WhoParticipatedList>
+        </WhoParticipated>
+
         <CustomButton
           variantType="large"
           color="orange"
@@ -96,11 +170,3 @@ export function DetailedActivity({ route }: DetailedActivityProps) {
     </BigContainer>
   )
 }
-
-/* const styles = StyleSheet.create({
-  map: {
-    width: '90%',
-    height: '30%',
-    borderRadius: 10,
-  },
-}) */
