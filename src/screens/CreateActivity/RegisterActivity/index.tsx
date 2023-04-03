@@ -6,13 +6,17 @@ import {
   Button,
   Container,
   Forms,
-  NameTextInput,
+  TextInput,
   Pair,
   Title,
 } from './styles'
 
 export function RegisterActivity({ route, navigation }: any) {
   const { need } = route.params
+
+  const goToMoreInfos = () => {
+    navigation.push('moreInfos')
+  }
   return (
     <BigContainer>
       <Container>
@@ -32,7 +36,7 @@ export function RegisterActivity({ route, navigation }: any) {
         <Forms>
           <Pair>
             <CustomText type="h3">Nome da atividade</CustomText>
-            <NameTextInput
+            <TextInput
               placeholder={'Insira o nome da atividade'}
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
@@ -41,7 +45,7 @@ export function RegisterActivity({ route, navigation }: any) {
 
           <Pair>
             <CustomText type="h3">Descrição da atividade</CustomText>
-            <NameTextInput
+            <TextInput
               placeholder={'Insira a descrição da atividade'}
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
@@ -50,7 +54,7 @@ export function RegisterActivity({ route, navigation }: any) {
 
           <Pair>
             <CustomText type="h3">Instruções de participação</CustomText>
-            <NameTextInput
+            <TextInput
               placeholder={'Descreva como participar'}
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
@@ -59,7 +63,7 @@ export function RegisterActivity({ route, navigation }: any) {
 
           <Pair>
             <CustomText type="h3">Endereço da atividade</CustomText>
-            <NameTextInput
+            <TextInput
               placeholder={'Insira o endereço'}
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
@@ -71,7 +75,7 @@ export function RegisterActivity({ route, navigation }: any) {
               <CustomText type="h3">
                 Número do conselho do profissional
               </CustomText>
-              <NameTextInput
+              <TextInput
                 placeholder={'Exemplo: CRF, CREFITO, CREF, COREN... '}
                 selectionColor={'#000'}
                 placeholderTextColor={'#AAAAAA'}
@@ -81,7 +85,11 @@ export function RegisterActivity({ route, navigation }: any) {
         </Forms>
 
         <Button>
-          <CustomButton variantType="block" text="Prosseguir"></CustomButton>
+          <CustomButton
+            variantType="block"
+            text="Prosseguir"
+            onPress={goToMoreInfos}
+          ></CustomButton>
         </Button>
       </Container>
     </BigContainer>

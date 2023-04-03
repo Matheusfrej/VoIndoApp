@@ -12,6 +12,7 @@ import { DetailedActivity } from '../screens/DetailedActivity'
 import MapTeste from '../screens/MapTeste'
 import { NeedProfessional } from '../screens/CreateActivity/NeedProfessional'
 import { RegisterActivity } from '../screens/CreateActivity/RegisterActivity'
+import { MoreInfos } from '../screens/CreateActivity/MoreInfos'
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
@@ -30,6 +31,7 @@ export function StackRoutes() {
       <Screen name="mapTest" component={MapTeste} />
       <Screen name="needProf" component={NeedProfessional} />
       <Screen name="registerActivity" component={RegisterActivity} />
+      <Screen name="moreInfos" component={MoreInfos} />
       {/* <Screen name="searchActivities" component={SearchActivities} /> */}
     </Navigator>
   )
