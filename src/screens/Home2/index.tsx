@@ -19,6 +19,7 @@ export function Home2({ navigation }: any) {
 
       <Buttons>
         <CustomButton
+          color="blue"
           text="Participar de uma atividade"
           variantType="block"
           onPress={goToPreferences}
@@ -27,6 +28,7 @@ export function Home2({ navigation }: any) {
 
       <Buttons>
         <CustomButton
+          color="blue"
           text="Organizar uma atividade"
           variantType="block"
           onPress={goToHub}
@@ -35,6 +37,7 @@ export function Home2({ navigation }: any) {
 
       <Buttons>
         <CustomButton
+          color="blue"
           text="Ver minhas atividades"
           variantType="block"
           onPress={() => navigation.push('myActivities')}
@@ -43,6 +46,7 @@ export function Home2({ navigation }: any) {
 
       <Buttons>
         <CustomButton
+          color="blue"
           text="Ver meu perfil"
           variantType="block"
           onPress={goToHub}

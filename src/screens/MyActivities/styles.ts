@@ -9,10 +9,9 @@ export const MyActivitiesHeader = styled.View`
   flex-direction: row;
 `
 
-export const BackButton = styled.View`
-  margin-left: 23px;
-  margin-top: 32px;
-  z-index: 1;
+export const Back = styled.Text`
+  color: #667a8c;
+  margin: 15px;
 `
 
 export const MyActivitiesCustomText = styled(StyledText)`

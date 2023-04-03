@@ -1,5 +1,3 @@
-import { Image } from 'react-native'
-
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import {
@@ -9,6 +7,7 @@ import {
   WelcomeText,
   Button,
   WelcomeTexts,
+  Img,
 } from './styles'
 
 export function Home({ navigation }: any) {
@@ -22,7 +21,8 @@ export function Home({ navigation }: any) {
 
   return (
     <HomeContainer>
-      <Image source={require('../../../assets/presentation.png')} alt="" />
+      <Img source={require('../../../assets/presentation.png')} alt="" />
+
       <WelcomeTexts>
         <WelcomeText>
           <CustomText type="h1">Seja bem vindo ao </CustomText>
@@ -35,6 +35,8 @@ export function Home({ navigation }: any) {
         <CenteredCustomText type="body">
           Aqui você pode encontrar atividades adequadas para idosos, oferecidas
           por profissionais confiáveis ou por outros idosos usuários do app.
+        </CenteredCustomText>
+        <CenteredCustomText type="body">
           Complete seu cadastro para recomendarmos atividades de acordo com seus
           interesses!
         </CenteredCustomText>
