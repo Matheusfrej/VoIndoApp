@@ -4,7 +4,7 @@ import { CustomText } from '../../components/CustomText'
 import { PastActivityCard } from '../../components/PastActivityCard'
 import {
   ActivityAndButtons,
-  BackButton,
+  Back,
   ConfirmedActivitiesContainer,
   MainContentContainer,
   MyActivitiesContainer,
@@ -18,17 +18,14 @@ export function MyActivities({ navigation }: any) {
   return (
     <MyActivitiesContainer>
       <MyActivitiesHeader>
-        <BackButton>
-          <CustomButton
-            text="Voltar"
-            textSize={12}
-            variantType="small"
-            color="blue"
-            onPress={() => {
-              navigation.goBack()
-            }}
-          />
-        </BackButton>
+        <Back
+          onPress={() => {
+            navigation.goBack()
+          }}
+        >
+          ← Voltar
+        </Back>
+
         <MyActivitiesCustomText type="h3" centered={true}>
           Minhas atividades
         </MyActivitiesCustomText>

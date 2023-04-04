@@ -25,14 +25,21 @@ import {
 
 interface DetailedActivityProps {
   route: any
+  navigation: any
 }
 
-export function DetailedActivity({ route }: DetailedActivityProps) {
+export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { check, organizer, activity, local } = route.params
   return (
     <BigContainer>
       <Container>
-        <Back> ← Voltar</Back>
+        <Back
+          onPress={() => {
+            navigation.goBack()
+          }}
+        >
+          ← Voltar
+        </Back>
 
         <Title>
           <CustomText type="h2">{activity}</CustomText>

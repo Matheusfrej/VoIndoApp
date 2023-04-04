@@ -14,6 +14,10 @@ export const LogoImg = styled.Image`
   padding: 0;
 `
 
+export const Img = styled.Image`
+  margin-bottom: 50px;
+`
+
 export const WelcomeText = styled.View`
   flex-direction: row;
   align-items: center;
@@ -24,7 +28,7 @@ export const WelcomeText = styled.View`
 export const WelcomeTexts = styled.View`
   text-align: center;
   gap: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 `
 
 export const CenteredCustomText = styled(StyledText)`

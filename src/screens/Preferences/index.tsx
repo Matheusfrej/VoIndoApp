@@ -3,7 +3,7 @@ import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import {
   Avatar,
-  BackButton,
+  Back,
   CentralizedCustomText,
   MainContainer,
   MainTexts,
@@ -18,17 +18,14 @@ export function Preferences({ navigation }: any) {
   }
   return (
     <PreferencesContainer>
-      <BackButton>
-        <CustomButton
-          text="Voltar"
-          textSize={12}
-          variantType="small"
-          color="orange"
-          onPress={() => {
-            navigation.goBack()
-          }}
-        />
-      </BackButton>
+      <Back
+        onPress={() => {
+          navigation.goBack()
+        }}
+      >
+        {' '}
+        ← Voltar
+      </Back>
 
       <MainContainer>
         <MainTexts>
@@ -46,16 +43,16 @@ export function Preferences({ navigation }: any) {
         <Options>
           <CustomButton
             text="Buscar Atividades mais próximas a mim"
-            variantType="block"
-            color="orange"
+            variantType="large"
+            color="blue"
             onPress={goToHub}
             textSize={14}
           />
           <CustomText type="body">ou</CustomText>
           <CustomButton
             text="Ver atividades que tenho mais interesse"
-            variantType="block"
-            color="orange"
+            variantType="large"
+            color="blue"
             textSize={14}
             onPress={() => {
               navigation.push('activitiesList')

@@ -28,7 +28,13 @@ export function ActivitiesList({ navigation }: any) {
   return (
     <ListContainer>
       <ListHeader>
-        <Back> ← Voltar</Back>
+        <Back
+          onPress={() => {
+            navigation.goBack()
+          }}
+        >
+          ← Voltar
+        </Back>
 
         <TextAndLink>
           <Title>
@@ -43,6 +49,7 @@ export function ActivitiesList({ navigation }: any) {
         <AcitivitiesTextInput
           placeholder={placeholderText}
           selectionColor={'#000'}
+          placeholderTextColor={'#AAAAAA'}
           onFocus={() => setPlaceholderText('')}
         />
         <CustomButton
