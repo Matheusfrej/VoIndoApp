@@ -9,14 +9,12 @@ import {
   WelcomeTexts,
   Img,
 } from './styles'
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 // import axios from 'axios'
-import api from '../../services/api'
-import { useActivities } from '../../contexts/ActivitiesContext'
+// import api from '../../services/api'
 
 export function Home({ navigation }: any) {
   // const [activities, setActivities] = useState<any>([])
-  const { activitiesList, areActivitiesLoading } = useActivities()
 
   const goToPresentation = () => {
     console.log('apertou')
@@ -68,9 +66,9 @@ export function Home({ navigation }: any) {
         </CenteredCustomText>
       </WelcomeTexts>
 
-      {!areActivitiesLoading && (
+      {/* {!areActivitiesLoading && activitiesList !== undefined && (
         <CustomText type="span">{activitiesList[0].description}</CustomText>
-      )}
+      )} */}
       {/* <CustomText type="span">{'oi' || activities[0].description}</CustomText> */}
       {/* ;-; activities.length > 0 && */}
       <Button>
