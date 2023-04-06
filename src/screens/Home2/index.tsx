@@ -11,6 +11,10 @@ export function Home2({ navigation }: any) {
   const goToPreferences = () => {
     navigation.push('preferences')
   }
+
+  const goToNeedProf = () => {
+    navigation.push('needProf')
+  }
   return (
     <Container>
       <TextContainer>
@@ -31,7 +35,7 @@ export function Home2({ navigation }: any) {
           color="blue"
           text="Organizar uma atividade"
           variantType="block"
-          onPress={goToHub}
+          onPress={goToNeedProf}
         ></CustomButton>
       </Buttons>
 

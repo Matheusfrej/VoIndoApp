@@ -16,6 +16,7 @@ export const LogoImg = styled.Image`
 
 export const Img = styled.Image`
   margin-bottom: 50px;
+  width: 100%;
 `
 
 export const WelcomeText = styled.View`
