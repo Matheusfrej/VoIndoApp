@@ -2,13 +2,16 @@ import axios from 'axios'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const api = axios.create({
-  baseURL: 'https://3159-2804-14d-5492-8009-445c-b7c5-6637-d7c4.sa.ngrok.io',
+  baseURL: 'https://b226-2804-14d-5492-8009-c809-44d3-3a2d-e2eb.sa.ngrok.io',
 })
 
 // api.interceptors.request.use((request) => {
 //   const token = AsyncStorage.getItem('token')
+//   console.log(token)
 
-//   if (request.headers) {
+//   if (token && request.headers) {
+//     console.log('qualquer coisa')
+
 //     request.headers.Authorization = token ? `Token ${token}` : ''
 //   }
 

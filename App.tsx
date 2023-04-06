@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components/native'
 import defaultTheme from './src/theme/light'
 import { useFonts } from 'expo-font'
 import { Routes } from './src/routes'
+import { ActivitiesContextProvider } from './src/contexts/ActivitiesContext'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -15,8 +16,10 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Routes />
-    </ThemeProvider>
+    <ActivitiesContextProvider>
+      <ThemeProvider theme={defaultTheme}>
+        <Routes />
+      </ThemeProvider>
+    </ActivitiesContextProvider>
   )
 }
