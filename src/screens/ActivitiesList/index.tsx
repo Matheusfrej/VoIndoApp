@@ -5,7 +5,6 @@ import { CustomText } from '../../components/CustomText'
 import {
   AcitivitiesTextInput,
   ActivitiesContainer,
-  Back,
   FilterBar,
   ListContainer,
   ListHeader,
@@ -14,6 +13,7 @@ import {
   Title,
 } from './styles'
 import { useActivities } from '../../contexts/ActivitiesContext'
+import { BackButton } from '../../components/BackButton'
 
 export function ActivitiesList({ navigation }: any) {
   const { activitiesList, areActivitiesLoading } = useActivities()
@@ -26,13 +26,11 @@ export function ActivitiesList({ navigation }: any) {
   return (
     <ListContainer>
       <ListHeader>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
+        />
 
         <TextAndLink>
           <Title>

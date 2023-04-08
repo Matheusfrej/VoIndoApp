@@ -7,7 +7,6 @@ import { Tag } from '../../components/Tag'
 import {
   AvaliationCards,
   Avaliations,
-  Back,
   BigContainer,
   Container,
   How,
@@ -23,6 +22,7 @@ import {
   WhoParticipatedList,
 } from './styles'
 import { useActivities } from '../../contexts/ActivitiesContext'
+import { BackButton } from '../../components/BackButton'
 
 interface DetailedActivityProps {
   route: any
@@ -37,13 +37,11 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   return (
     <BigContainer>
       <Container>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
+        />
 
         <Title>
           <CustomText type="h2">{activity?.name}</CustomText>

@@ -3,7 +3,6 @@ import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import {
   Avatar,
-  Back,
   CentralizedCustomText,
   Interests,
   InterestsHeader,
@@ -14,18 +13,16 @@ import {
   PreferencesContainer,
 } from './styles'
 import { Tag } from '../../components/Tag'
+import { BackButton } from '../../components/BackButton'
 
 export function Preferences({ navigation }: any) {
   return (
     <PreferencesContainer>
-      <Back
+      <BackButton
         onPress={() => {
           navigation.goBack()
         }}
-      >
-        {' '}
-        ← Voltar
-      </Back>
+      />
 
       <MainContainer>
         <MainTexts>

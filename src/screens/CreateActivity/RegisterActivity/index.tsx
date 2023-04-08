@@ -1,7 +1,7 @@
+import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
 import {
-  Back,
   BigContainer,
   Button,
   Container,
@@ -20,13 +20,11 @@ export function RegisterActivity({ route, navigation }: any) {
   return (
     <BigContainer>
       <Container>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
+        />
         <Title>
           <CustomText style={{ color: '#3F3D56' }} type="h1">
             Cadastar atividade

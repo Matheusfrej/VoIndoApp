@@ -1,10 +1,10 @@
 import { ActivityCard } from '../../components/ActivityCard'
+import { BackButton } from '../../components/BackButton'
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import { PastActivityCard } from '../../components/PastActivityCard'
 import {
   ActivityAndButtons,
-  Back,
   ConfirmedActivitiesContainer,
   MainContentContainer,
   MyActivitiesContainer,
@@ -18,13 +18,11 @@ export function MyActivities({ navigation }: any) {
   return (
     <MyActivitiesContainer>
       <MyActivitiesHeader>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
+        />
 
         <MyActivitiesCustomText type="h3" centered={true}>
           Minhas atividades

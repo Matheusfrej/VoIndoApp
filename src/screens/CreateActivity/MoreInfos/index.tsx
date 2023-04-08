@@ -1,6 +1,7 @@
+import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
-import { Back, Button, Container, Forms, Pair, Title } from './styles'
+import { Button, Container, Forms, Pair, Title } from './styles'
 import React, { useState } from 'react'
 import DatePicker from 'react-native-date-picker'
 
@@ -9,13 +10,11 @@ export function MoreInfos({ navigation }: any) {
   const [open, setOpen] = useState(false)
   return (
     <Container>
-      <Back
+      <BackButton
         onPress={() => {
           navigation.goBack()
         }}
-      >
-        ← Voltar
-      </Back>
+      />
 
       <Title>
         <CustomText style={{ color: '#3F3D56' }} type="h1">
