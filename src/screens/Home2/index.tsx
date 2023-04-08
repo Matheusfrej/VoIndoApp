@@ -4,16 +4,16 @@ import { CustomText } from '../../components/CustomText'
 import { Container, Avatar, TextContainer, Buttons } from './styles'
 
 export function Home2({ navigation }: any) {
-  const goToHub = () => {
-    navigation.push('hub')
-  }
-
   const goToPreferences = () => {
     navigation.push('preferences')
   }
 
   const goToNeedProf = () => {
     navigation.push('needProf')
+  }
+
+  const goToProfile = () => {
+    navigation.push('profile')
   }
   return (
     <Container>
@@ -53,7 +53,7 @@ export function Home2({ navigation }: any) {
           color="blue"
           text="Ver meu perfil"
           variantType="block"
-          onPress={goToHub}
+          onPress={goToProfile}
         ></CustomButton>
       </Buttons>
 

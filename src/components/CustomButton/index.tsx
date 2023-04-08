@@ -4,7 +4,7 @@ interface ButtonProps {
   text: string
   textSize?: number
   variantType: 'default' | 'large' | 'outline' | 'small' | 'block'
-  color?: 'blue' | 'orange' | 'red'
+  color?: 'blue' | 'orange' | 'red' | 'grey'
   style?: any
   onPress?: any // chama qualquer função que você passar
 }
