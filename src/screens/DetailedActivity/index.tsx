@@ -70,6 +70,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           color="blue"
           text="Visualizar perfil do responsável"
           textSize={16}
+          onPress={() => navigation.push('profile', { mine: false })}
         ></CustomButton>
 
         <How>
@@ -139,16 +140,22 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                 alt=""
                 style={{ marginBottom: -16, zIndex: 1 }}
               />
-              <PersonWhoParticipated>
+              <PersonWhoParticipated
+                onPress={() => navigation.push('profile', { mine: false })}
+              >
                 <Image source={require('../../../assets/senhor.png')} alt="" />
                 <CustomText type="body">Mário</CustomText>
               </PersonWhoParticipated>
             </PersonWhoParticipatedAndPossibleCheck>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhora.png')} alt="" />
               <CustomText type="body">Rita</CustomText>
             </PersonWhoParticipated>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhor.png')} alt="" />
               <CustomText type="body">Mário</CustomText>
             </PersonWhoParticipated>
@@ -158,16 +165,22 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                 alt=""
                 style={{ marginBottom: -16, zIndex: 1 }}
               />
-              <PersonWhoParticipated>
+              <PersonWhoParticipated
+                onPress={() => navigation.push('profile', { mine: false })}
+              >
                 <Image source={require('../../../assets/senhora.png')} alt="" />
                 <CustomText type="body">Rita</CustomText>
               </PersonWhoParticipated>
             </PersonWhoParticipatedAndPossibleCheck>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhor.png')} alt="" />
               <CustomText type="body">Mário</CustomText>
             </PersonWhoParticipated>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhora.png')} alt="" />
               <CustomText type="body">Rita</CustomText>
             </PersonWhoParticipated>

@@ -66,7 +66,7 @@ export const WhoParticipated = styled.View`
 
 export const WhoParticipatedList = styled.ScrollView``
 
-export const PersonWhoParticipated = styled.View`
+export const PersonWhoParticipated = styled.TouchableOpacity`
   flex: 1;
   gap: 16px;
   align-items: center;

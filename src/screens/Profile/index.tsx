@@ -17,17 +17,25 @@ import {
 import { CustomText } from '../../components/CustomText'
 import { Tag } from '../../components/Tag'
 
-export function Profile({ navigation }: any) {
+interface ProfileProps {
+  navigation: any
+  route: any
+}
+
+export function Profile({ navigation, route }: ProfileProps) {
+  const { mine } = route.params
   return (
     <ProfileContainer>
       <ProfileContainerHeader>
         <BackButton onPress={() => navigation.goBack()}></BackButton>
-        <CustomButton
-          text="Editar"
-          variantType="small"
-          textSize={16}
-          color="grey"
-        />
+        {mine && (
+          <CustomButton
+            text="Editar"
+            variantType="small"
+            textSize={16}
+            color="grey"
+          />
+        )}
       </ProfileContainerHeader>
       <PersonProfileContainer>
         <Image
@@ -62,11 +70,13 @@ export function Profile({ navigation }: any) {
           <CustomText type="subtitle" style={{ fontSize: 20 }}>
             Identidade não confirmada
           </CustomText>
-          <CustomButton
-            text="Confirmar identidade"
-            color="blue"
-            variantType="default"
-          />
+          {mine && (
+            <CustomButton
+              text="Confirmar identidade"
+              color="blue"
+              variantType="default"
+            />
+          )}
         </Identity>
 
         <LevelContainer>

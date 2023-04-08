@@ -13,7 +13,7 @@ export function Home2({ navigation }: any) {
   }
 
   const goToProfile = () => {
-    navigation.push('profile')
+    navigation.push('profile', { mine: true })
   }
   return (
     <Container>

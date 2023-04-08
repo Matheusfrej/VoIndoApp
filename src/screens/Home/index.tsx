@@ -17,8 +17,6 @@ export function Home({ navigation }: any) {
   // const [activities, setActivities] = useState<any>([])
 
   const goToPresentation = () => {
-    console.log('apertou')
-
     navigation.push('home2')
   }
 
