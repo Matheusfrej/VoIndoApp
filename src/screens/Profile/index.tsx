@@ -34,6 +34,7 @@ export function Profile({ navigation, route }: ProfileProps) {
             variantType="small"
             textSize={16}
             color="grey"
+            onPress={() => navigation.push('editProfile')}
           />
         )}
       </ProfileContainerHeader>

@@ -16,9 +16,14 @@ export const Back = styled.Text`
 
 export const MyActivitiesCustomText = styled(StyledText)`
   color: ${(props) => props.theme.color['BLACK-2']};
+
+  /* margin-top: 80px; */
+`
+
+export const TitleContainer = styled.View`
   width: 100%;
   margin-left: auto;
-  margin-top: 41px;
+  margin-top: 24px;
 `
 
 export const MainContentContainer = styled.View`
