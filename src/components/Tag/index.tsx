@@ -9,7 +9,7 @@ interface TagProps {
 export function Tag({ children }: TagProps) {
   return (
     <TagContainer>
-      <CustomText type="body" style={{ color: '#166e83' }}>
+      <CustomText type="body" style={{ color: '#166E83' }}>
         {children}
       </CustomText>
     </TagContainer>

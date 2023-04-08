@@ -19,6 +19,25 @@ export const MainTexts = styled.View`
   align-items: center;
 `
 
+export const Interests = styled.View`
+  width: 100%;
+`
+
+export const InterestsHeader = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 40px;
+`
+
+export const InterestsList = styled.View`
+  flex-direction: row;
+  margin: 30px 40px;
+  gap: 16px;
+  flex-wrap: wrap;
+`
+
 export const TextContainer = styled.View`
   width: 255px;
 `

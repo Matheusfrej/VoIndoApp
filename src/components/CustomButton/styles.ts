@@ -33,21 +33,24 @@ export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
       case 'outline':
         if (props.color === 'blue') {
           return css`
-            padding: 10px 16px;
+            padding: 8px 16px;
             background-color: transparent;
             border: 2px solid ${props.theme.color.PRIMARY};
+            /* width: 100%; */
           `
         } else if (props.color === 'orange') {
           return css`
-            padding: 10px 16px;
+            padding: 8px 16px;
             background-color: transparent;
             border: 2px solid ${props.theme.color.SECONDARY};
+            /* width: 100%; */
           `
         } else if (props.color === 'red') {
           return css`
-            padding: 10px 16px;
+            padding: 8px 16px;
             background-color: transparent;
             border: 2px solid ${props.theme.color.RED};
+            /* width: 100%; */
           `
         }
         break

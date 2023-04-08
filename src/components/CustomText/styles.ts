@@ -40,7 +40,7 @@ export const StyledText = styled.Text<StyledTextProps>`
       `) ||
     (props.type === 'body' &&
       css`
-        font-size: 14px;
+        font-size: 16px;
         font-weight: normal;
         font-family: 'InterRegular';
       `)}

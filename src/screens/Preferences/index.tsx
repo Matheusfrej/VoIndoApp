@@ -5,17 +5,17 @@ import {
   Avatar,
   Back,
   CentralizedCustomText,
+  Interests,
+  InterestsHeader,
+  InterestsList,
   MainContainer,
   MainTexts,
   Options,
   PreferencesContainer,
-  TextContainer,
 } from './styles'
+import { Tag } from '../../components/Tag'
 
 export function Preferences({ navigation }: any) {
-  const goToHub = () => {
-    navigation.push('hub')
-  }
   return (
     <PreferencesContainer>
       <Back
@@ -30,30 +30,44 @@ export function Preferences({ navigation }: any) {
       <MainContainer>
         <MainTexts>
           <CentralizedCustomText type="h2">
-            De que maneira prefere buscar atividades?
+            Você deseja procurar atividades baseadas nos seus interesses?
           </CentralizedCustomText>
-
-          <TextContainer>
-            <CentralizedCustomText type="body">
-              Podemos te sugerir atividades com base nos seus gostos
-            </CentralizedCustomText>
-          </TextContainer>
         </MainTexts>
+
+        <Interests>
+          <InterestsHeader>
+            <CustomText type="h3">Seus interesses</CustomText>
+            <CustomButton
+              variantType="outline"
+              text="Editar"
+              color="blue"
+              textSize={16}
+            ></CustomButton>
+          </InterestsHeader>
+
+          <InterestsList>
+            <Tag>Em grupo</Tag>
+            <Tag>Aprender algo novo</Tag>
+            <Tag>Atividades Físicas</Tag>
+          </InterestsList>
+        </Interests>
 
         <Options>
           <CustomButton
-            text="Buscar Atividades mais próximas a mim"
-            variantType="large"
+            text="Buscar atividades do meu interesse"
+            variantType="block"
             color="blue"
-            onPress={goToHub}
-            textSize={14}
+            onPress={() => {
+              navigation.push('activitiesList')
+            }}
+            textSize={16}
           />
           <CustomText type="body">ou</CustomText>
           <CustomButton
-            text="Ver atividades que tenho mais interesse"
-            variantType="large"
+            text="Ver todas as atividades disponíveis"
+            variantType="outline"
             color="blue"
-            textSize={14}
+            textSize={16}
             onPress={() => {
               navigation.push('activitiesList')
             }}
