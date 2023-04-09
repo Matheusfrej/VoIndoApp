@@ -9,6 +9,8 @@ interface StyledButtonProps {
 export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
   margin: 0;
   border-radius: 4px;
+  /* align-items: center; */
+  justify-content: center;
   background-color: ${(props) => {
     switch (props.color) {
       case 'blue':

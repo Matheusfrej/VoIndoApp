@@ -8,6 +8,7 @@ export const PastActivityCardContainer = styled.View`
   border-radius: 4px;
   min-width: 200px;
   max-width: 300px;
+  justify-content: space-around;
 `
 
 export const Header = styled.View``

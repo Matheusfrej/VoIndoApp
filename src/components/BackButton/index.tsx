@@ -1,3 +1,4 @@
+import { useTheme } from 'styled-components'
 import { CustomText } from '../CustomText'
 import { Back, BackButtonContainer } from './styles'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -8,6 +9,7 @@ interface BackButtonProps {
 }
 
 export function BackButton({ onPress, style }: BackButtonProps) {
+  const theme = useTheme()
   return (
     <Back
       onPress={onPress}
@@ -16,8 +18,8 @@ export function BackButton({ onPress, style }: BackButtonProps) {
       style={style}
     >
       <BackButtonContainer>
-        <FontAwesome name="arrow-left" color="#3F3D56" />
-        <CustomText type="body" style={{ color: '#3F3D56' }}>
+        <FontAwesome name="arrow-left" color={theme.color['BLACK-2']} />
+        <CustomText type="body" style={{ color: theme.color['BLACK-2'] }}>
           Voltar
         </CustomText>
       </BackButtonContainer>

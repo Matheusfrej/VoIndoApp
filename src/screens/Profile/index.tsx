@@ -16,6 +16,7 @@ import {
 } from './styles'
 import { CustomText } from '../../components/CustomText'
 import { Tag } from '../../components/Tag'
+import { useTheme } from 'styled-components'
 
 interface ProfileProps {
   navigation: any
@@ -24,6 +25,7 @@ interface ProfileProps {
 
 export function Profile({ navigation, route }: ProfileProps) {
   const { mine } = route.params
+  const theme = useTheme()
   return (
     <ProfileContainer>
       <ProfileContainerHeader>
@@ -47,7 +49,7 @@ export function Profile({ navigation, route }: ProfileProps) {
         <CustomText
           type="h1"
           centered={true}
-          style={{ color: '#3F3D56', marginTop: 24 }}
+          style={{ color: theme.color['BLACK-2'], marginTop: 24 }}
         >
           Maria Conceição
         </CustomText>
@@ -55,14 +57,14 @@ export function Profile({ navigation, route }: ProfileProps) {
           <CustomText
             type="subtitle"
             centered={true}
-            style={{ color: '#3F3D56' }}
+            style={{ color: theme.color['BLACK-2'] }}
           >
             72 anos.
           </CustomText>
           <CustomText
             type="subtitle"
             centered={true}
-            style={{ color: '#3F3D56' }}
+            style={{ color: theme.color['BLACK-2'] }}
           >
             Membro desde jan/2023
           </CustomText>
@@ -89,7 +91,7 @@ export function Profile({ navigation, route }: ProfileProps) {
             <QuantityAndText>
               <CustomText
                 type="h1"
-                style={{ color: '#EC6C01' }}
+                style={{ color: theme.color['SECONDARY-SATURATED'] }}
                 centered={true}
               >
                 8
@@ -101,7 +103,7 @@ export function Profile({ navigation, route }: ProfileProps) {
             <QuantityAndText>
               <CustomText
                 type="h1"
-                style={{ color: '#EC6C01' }}
+                style={{ color: theme.color['SECONDARY-SATURATED'] }}
                 centered={true}
               >
                 0
@@ -113,7 +115,7 @@ export function Profile({ navigation, route }: ProfileProps) {
           </MainLevelContent>
           <CustomText
             type="body"
-            style={{ color: '#667A8C', paddingRight: 30 }}
+            style={{ color: theme.color.GREY, paddingRight: 30 }}
           >
             Você pode aumentar seu nível participando ou organizando atividades
           </CustomText>

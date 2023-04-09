@@ -39,6 +39,7 @@ export function Preferences({ navigation }: any) {
               text="Editar"
               color="blue"
               textSize={16}
+              onPress={() => navigation.push('editProfile')}
             ></CustomButton>
           </InterestsHeader>
 

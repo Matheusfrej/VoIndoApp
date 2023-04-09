@@ -50,7 +50,7 @@ export function ActivitiesList({ navigation }: any) {
         />
         <CustomButton
           variantType="outline"
-          text="Filtrar"
+          text="Buscar"
           textSize={14}
           color="blue"
         />

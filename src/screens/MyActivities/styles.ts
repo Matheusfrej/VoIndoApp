@@ -34,7 +34,7 @@ export const MainContentContainer = styled.View`
 
 export const ConfirmedActivitiesContainer = styled.View`
   margin: 0 auto;
-  gap: 24px;
+  gap: 40px;
 `
 
 export const ActivityAndButtons = styled.View`
