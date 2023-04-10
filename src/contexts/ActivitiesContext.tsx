@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import api from '../services/api'
+import api, { apiLogin } from '../services/api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface ActivitiesContextProviderProps {
@@ -80,7 +80,7 @@ export function ActivitiesContextProvider({
         const headers = {
           'Content-Type': 'application/json',
         }
-        const response = await api.post('/authuser/login/', data, {
+        const response = await apiLogin.post('/authuser/login/', data, {
           withCredentials: false,
           headers,
         })

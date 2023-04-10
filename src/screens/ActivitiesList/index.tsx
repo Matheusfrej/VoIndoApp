@@ -68,7 +68,7 @@ export function ActivitiesList({ navigation }: any) {
                 <ActivityCard
                   key={activity.id}
                   activity={activity.name}
-                  organizer={activity.organizers[0].id}
+                  organizer={activity.organizers[0]?.id}
                   distance={100}
                   quantity={activity.participants_limit}
                   onPress={() => navigateToDetailedActivity(activity.id)}
