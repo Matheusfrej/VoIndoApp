@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react'
 import api from '../services/api'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface ActivitiesContextProviderProps {
   children: ReactNode
@@ -56,6 +57,7 @@ export function ActivitiesContextProvider({
     ActivityType[] | undefined
   >()
   const [areActivitiesLoading, setAreActivitiesLoading] = useState(true)
+  const [isLogged, setIsLogged] = useState(false)
 
   // FUNCTIONS
 
@@ -82,8 +84,8 @@ export function ActivitiesContextProvider({
           withCredentials: false,
           headers,
         })
-
-        console.log(response.data) // do something with the response
+        AsyncStorage.setItem('token', response.data.token)
+        setIsLogged(true)
       } catch (error) {
         console.error(error)
       }
@@ -99,6 +101,7 @@ export function ActivitiesContextProvider({
         const response = await api.get('/api/atividades/list-all/')
 
         setActivitiesList(response.data)
+        console.log(response.data)
       } catch (error) {
         console.error(error)
       } finally {
@@ -106,8 +109,8 @@ export function ActivitiesContextProvider({
       }
     }
 
-    if (!activitiesList) getActivities()
-  }, [activitiesList])
+    if (!activitiesList && isLogged) getActivities()
+  }, [activitiesList, isLogged])
   return (
     <ActivitiesContext.Provider
       value={{ activitiesList, areActivitiesLoading, getActivityById }}
