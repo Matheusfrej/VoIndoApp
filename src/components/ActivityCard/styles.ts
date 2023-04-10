@@ -23,6 +23,7 @@ export const ActivityName = styled.View`
   flex-direction: row;
   gap: 8px;
   align-items: center;
+  max-width: 55%;
 `
 
 export const CardFooterContainer = styled.View`
@@ -30,5 +31,9 @@ export const CardFooterContainer = styled.View`
 `
 
 export const ProfessionalText = styled.Text`
-  font-size: 12px;
+  font-size: 14px;
+`
+
+export const OrganizedBy = styled.View`
+  max-width: 50%;
 `

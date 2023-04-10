@@ -7,7 +7,6 @@ import { Tag } from '../../components/Tag'
 import {
   AvaliationCards,
   Avaliations,
-  Back,
   BigContainer,
   Container,
   How,
@@ -22,6 +21,8 @@ import {
   WhoParticipated,
   WhoParticipatedList,
 } from './styles'
+import { useActivities } from '../../contexts/ActivitiesContext'
+import { BackButton } from '../../components/BackButton'
 
 interface DetailedActivityProps {
   route: any
@@ -29,25 +30,26 @@ interface DetailedActivityProps {
 }
 
 export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
-  const { check, organizer, activity, local } = route.params
+  const { getActivityById } = useActivities()
+  const { id } = route.params
+
+  const activity = getActivityById(id)
   return (
     <BigContainer>
       <Container>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
+        />
 
         <Title>
-          <CustomText type="h2">{activity}</CustomText>
-          {check && (
+          <CustomText type="h2">{activity?.name}</CustomText>
+          {true && (
             <Image source={require('../../../assets/verificado.png')} alt="" />
           )}
         </Title>
-        <CustomText type="body"> descricao </CustomText>
+        <CustomText type="body"> {activity?.description} </CustomText>
 
         <Tags>
           <Tag>Atividade Fisica</Tag>
@@ -59,13 +61,16 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             Quem é o responsável?
           </CustomText>
 
-          <CustomText type="body">{organizer}, idade anos.</CustomText>
+          <CustomText type="body">
+            {activity?.organizers[0].id}, idade anos.
+          </CustomText>
         </Who>
         <CustomButton
           variantType="outline"
           color="blue"
           text="Visualizar perfil do responsável"
           textSize={16}
+          onPress={() => navigation.push('profile', { mine: false })}
         ></CustomButton>
 
         <How>
@@ -80,8 +85,11 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           <CustomText type="span" style={{ fontWeight: 'bold' }}>
             Onde acontece?
           </CustomText>
-          <CustomText type="body"> {local} </CustomText>
-          <CustomText type="body"> Ponto de encontro: encontro </CustomText>
+          <CustomText type="body"> {activity?.location} </CustomText>
+          <CustomText type="body">
+            {' '}
+            Ponto de encontro: {activity?.location}{' '}
+          </CustomText>
           <MyMapView>
             <WhereMap
               // -8.046485892509358, -34.90411727453414
@@ -97,7 +105,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                   latitude: -8.046485892509358,
                   longitude: -34.90411727453414,
                 }}
-                title={activity}
+                title={activity?.name}
                 description="Ponto de encontro"
               />
             </WhereMap>
@@ -132,16 +140,22 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                 alt=""
                 style={{ marginBottom: -16, zIndex: 1 }}
               />
-              <PersonWhoParticipated>
+              <PersonWhoParticipated
+                onPress={() => navigation.push('profile', { mine: false })}
+              >
                 <Image source={require('../../../assets/senhor.png')} alt="" />
                 <CustomText type="body">Mário</CustomText>
               </PersonWhoParticipated>
             </PersonWhoParticipatedAndPossibleCheck>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhora.png')} alt="" />
               <CustomText type="body">Rita</CustomText>
             </PersonWhoParticipated>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhor.png')} alt="" />
               <CustomText type="body">Mário</CustomText>
             </PersonWhoParticipated>
@@ -151,16 +165,22 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                 alt=""
                 style={{ marginBottom: -16, zIndex: 1 }}
               />
-              <PersonWhoParticipated>
+              <PersonWhoParticipated
+                onPress={() => navigation.push('profile', { mine: false })}
+              >
                 <Image source={require('../../../assets/senhora.png')} alt="" />
                 <CustomText type="body">Rita</CustomText>
               </PersonWhoParticipated>
             </PersonWhoParticipatedAndPossibleCheck>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhor.png')} alt="" />
               <CustomText type="body">Mário</CustomText>
             </PersonWhoParticipated>
-            <PersonWhoParticipated>
+            <PersonWhoParticipated
+              onPress={() => navigation.push('profile', { mine: false })}
+            >
               <Image source={require('../../../assets/senhora.png')} alt="" />
               <CustomText type="body">Rita</CustomText>
             </PersonWhoParticipated>

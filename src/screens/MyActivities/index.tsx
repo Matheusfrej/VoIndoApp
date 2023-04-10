@@ -1,10 +1,10 @@
 import { ActivityCard } from '../../components/ActivityCard'
+import { BackButton } from '../../components/BackButton'
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
-import { PastActivityCard } from '../../components/PastActivityCard'
+import { OtherActivityCard } from '../../components/OtherActivityCard'
 import {
   ActivityAndButtons,
-  Back,
   ConfirmedActivitiesContainer,
   MainContentContainer,
   MyActivitiesContainer,
@@ -12,27 +12,47 @@ import {
   MyActivitiesHeader,
   PastActivities,
   PastActivityCardContainer,
+  TitleContainer,
 } from './styles'
 
 export function MyActivities({ navigation }: any) {
   return (
     <MyActivitiesContainer>
       <MyActivitiesHeader>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
-
-        <MyActivitiesCustomText type="h3" centered={true}>
+        />
+      </MyActivitiesHeader>
+      <TitleContainer>
+        <MyActivitiesCustomText type="h1" centered={true}>
           Minhas atividades
         </MyActivitiesCustomText>
-      </MyActivitiesHeader>
+      </TitleContainer>
+      <PastActivities>
+        <CustomText type="h2">Atividades que estou organizando</CustomText>
+        <PastActivityCardContainer
+          horizontal={true}
+          contentContainerStyle={{ gap: 20, paddingRight: 200 }}
+        >
+          <OtherActivityCard
+            activity="Campeonato de truco"
+            mine={true}
+          ></OtherActivityCard>
+          <OtherActivityCard
+            activity="Caminhada em grupo"
+            mine={true}
+          ></OtherActivityCard>
+          <OtherActivityCard
+            activity="Funcional na praia"
+            mine={true}
+          ></OtherActivityCard>
+        </PastActivityCardContainer>
+      </PastActivities>
 
       <MainContentContainer>
-        <CustomText type="h3">Atividades Confirmadas</CustomText>
+        <CustomText type="h2">Atividades Confirmadas</CustomText>
 
         <ConfirmedActivitiesContainer>
           <ActivityAndButtons>
@@ -82,26 +102,26 @@ export function MyActivities({ navigation }: any) {
         </ConfirmedActivitiesContainer>
       </MainContentContainer>
       <PastActivities>
-        <CustomText type="h3">Atividades Passadas</CustomText>
+        <CustomText type="h2">Atividades Passadas</CustomText>
         <PastActivityCardContainer
           horizontal={true}
           contentContainerStyle={{ gap: 20, paddingRight: 200 }}
         >
-          <PastActivityCard
+          <OtherActivityCard
             activity="Oficina de Tricô"
             check={true}
             organizer="Lúcia"
-          ></PastActivityCard>
-          <PastActivityCard
+          ></OtherActivityCard>
+          <OtherActivityCard
             activity="Jogo de Baralho"
             check={true}
             organizer="Maria"
-          ></PastActivityCard>
-          <PastActivityCard
+          ></OtherActivityCard>
+          <OtherActivityCard
             activity="Campeonato de Dominó"
             check={true}
             organizer="Roberto"
-          ></PastActivityCard>
+          ></OtherActivityCard>
         </PastActivityCardContainer>
       </PastActivities>
     </MyActivitiesContainer>

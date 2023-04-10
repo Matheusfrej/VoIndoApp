@@ -9,37 +9,35 @@ import {
   WelcomeTexts,
   Img,
 } from './styles'
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 // import axios from 'axios'
-import api from '../../services/api'
+// import api from '../../services/api'
 
 export function Home({ navigation }: any) {
-  const [activities, setActivities] = useState<any>([])
+  // const [activities, setActivities] = useState<any>([])
 
   const goToPresentation = () => {
-    console.log('apertou')
-
     navigation.push('home2')
   }
 
-  useEffect(() => {
-    const getActivities = async () => {
-      try {
-        console.log('oiiii')
-        const response = await api.get('/api/atividade/list-all')
-        console.log(response.data)
-        console.log('oiiii2')
+  // useEffect(() => {
+  //   const getActivities = async () => {
+  //     try {
+  //       console.log('oiiii')
+  //       const response = await api.get('/api/atividades/list-all/')
+  //       console.log(response.data)
+  //       console.log('oiiii2')
 
-        setActivities(response.data)
-      } catch (error) {
-        console.log('oiiii erro')
-        // throw new Error(error)
-        console.error(error)
-      }
-    }
+  //       setActivities(response.data)
+  //     } catch (error) {
+  //       console.log('oiiii erro')
+  //       // throw new Error(error)
+  //       console.error(error)
+  //     }
+  //   }
 
-    getActivities()
-  }, [])
+  //   getActivities()
+  // }, [])
 
   // comentario
 
@@ -66,9 +64,9 @@ export function Home({ navigation }: any) {
         </CenteredCustomText>
       </WelcomeTexts>
 
-      {activities.length > 0 && (
-        <CustomText type="span">{activities[0].description}</CustomText>
-      )}
+      {/* {!areActivitiesLoading && activitiesList !== undefined && (
+        <CustomText type="span">{activitiesList[0].description}</CustomText>
+      )} */}
       {/* <CustomText type="span">{'oi' || activities[0].description}</CustomText> */}
       {/* ;-; activities.length > 0 && */}
       <Button>

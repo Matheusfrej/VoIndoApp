@@ -6,6 +6,7 @@ import {
   CardFooterContainer,
   CardFooterSectionContainer,
   CardSectionContainer,
+  OrganizedBy,
   ProfessionalText,
 } from './styles'
 
@@ -51,7 +52,9 @@ export function ActivityCard({
 
         <CardFooterContainer>
           <CardFooterSectionContainer>
-            <CustomText type="body">Organizado por {organizer}</CustomText>
+            <OrganizedBy>
+              <CustomText type="body">Organizado por {organizer}</CustomText>
+            </OrganizedBy>
 
             {distance >= 1000 && (
               <CustomText type="body">

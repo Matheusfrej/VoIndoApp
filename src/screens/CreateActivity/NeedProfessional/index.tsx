@@ -1,7 +1,8 @@
 import { Image } from 'react-native'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
-import { Avatar, Back, Buttons, Container, Ou, Texts } from './styles'
+import { Avatar, Buttons, Container, Ou, Texts } from './styles'
+import { BackButton } from '../../../components/BackButton'
 
 export function NeedProfessional({ navigation }: any) {
   const goToRegister = (need: boolean) => {
@@ -9,13 +10,11 @@ export function NeedProfessional({ navigation }: any) {
   }
   return (
     <Container>
-      <Back
+      <BackButton
         onPress={() => {
           navigation.goBack()
         }}
-      >
-        ← Voltar
-      </Back>
+      />
 
       <Texts>
         <CustomText style={{ textAlign: 'center' }} type="h1">

@@ -9,6 +9,8 @@ interface StyledButtonProps {
 export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
   margin: 0;
   border-radius: 4px;
+  /* align-items: center; */
+  justify-content: center;
   background-color: ${(props) => {
     switch (props.color) {
       case 'blue':
@@ -17,6 +19,8 @@ export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
         return props.theme.color.SECONDARY
       case 'red':
         return props.theme.color.RED
+      case 'grey':
+        return props.theme.color.GREY
     }
   }};
 
@@ -33,28 +37,38 @@ export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
       case 'outline':
         if (props.color === 'blue') {
           return css`
-            padding: 10px 16px;
+            padding: 8px 16px;
             background-color: transparent;
             border: 2px solid ${props.theme.color.PRIMARY};
+            /* width: 100%; */
           `
         } else if (props.color === 'orange') {
           return css`
-            padding: 10px 16px;
+            padding: 8px 16px;
             background-color: transparent;
             border: 2px solid ${props.theme.color.SECONDARY};
+            /* width: 100%; */
           `
         } else if (props.color === 'red') {
           return css`
-            padding: 10px 16px;
+            padding: 8px 16px;
             background-color: transparent;
             border: 2px solid ${props.theme.color.RED};
+            /* width: 100%; */
+          `
+        } else if (props.color === 'grey') {
+          return css`
+            padding: 8px 16px;
+            background-color: transparent;
+            border: 2px solid ${props.theme.color.GREY};
+            /* width: 100%; */
           `
         }
         break
       case 'small':
         return css`
           padding: 8px 12px;
-          max-width: 70px;
+          max-width: 100px;
         `
       case 'block':
         return css`
@@ -92,6 +106,10 @@ export const ButtonText = styled(StyledText)<ButtonTextProps>`
         case 'red':
           return css`
             color: ${props.theme.color.RED};
+          `
+        case 'grey':
+          return css`
+            color: ${props.theme.color.GREY};
           `
         default:
           break

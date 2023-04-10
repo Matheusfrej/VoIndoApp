@@ -25,6 +25,8 @@ export const Title = styled.View`
 export const FilterBar = styled.View`
   flex-direction: row;
   justify-content: center;
+  /* flex: 1; */
+  /* align-items: center; */
   gap: 20px;
   margin-top: 16px;
   margin-bottom: 32px;
@@ -42,7 +44,7 @@ export const NewView = styled.View`
 export const AcitivitiesTextInput = styled.TextInput`
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  width: 65%;
+  width: 60%;
   font-size: 16px;
   border-radius: 5px;
 `

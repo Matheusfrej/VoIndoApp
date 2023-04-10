@@ -1,7 +1,8 @@
+import { useTheme } from 'styled-components'
+import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
 import {
-  Back,
   BigContainer,
   Button,
   Container,
@@ -13,6 +14,7 @@ import {
 
 export function RegisterActivity({ route, navigation }: any) {
   const { need } = route.params
+  const theme = useTheme()
 
   const goToMoreInfos = () => {
     navigation.push('moreInfos')
@@ -20,15 +22,14 @@ export function RegisterActivity({ route, navigation }: any) {
   return (
     <BigContainer>
       <Container>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
+          style={{ marginLeft: 0 }}
+        />
         <Title>
-          <CustomText style={{ color: '#3F3D56' }} type="h1">
+          <CustomText style={{ color: theme.color['BLACK-2'] }} type="h1">
             Cadastar atividade
           </CustomText>
         </Title>

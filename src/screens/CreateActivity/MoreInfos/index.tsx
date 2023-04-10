@@ -1,24 +1,25 @@
+import { useTheme } from 'styled-components'
+import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
-import { Back, Button, Container, Forms, Pair, Title } from './styles'
+import { Button, Container, Forms, Pair, Title } from './styles'
 import React, { useState } from 'react'
 import DatePicker from 'react-native-date-picker'
 
 export function MoreInfos({ navigation }: any) {
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
+  const theme = useTheme()
   return (
     <Container>
-      <Back
+      <BackButton
         onPress={() => {
           navigation.goBack()
         }}
-      >
-        ← Voltar
-      </Back>
+      />
 
       <Title>
-        <CustomText style={{ color: '#3F3D56' }} type="h1">
+        <CustomText style={{ color: theme.color['BLACK-2'] }} type="h1">
           Mais informações
         </CustomText>
       </Title>

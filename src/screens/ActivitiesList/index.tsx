@@ -5,7 +5,6 @@ import { CustomText } from '../../components/CustomText'
 import {
   AcitivitiesTextInput,
   ActivitiesContainer,
-  Back,
   FilterBar,
   ListContainer,
   ListHeader,
@@ -13,28 +12,25 @@ import {
   TextAndLink,
   Title,
 } from './styles'
+import { useActivities } from '../../contexts/ActivitiesContext'
+import { BackButton } from '../../components/BackButton'
 
 export function ActivitiesList({ navigation }: any) {
+  const { activitiesList, areActivitiesLoading } = useActivities()
+
   const [placeholderText, setPlaceholderText] = useState('Pesquisar atividade')
-  const navigateToDetailedActivity = (
-    check: boolean,
-    activity: string,
-    organizer: string,
-    local: string,
-  ) => {
-    navigation.push('detailedActivity', { check, activity, organizer, local })
+  const navigateToDetailedActivity = (id: string) => {
+    navigation.push('detailedActivity', { id })
   }
 
   return (
     <ListContainer>
       <ListHeader>
-        <Back
+        <BackButton
           onPress={() => {
             navigation.goBack()
           }}
-        >
-          ← Voltar
-        </Back>
+        />
 
         <TextAndLink>
           <Title>
@@ -54,7 +50,7 @@ export function ActivitiesList({ navigation }: any) {
         />
         <CustomButton
           variantType="outline"
-          text="Filtrar"
+          text="Buscar"
           textSize={14}
           color="blue"
         />
@@ -65,7 +61,21 @@ export function ActivitiesList({ navigation }: any) {
           contentContainerStyle={{ gap: 32, paddingBottom: 300 }}
           showsVerticalScrollIndicator={false}
         >
-          <ActivityCard
+          {!areActivitiesLoading &&
+            activitiesList !== undefined &&
+            activitiesList.map((activity) => {
+              return (
+                <ActivityCard
+                  key={activity.id}
+                  activity={activity.name}
+                  organizer={activity.organizers[0].id}
+                  distance={100}
+                  quantity={activity.participants_limit}
+                  onPress={() => navigateToDetailedActivity(activity.id)}
+                />
+              )
+            })}
+          {/* <ActivityCard
             onPress={() =>
               navigateToDetailedActivity(
                 true,
@@ -143,7 +153,7 @@ export function ActivitiesList({ navigation }: any) {
             organizer="Lucia"
             distance={100}
             quantity={24}
-          ></ActivityCard>
+          ></ActivityCard> */}
         </ActivitiesContainer>
       </NewView>
     </ListContainer>
