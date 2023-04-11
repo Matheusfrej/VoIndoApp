@@ -11,31 +11,40 @@ export function MoreInfos({ navigation }: any) {
   // const [open, setOpen] = useState(true)
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
+  const [time, setTime] = useState(new Date())
   const [mode, setMode] = useState('date')
-  const [show, setShow] = useState(true)
+  const [showDate, setShowDate] = useState(false)
+  const [showTime, setShowTime] = useState(false)
 
-  const onChange = (event, selectedDate) => {
+  const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate
-    // setShow(false)
+    setShowDate(false)
     setDate(currentDate)
   }
 
-  const showMode = (currentMode) => {
-    if (Platform.OS === 'android') {
-      setShow(false)
-      // for iOS, add a button that closes the picker
-    }
-    setMode(currentMode)
+  const onChangeTime = (event, selectedTime) => {
+    const currentTime = selectedTime
+    setShowTime(false)
+
+    setDate(currentTime)
   }
 
+  // const showMode = (currentMode) => {
+  //   if (Platform.OS === 'android') {
+  //     setShow(false)
+  //     // for iOS, add a button that closes the picker
+  //   }
+  //   setMode(currentMode)
+  // }
+
   const showDatepicker = () => {
-    showMode('date')
-    setShow(true)
+    // showMode('date')
+    setShowDate(true)
   }
 
   const showTimepicker = () => {
-    showMode('time')
-    setShow(true)
+    // showMode('time')
+    setShowTime(true)
   }
 
   return (
@@ -72,15 +81,30 @@ export function MoreInfos({ navigation }: any) {
             text="Escolher uma data"
             onPress={showDatepicker}
           ></CustomButton>
+          <CustomButton
+            variantType="outline"
+            text="Escolher uma hora"
+            onPress={showTimepicker}
+          ></CustomButton>
           <CustomText type="h3">selected: {date.toLocaleString()}</CustomText>
-          {show && (
+          {showDate && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              // date={date}
+              mode="date"
+              is24Hour={true}
+              onChange={onChangeDate}
+            />
+          )}
+          {showTime && (
             <DateTimePicker
               testID="dateTimePicker"
               value={date}
               // date={date}
               mode="time"
               is24Hour={true}
-              onChange={onChange}
+              onChange={onChangeTime}
             />
           )}
         </Pair>

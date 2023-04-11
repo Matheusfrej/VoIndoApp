@@ -7,9 +7,9 @@ export const Back = styled.TouchableHighlight`
   width: 100px;
   border-radius: 8px;
 
-  position: fixed;
-  top: 8px;
-  left: 4px;
+  /* position: fixed; */
+  /* top: 8px; */
+  /* left: 4px; */
 `
 
 export const BackButtonContainer = styled.View`
