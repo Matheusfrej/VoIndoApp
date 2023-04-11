@@ -1,15 +1,43 @@
+import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
 import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
 import { Button, Container, Forms, Pair, Title } from './styles'
-import React, { useState } from 'react'
-import DatePicker from 'react-native-date-picker'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { Platform } from 'react-native'
 
 export function MoreInfos({ navigation }: any) {
-  const [date, setDate] = useState(new Date())
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(true)
   const theme = useTheme()
+  const [date, setDate] = useState(new Date())
+  const [mode, setMode] = useState('date')
+  const [show, setShow] = useState(true)
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate
+    // setShow(false)
+    setDate(currentDate)
+  }
+
+  const showMode = (currentMode) => {
+    if (Platform.OS === 'android') {
+      setShow(false)
+      // for iOS, add a button that closes the picker
+    }
+    setMode(currentMode)
+  }
+
+  const showDatepicker = () => {
+    showMode('date')
+    setShow(true)
+  }
+
+  const showTimepicker = () => {
+    showMode('time')
+    setShow(true)
+  }
+
   return (
     <Container>
       <BackButton
@@ -26,13 +54,7 @@ export function MoreInfos({ navigation }: any) {
 
       <Forms>
         <Pair>
-          <CustomButton
-            text={'Quando a atividade irá acontecer?'}
-            variantType={'outline'}
-            color="blue"
-            onPress={() => setOpen(true)}
-          ></CustomButton>
-
+          {/* 
           <DatePicker
             modal
             open={open}
@@ -44,7 +66,23 @@ export function MoreInfos({ navigation }: any) {
             onCancel={() => {
               setOpen(false)
             }}
-          />
+          />  */}
+          <CustomButton
+            variantType="outline"
+            text="Escolher uma data"
+            onPress={showDatepicker}
+          ></CustomButton>
+          <CustomText type="h3">selected: {date.toLocaleString()}</CustomText>
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              // date={date}
+              mode="time"
+              is24Hour={true}
+              onChange={onChange}
+            />
+          )}
         </Pair>
 
         <Pair>

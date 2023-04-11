@@ -7,7 +7,7 @@ export const BigContainer = styled.ScrollView`
 
 export const Container = styled.View`
   flex: 1;
-  margin: 20px;
+  margin: 0 20px 16px;
   gap: 20px;
 `
 

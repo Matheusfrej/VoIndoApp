@@ -36,13 +36,12 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const activity = getActivityById(id)
   return (
     <BigContainer>
+      <BackButton
+        onPress={() => {
+          navigation.goBack()
+        }}
+      />
       <Container>
-        <BackButton
-          onPress={() => {
-            navigation.goBack()
-          }}
-        />
-
         <Title>
           <CustomText type="h2">{activity?.name}</CustomText>
           {true && (

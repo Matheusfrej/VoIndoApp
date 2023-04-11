@@ -5,7 +5,7 @@ export const HomeContainer = styled.View`
   flex: 1;
   justify-content: space-around;
   align-items: center;
-  padding: 16px 24px;
+  padding: 24px;
 `
 
 export const LogoImg = styled.Image`
