@@ -3,26 +3,36 @@ import { useTheme } from 'styled-components'
 import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
-import { Button, Container, Forms, Pair, Title } from './styles'
+import {
+  Button,
+  Container,
+  FinalButton,
+  Forms,
+  Pair,
+  TextInput,
+  Title,
+} from './styles'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { Platform } from 'react-native'
+import SelectDropdown from 'react-native-select-dropdown'
 
-export function MoreInfos({ navigation }: any) {
-  // const [open, setOpen] = useState(true)
+export function MoreInfos({ navigation, route }: any) {
+  const { need, name, desc, adr } = route.params
+
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
-  const [time, setTime] = useState(new Date())
-  const [mode, setMode] = useState('date')
+  const [max, setMax] = useState('')
+
   const [showDate, setShowDate] = useState(false)
   const [showTime, setShowTime] = useState(false)
+  const quantity = ['Sem limites', '1', '2', '3', '4', '5', '8', '10']
 
-  const onChangeDate = (event, selectedDate) => {
+  const onChangeDate = (event: any, selectedDate: any) => {
     const currentDate = selectedDate
     setShowDate(false)
     setDate(currentDate)
   }
 
-  const onChangeTime = (event, selectedTime) => {
+  const onChangeTime = (event: any, selectedTime: any) => {
     const currentTime = selectedTime
     setShowTime(false)
 
@@ -62,31 +72,22 @@ export function MoreInfos({ navigation }: any) {
       </Title>
 
       <Forms>
-        <Pair>
-          {/* 
-          <DatePicker
-            modal
-            open={open}
-            date={date}
-            onConfirm={(date) => {
-              setOpen(false)
-              setDate(date)
-            }}
-            onCancel={() => {
-              setOpen(false)
-            }}
-          />  */}
+        <Button>
           <CustomButton
             variantType="outline"
             text="Escolher uma data"
             onPress={showDatepicker}
+            style={{ width: 280 }}
           ></CustomButton>
           <CustomButton
             variantType="outline"
             text="Escolher uma hora"
             onPress={showTimepicker}
+            style={{ width: 280 }}
           ></CustomButton>
-          <CustomText type="h3">selected: {date.toLocaleString()}</CustomText>
+          <CustomText type="h3">
+            Data e hora selecionada: {date.toLocaleString()}
+          </CustomText>
           {showDate && (
             <DateTimePicker
               testID="dateTimePicker"
@@ -107,20 +108,50 @@ export function MoreInfos({ navigation }: any) {
               onChange={onChangeTime}
             />
           )}
-        </Pair>
+        </Button>
 
         <Pair>
           <CustomText type="h3">Existe uma frequência?</CustomText>
+          <TextInput
+            placeholder={'Insira a frequência da atividade'}
+            selectionColor={'#000'}
+            placeholderTextColor={'#AAAAAA'}
+          />
         </Pair>
 
         <Pair>
           <CustomText type="h3">Número máximo de participantes</CustomText>
+          <SelectDropdown
+            data={quantity}
+            onSelect={(selectedItem, index) => {
+              setMax(selectedItem)
+            }}
+            defaultButtonText="Selecione a quantidade"
+            buttonStyle={{
+              width: 320,
+              borderColor: '#000',
+              borderStyle: 'solid',
+              borderWidth: 1,
+            }}
+          />
         </Pair>
       </Forms>
 
-      <Button>
-        <CustomButton variantType="block" text="Cadastrar"></CustomButton>
-      </Button>
+      <FinalButton>
+        <CustomButton
+          onPress={() => {
+            // console.log(need)
+            // console.log(name)
+            // console.log(desc)
+            // console.log(adr)
+            // console.log(name)
+            // console.log(date.toLocaleString())
+            // console.log(max)
+          }}
+          variantType="block"
+          text="Cadastrar"
+        ></CustomButton>
+      </FinalButton>
     </Container>
   )
 }
