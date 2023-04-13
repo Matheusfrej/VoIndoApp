@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ActivityCard } from '../../components/ActivityCard'
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
@@ -16,12 +16,19 @@ import { useActivities } from '../../contexts/ActivitiesContext'
 import { BackButton } from '../../components/BackButton'
 
 export function ActivitiesList({ navigation }: any) {
-  const { activitiesList, areActivitiesLoading } = useActivities()
+  const { activitiesList, areActivitiesLoading, getActivities, isLogged } =
+    useActivities()
 
   const [placeholderText, setPlaceholderText] = useState('Pesquisar atividade')
   const navigateToDetailedActivity = (id: string) => {
     navigation.push('detailedActivity', { id })
   }
+
+  useEffect(() => {
+    if (isLogged) {
+      getActivities()
+    }
+  }, [])
 
   return (
     <ListContainer>
@@ -68,92 +75,16 @@ export function ActivitiesList({ navigation }: any) {
                 <ActivityCard
                   key={activity.id}
                   activity={activity.name}
-                  organizer={activity.organizers[0]?.id}
                   distance={100}
-                  quantity={activity.participants_limit}
-                  onPress={() => navigateToDetailedActivity(activity.id)}
+                  quantity={Number(activity.participants_limit)}
+                  onPress={() => {
+                    if (activity.id !== undefined) {
+                      navigateToDetailedActivity(activity.id)
+                    }
+                  }}
                 />
               )
             })}
-          {/* <ActivityCard
-            onPress={() =>
-              navigateToDetailedActivity(
-                true,
-                'Caminhada em grupo',
-                'Lucia',
-                'Rua real da torre 705',
-              )
-            }
-            check={true}
-            profissional={false}
-            activity="Caminhada em grupo"
-            organizer="Lucia"
-            distance={100}
-            quantity={8}
-          ></ActivityCard>
-
-          <ActivityCard
-            onPress={() =>
-              navigateToDetailedActivity(
-                false,
-                'Aula de tricô',
-                'Zefa',
-                'Parque da Jaqueira',
-              )
-            }
-            check={false}
-            profissional={false}
-            activity="Aula de tricô"
-            organizer="Zefa"
-            distance={200}
-            quantity={10}
-          ></ActivityCard>
-
-          <ActivityCard
-            onPress={() =>
-              navigateToDetailedActivity(
-                true,
-                'Hidroginástica',
-                'Mario',
-                'Beira Rio',
-              )
-            }
-            check={true}
-            profissional={true}
-            activity="Hidroginástica"
-            organizer="Mario"
-            distance={800}
-            quantity={4}
-          ></ActivityCard>
-
-          <ActivityCard
-            onPress={() =>
-              navigateToDetailedActivity(
-                false,
-                'Jogar baralho',
-                'Lucia',
-                'Marco zero',
-              )
-            }
-            check={false}
-            profissional={false}
-            activity="Jogar baralho"
-            organizer="Lucia"
-            distance={1000}
-            quantity={3}
-          ></ActivityCard>
-
-          <ActivityCard
-            onPress={() =>
-              navigateToDetailedActivity(true, 'Bingo', 'Lucia', 'Disney')
-            }
-            check={true}
-            profissional={false}
-            activity="Bingo"
-            organizer="Lucia"
-            distance={100}
-            quantity={24}
-          ></ActivityCard> */}
         </ActivitiesContainer>
       </NewView>
     </ListContainer>

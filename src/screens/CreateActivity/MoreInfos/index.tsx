@@ -14,6 +14,8 @@ import {
 } from './styles'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDropdown from 'react-native-select-dropdown'
+import { ActivityType } from '../../../contexts/ActivitiesContext'
+import api from '../../../services/api'
 
 export function MoreInfos({ navigation, route }: any) {
   const { need, name, desc, adr } = route.params
@@ -30,6 +32,42 @@ export function MoreInfos({ navigation, route }: any) {
     const currentDate = selectedDate
     setShowDate(false)
     setDate(currentDate)
+  }
+
+  const postNewActivity = async (
+    need: boolean,
+    name: string,
+    desc: string,
+    adr: string,
+    date: Date,
+    max: string,
+  ) => {
+    const newActivity: ActivityType = {
+      name,
+      address: adr,
+      description: desc,
+      participants_limit: max,
+      professional_required: need,
+      latitude: -8.050718,
+      longitude: -34.908375,
+      ocorrencias: [{ data_time: date }],
+    }
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+      }
+      const response = await api.post(
+        '/api/atividades/create-update/',
+        newActivity,
+        {
+          withCredentials: false,
+          headers,
+        },
+      )
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const onChangeTime = (event: any, selectedTime: any) => {
@@ -124,7 +162,11 @@ export function MoreInfos({ navigation, route }: any) {
           <SelectDropdown
             data={quantity}
             onSelect={(selectedItem, index) => {
-              setMax(selectedItem)
+              if (selectedItem === 'Sem limites') {
+                setMax('-1')
+              } else {
+                setMax(selectedItem)
+              }
             }}
             defaultButtonText="Selecione a quantidade"
             buttonStyle={{
@@ -140,13 +182,7 @@ export function MoreInfos({ navigation, route }: any) {
       <FinalButton>
         <CustomButton
           onPress={() => {
-            // console.log(need)
-            // console.log(name)
-            // console.log(desc)
-            // console.log(adr)
-            // console.log(name)
-            // console.log(date.toLocaleString())
-            // console.log(max)
+            postNewActivity(need, name, desc, adr, date, max)
           }}
           variantType="block"
           text="Cadastrar"
