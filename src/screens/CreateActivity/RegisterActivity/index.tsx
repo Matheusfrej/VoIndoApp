@@ -68,15 +68,6 @@ export function RegisterActivity({ route, navigation }: any) {
           </Pair>
 
           <Pair>
-            <CustomText type="h3">Instruções de participação</CustomText>
-            <TextInput
-              placeholder={'Descreva como participar'}
-              selectionColor={'#000'}
-              placeholderTextColor={'#AAAAAA'}
-            />
-          </Pair>
-
-          <Pair>
             <CustomText type="h3">Endereço da atividade</CustomText>
             <TextInput
               placeholder={'Insira o endereço'}

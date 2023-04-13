@@ -48,8 +48,8 @@ export function MoreInfos({ navigation, route }: any) {
       description: desc,
       participants_limit: max,
       professional_required: need,
-      latitude: -8.050718,
-      longitude: -34.908375,
+      latitude: -8.127497893953393,
+      longitude: -34.89946246037277,
       ocorrencias: [{ data_time: date }],
     }
     try {
