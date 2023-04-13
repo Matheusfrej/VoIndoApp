@@ -12,6 +12,12 @@ interface ActivitiesContextProviderProps {
   children: ReactNode
 }
 
+export interface adressType {
+  address: string
+  location: string
+  distance: number
+}
+
 export interface ActivityType {
   id?: string
   tags?: string[]

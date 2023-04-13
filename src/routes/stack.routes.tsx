@@ -15,6 +15,7 @@ import { RegisterActivity } from '../screens/CreateActivity/RegisterActivity'
 import { MoreInfos } from '../screens/CreateActivity/MoreInfos'
 import { Profile } from '../screens/Profile'
 import { EditProfile } from '../screens/EditProfile'
+import { AskAdress } from '../screens/CreateActivity/AskAdress'
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
@@ -36,6 +37,7 @@ export function StackRoutes() {
       <Screen name="moreInfos" component={MoreInfos} />
       <Screen name="profile" component={Profile} />
       <Screen name="editProfile" component={EditProfile} />
+      <Screen name="askAddress" component={AskAdress} />
 
       {/* <Screen name="searchActivities" component={SearchActivities} /> */}
     </Navigator>

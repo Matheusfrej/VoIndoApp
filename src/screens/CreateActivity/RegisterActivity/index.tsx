@@ -19,15 +19,9 @@ export function RegisterActivity({ route, navigation }: any) {
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
-  const [adress, setAdress] = useState('')
 
-  const goToMoreInfos = (
-    need: boolean,
-    name: string,
-    desc: string,
-    adr: string,
-  ) => {
-    navigation.push('moreInfos', { need, name, desc, adr })
+  const goToAskAddress = (need: boolean, name: string, desc: string) => {
+    navigation.push('askAddress', { need, name, desc })
   }
   return (
     <BigContainer>
@@ -67,17 +61,6 @@ export function RegisterActivity({ route, navigation }: any) {
             />
           </Pair>
 
-          <Pair>
-            <CustomText type="h3">Endereço da atividade</CustomText>
-            <TextInput
-              placeholder={'Insira o endereço'}
-              selectionColor={'#000'}
-              placeholderTextColor={'#AAAAAA'}
-              value={adress}
-              onChangeText={(newAdr) => setAdress(newAdr)}
-            />
-          </Pair>
-
           {need && (
             <Pair>
               <CustomText type="h3">
@@ -96,7 +79,7 @@ export function RegisterActivity({ route, navigation }: any) {
           <CustomButton
             variantType="block"
             text="Prosseguir"
-            onPress={() => goToMoreInfos(need, name, description, adress)}
+            onPress={() => goToAskAddress(need, name, description)}
           ></CustomButton>
         </Button>
       </Container>

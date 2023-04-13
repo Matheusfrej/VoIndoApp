@@ -168,7 +168,7 @@ export function MoreInfos({ navigation, route }: any) {
                 setMax(selectedItem)
               }
             }}
-            defaultButtonText="Selecione a quantidade"
+            defaultValue={'Sem limites'}
             buttonStyle={{
               width: 320,
               borderColor: '#000',
