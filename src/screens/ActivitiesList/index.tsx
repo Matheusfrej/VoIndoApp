@@ -77,6 +77,10 @@ export function ActivitiesList({ navigation }: any) {
                   activity={activity.name}
                   distance={100}
                   quantity={Number(activity.participants_limit)}
+                  profissional={activity.professional_required}
+                  organizer={
+                    activity?.creator?.nickname || activity?.creator?.first_name
+                  }
                   onPress={() => {
                     if (activity.id !== undefined) {
                       navigateToDetailedActivity(activity.id)

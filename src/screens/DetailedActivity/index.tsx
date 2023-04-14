@@ -33,7 +33,8 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
 
   const activity = getActivityById(id)
-  console.log(activity?.latitude)
+  console.log(activity)
+  console.log(activity?.ocorrencias)
 
   return (
     <BigContainer>
@@ -52,8 +53,10 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
         <CustomText type="body"> {activity?.description} </CustomText>
 
         <Tags>
-          <Tag>Atividade Fisica</Tag>
-          <Tag>Em grupo</Tag>
+          {activity !== undefined &&
+            activity.tags?.map((tag, index) => {
+              return <Tag key={index}>{tag}</Tag>
+            })}
         </Tags>
 
         <Who>
@@ -61,7 +64,12 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             Quem é o responsável?
           </CustomText>
 
-          <CustomText type="body">Fulano, idade anos.</CustomText>
+          <CustomText type="body">
+            <CustomText type="span">
+              {activity?.creator?.nickname || activity?.creator?.first_name}
+            </CustomText>
+            , idade anos.
+          </CustomText>
         </Who>
         <CustomButton
           variantType="outline"
@@ -70,6 +78,36 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           textSize={16}
           onPress={() => navigation.push('profile', { mine: false })}
         ></CustomButton>
+
+        <Who>
+          <CustomText type="span" style={{ fontWeight: 'bold' }}>
+            Quando acontece?
+          </CustomText>
+
+          {/* {activity !== undefined &&
+            activity?.ocorrencias.map((ocorrencia: OcorrenciaType, index) => {
+              return (
+                <CustomText key={index} type="body">
+                  {ocorrencia.data_time.toLocaleDateString()}
+                </CustomText>
+              )
+            })} */}
+          <CustomText type="body">
+            {activity?.ocorrencias[0] !== undefined &&
+              new Date(activity?.ocorrencias[0].data_time).toLocaleString(
+                'pt-BR',
+                {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: false,
+                  timeZone: 'America/Sao_Paulo',
+                },
+              )}
+          </CustomText>
+        </Who>
 
         <Where>
           <CustomText type="span" style={{ fontWeight: 'bold' }}>

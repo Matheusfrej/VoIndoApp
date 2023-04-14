@@ -55,7 +55,9 @@ export function ActivityCard({
         <CardFooterContainer>
           <CardFooterSectionContainer>
             <OrganizedBy>
-              <CustomText type="body">Organizado por {organizer}</CustomText>
+              <CustomText type="body">
+                Organizado por <CustomText type="span">{organizer}</CustomText>
+              </CustomText>
             </OrganizedBy>
 
             {distance >= 1000 && (

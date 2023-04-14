@@ -34,3 +34,13 @@ export const FilterCont = styled.View`
 export const Suggestions = styled.ScrollView`
   height: 80%;
 `
+
+export const NoResult = styled.View`
+  /* backgroundColor: 'blue'
+                  height: 100
+                  alignItems: 'center' */
+  height: 100px;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+`

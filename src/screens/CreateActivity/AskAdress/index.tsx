@@ -5,6 +5,7 @@ import { CustomText } from '../../../components/CustomText'
 import * as S from './styles'
 import api from '../../../services/api'
 import { CustomButton } from '../../../components/CustomButton'
+import { useTheme } from 'styled-components'
 
 interface AddressType {
   name: string
@@ -37,11 +38,12 @@ export function AskAdress({ navigation, route }: any) {
       longitude,
     })
   }
-
+  const theme = useTheme()
   const { need, name, desc, date, max } = route.params
 
   const [adress, setAdress] = useState('')
-  const [addresses, setAddresses] = useState([])
+  const [addresses, setAddresses] = useState<AddressType[]>([])
+  const [noResult, setNoResult] = useState(false)
 
   const ufpeCoords = {
     lat: -8.055363554937818,
@@ -50,10 +52,24 @@ export function AskAdress({ navigation, route }: any) {
 
   const getAddress = async (lat: number, long: number, adr: string) => {
     try {
+      console.log(lat, long, adr)
+
       const response = await api.get('/api/address/', {
         params: { lat: long, lon: lat, address: adr },
       })
-      setAddresses(response.data)
+      console.log(response.data)
+      if (typeof response.data === 'object' && response.data.length > 0) {
+        console.log('entrou no if')
+
+        await setAddresses(response.data)
+        setNoResult(false)
+      } else {
+        console.log('entrou no else')
+
+        setAddresses([])
+        setNoResult(true)
+      }
+      console.log('passou den ovo')
     } catch (error) {
       console.error(error)
     }
@@ -92,9 +108,9 @@ export function AskAdress({ navigation, route }: any) {
               variantType="outline"
               color="blue"
               text="Pesquisar"
-              onPress={() =>
+              onPress={() => {
                 getAddress(ufpeCoords.lat, ufpeCoords.long, adress)
-              }
+              }}
             ></CustomButton>
           </S.FilterCont>
         </S.Pair>
@@ -122,6 +138,17 @@ export function AskAdress({ navigation, route }: any) {
               ></AddressSugestion>
             )
           })}
+          {noResult && (
+            <S.NoResult>
+              <CustomText
+                type="h2"
+                centered={true}
+                style={{ color: theme.color.GREY }}
+              >
+                Não encontramos nenhum endereço para sua busca
+              </CustomText>
+            </S.NoResult>
+          )}
         </S.Suggestions>
       </S.Form>
     </S.Container>

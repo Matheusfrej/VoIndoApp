@@ -30,7 +30,7 @@ export function MoreInfos({ navigation, route }: any) {
 
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
-  const [max, setMax] = useState('')
+  const [max, setMax] = useState('-1')
   const [showDate, setShowDate] = useState(false)
   const [showTime, setShowTime] = useState(false)
   const quantity = ['Sem limites', '1', '2', '3', '4', '5', '8', '10']
@@ -94,8 +94,17 @@ export function MoreInfos({ navigation, route }: any) {
             onPress={showTimepicker}
             style={{ width: 280 }}
           ></CustomButton>
-          <CustomText type="h3">
-            Data e hora selecionada: {date.toLocaleString()}
+          <CustomText type="h3" centered={true}>
+            Data e hora selecionada:{' '}
+            {date.toLocaleString('pt-BR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+              timeZone: 'America/Sao_Paulo',
+            })}
           </CustomText>
           {showDate && (
             <DateTimePicker
@@ -141,7 +150,7 @@ export function MoreInfos({ navigation, route }: any) {
             }}
             defaultValue={'Sem limites'}
             buttonStyle={{
-              width: 320,
+              width: '100%',
               borderColor: '#000',
               borderStyle: 'solid',
               borderWidth: 1,

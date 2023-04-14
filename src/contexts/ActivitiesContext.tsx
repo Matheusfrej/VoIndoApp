@@ -12,17 +12,25 @@ interface ActivitiesContextProviderProps {
   children: ReactNode
 }
 
+// acho que isso não tá sendo usado
 export interface adressType {
   address: string
   location: string
   distance: number
 }
 
+export interface OcorrenciaType {
+  atividade: number
+  data_time: Date
+  id: number
+  participantes: []
+}
+
 export interface ActivityType {
   id?: string
   tags?: string[]
   comorbidities?: string[]
-  ocorrencias: {}[]
+  ocorrencias: any
   creator?: {
     id: string
     email: string

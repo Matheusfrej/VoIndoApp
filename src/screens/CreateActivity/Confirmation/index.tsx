@@ -96,7 +96,17 @@ export function Confirm({ navigation, route }: any) {
             Data e hora:
           </CustomText>
 
-          <CustomText type="body">{date.toLocaleString()}</CustomText>
+          <CustomText type="body">
+            {date.toLocaleString('pt-BR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+              timeZone: 'America/Sao_Paulo',
+            })}
+          </CustomText>
         </Pair>
 
         <Pair>
@@ -105,7 +115,7 @@ export function Confirm({ navigation, route }: any) {
           </CustomText>
 
           <CustomText type="body">
-            {max === -1 ? 'Sem limites' : max}
+            {max === '-1' ? 'Sem limites' : max}
           </CustomText>
         </Pair>
 
