@@ -28,7 +28,7 @@ export interface OcorrenciaType {
 
 export interface ActivityType {
   id?: string
-  tags?: string[]
+  tags?: any
   comorbidities?: string[]
   ocorrencias: any
   creator?: {

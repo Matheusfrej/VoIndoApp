@@ -14,6 +14,7 @@ import {
 } from './styles'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDropdown from 'react-native-select-dropdown'
+import { TagType } from '../../../contexts/ActivitiesContext'
 
 export function MoreInfos({ navigation, route }: any) {
   const goToAskAddress = (
@@ -22,12 +23,12 @@ export function MoreInfos({ navigation, route }: any) {
     desc: string,
     date: Date,
     max: string,
-    tags: string[],
+    tagsSelected: TagType[],
   ) => {
-    navigation.push('askAddress', { need, name, desc, date, max, tags })
+    navigation.push('askAddress', { need, name, desc, date, max, tagsSelected })
   }
 
-  const { need, name, desc, tags } = route.params
+  const { need, name, desc, tagsSelected } = route.params
 
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
@@ -163,7 +164,7 @@ export function MoreInfos({ navigation, route }: any) {
       <FinalButton>
         <CustomButton
           onPress={() => {
-            goToAskAddress(need, name, desc, date, max, tags)
+            goToAskAddress(need, name, desc, date, max, tagsSelected)
           }}
           variantType="block"
           text="Prosseguir"

@@ -54,9 +54,11 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
 
         <Tags>
           {activity !== undefined &&
-            activity.tags?.map((tag, index) => {
-              return <Tag key={index}>{tag}</Tag>
-            })}
+            activity.tags?.map(
+              (tag: { id: number; name: string }, index: number) => {
+                return <Tag key={index}>{tag.name}</Tag>
+              },
+            )}
         </Tags>
 
         <Who>

@@ -2,7 +2,7 @@ import { useTheme } from 'styled-components'
 import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
-import { ActivityType } from '../../../contexts/ActivitiesContext'
+import { ActivityType, TagType } from '../../../contexts/ActivitiesContext'
 import api from '../../../services/api'
 import {
   Container,
@@ -18,9 +18,19 @@ import { Marker } from 'react-native-maps'
 import { Tag } from '../../../components/Tag'
 
 export function Confirm({ navigation, route }: any) {
-  const { need, name, desc, date, max, adr, latitude, longitude, tags } =
-    route.params
+  const {
+    need,
+    name,
+    desc,
+    date,
+    max,
+    adr,
+    latitude,
+    longitude,
+    tagsSelected,
+  } = route.params
   const theme = useTheme()
+  console.log('chegou no confirmation', tagsSelected)
 
   const postNewActivity = async (
     need: boolean,
@@ -31,7 +41,7 @@ export function Confirm({ navigation, route }: any) {
     max: string,
     latitude: number,
     longitude: number,
-    tags: string[],
+    tagsSelected: TagType[],
   ) => {
     const newActivity: ActivityType = {
       name,
@@ -42,7 +52,7 @@ export function Confirm({ navigation, route }: any) {
       latitude,
       longitude,
       ocorrencias: [{ data_time: date }],
-      tags,
+      tags: tagsSelected,
     }
     try {
       const headers = {
@@ -103,9 +113,9 @@ export function Confirm({ navigation, route }: any) {
           </CustomText>
 
           <Tags>
-            {tags !== undefined &&
-              tags.map((tag: string, index: number) => {
-                return <Tag key={index}>{tag}</Tag>
+            {tagsSelected !== undefined &&
+              tagsSelected.map((tag: TagType, index: number) => {
+                return <Tag key={index}>{tag.name}</Tag>
               })}
           </Tags>
         </Pair>
@@ -178,7 +188,7 @@ export function Confirm({ navigation, route }: any) {
                 max,
                 latitude,
                 longitude,
-                tags,
+                tagsSelected,
               )
               // console.log(need, name, desc, adr, date, max, latitude, longitude)
             }}

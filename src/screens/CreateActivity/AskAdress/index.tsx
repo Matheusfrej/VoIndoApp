@@ -6,6 +6,7 @@ import * as S from './styles'
 import api from '../../../services/api'
 import { CustomButton } from '../../../components/CustomButton'
 import { useTheme } from 'styled-components'
+import { TagType } from '../../../contexts/ActivitiesContext'
 
 interface AddressType {
   name: string
@@ -26,6 +27,7 @@ export function AskAdress({ navigation, route }: any) {
     adr: string,
     latitude: number,
     longitude: number,
+    tagsSelected: TagType[],
   ) => {
     navigation.push('confirmation', {
       need,
@@ -36,12 +38,12 @@ export function AskAdress({ navigation, route }: any) {
       adr,
       latitude,
       longitude,
-      tags,
+      tagsSelected,
     })
   }
   const theme = useTheme()
-  const { need, name, desc, date, max, tags } = route.params
-  console.log('no ask adress', tags)
+  const { need, name, desc, date, max, tagsSelected } = route.params
+  console.log('no ask adress', tagsSelected)
 
   const [adress, setAdress] = useState('')
   const [addresses, setAddresses] = useState<AddressType[]>([])
@@ -135,6 +137,7 @@ export function AskAdress({ navigation, route }: any) {
                     add.name,
                     add.latitude,
                     add.longitude,
+                    tagsSelected,
                   )
                 }}
               ></AddressSugestion>
