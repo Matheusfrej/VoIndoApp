@@ -22,11 +22,12 @@ export function MoreInfos({ navigation, route }: any) {
     desc: string,
     date: Date,
     max: string,
+    tags: string[],
   ) => {
-    navigation.push('askAddress', { need, name, desc, date, max })
+    navigation.push('askAddress', { need, name, desc, date, max, tags })
   }
 
-  const { need, name, desc } = route.params
+  const { need, name, desc, tags } = route.params
 
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
@@ -162,7 +163,7 @@ export function MoreInfos({ navigation, route }: any) {
       <FinalButton>
         <CustomButton
           onPress={() => {
-            goToAskAddress(need, name, desc, date, max)
+            goToAskAddress(need, name, desc, date, max, tags)
           }}
           variantType="block"
           text="Prosseguir"

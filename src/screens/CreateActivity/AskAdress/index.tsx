@@ -36,10 +36,12 @@ export function AskAdress({ navigation, route }: any) {
       adr,
       latitude,
       longitude,
+      tags,
     })
   }
   const theme = useTheme()
-  const { need, name, desc, date, max } = route.params
+  const { need, name, desc, date, max, tags } = route.params
+  console.log('no ask adress', tags)
 
   const [adress, setAdress] = useState('')
   const [addresses, setAddresses] = useState<AddressType[]>([])

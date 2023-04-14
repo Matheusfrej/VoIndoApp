@@ -12,11 +12,14 @@ import {
   BigContainer,
   MyMapView,
   WhereMap,
+  Tags,
 } from './styles'
 import { Marker } from 'react-native-maps'
+import { Tag } from '../../../components/Tag'
 
 export function Confirm({ navigation, route }: any) {
-  const { need, name, desc, date, max, adr, latitude, longitude } = route.params
+  const { need, name, desc, date, max, adr, latitude, longitude, tags } =
+    route.params
   const theme = useTheme()
 
   const postNewActivity = async (
@@ -28,6 +31,7 @@ export function Confirm({ navigation, route }: any) {
     max: string,
     latitude: number,
     longitude: number,
+    tags: string[],
   ) => {
     const newActivity: ActivityType = {
       name,
@@ -38,6 +42,7 @@ export function Confirm({ navigation, route }: any) {
       latitude,
       longitude,
       ocorrencias: [{ data_time: date }],
+      tags,
     }
     try {
       const headers = {
@@ -89,6 +94,19 @@ export function Confirm({ navigation, route }: any) {
           </CustomText>
 
           <CustomText type="body">{desc}</CustomText>
+        </Pair>
+
+        <Pair>
+          <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+            Categorias:
+          </CustomText>
+
+          <Tags>
+            {tags !== undefined &&
+              tags.map((tag: string, index: number) => {
+                return <Tag key={index}>{tag}</Tag>
+              })}
+          </Tags>
         </Pair>
 
         <Pair>
@@ -159,6 +177,7 @@ export function Confirm({ navigation, route }: any) {
                 max,
                 latitude,
                 longitude,
+                tags,
               )
               // console.log(need, name, desc, adr, date, max, latitude, longitude)
             }}

@@ -11,8 +11,10 @@ import {
   Pair,
   Title,
   ContainerHeader,
+  PairTouchable,
 } from './styles'
 import { useState } from 'react'
+import { Switch } from 'react-native'
 
 export function RegisterActivity({ route, navigation }: any) {
   const { need } = route.params
@@ -20,9 +22,37 @@ export function RegisterActivity({ route, navigation }: any) {
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+  // Em grupo
+  const [isTag1Selected, setIsTag1Selected] = useState(false)
+  // Atividade Física
+  const [isTag2Selected, setIsTag2Selected] = useState(false)
+  // Aprender algo novo
+  const [isTag3Selected, setIsTag3Selected] = useState(false)
+
+  const handleTagChange = (id: number) => {
+    if (id === 1) {
+      setIsTag1Selected(!isTag1Selected)
+    } else if (id === 2) {
+      setIsTag2Selected(!isTag2Selected)
+    } else if (id === 3) {
+      setIsTag3Selected(!isTag3Selected)
+    }
+  }
 
   const goToMoreInfos = (need: boolean, name: string, desc: string) => {
-    navigation.push('moreInfos', { need, name, desc })
+    const auxTags = []
+    if (isTag1Selected) {
+      auxTags.push('Em grupo')
+    }
+    if (isTag2Selected) {
+      auxTags.push('Atividade Física')
+    }
+    if (isTag3Selected) {
+      auxTags.push('Aprender algo novo')
+    }
+    console.log(auxTags)
+
+    navigation.push('moreInfos', { need, name, desc, tags: auxTags })
   }
   return (
     <BigContainer>
@@ -75,6 +105,58 @@ export function RegisterActivity({ route, navigation }: any) {
                 />
               </Pair>
             )}
+
+            <Pair>
+              <CustomText type="h3">Categorias</CustomText>
+              <PairTouchable onPress={() => handleTagChange(1)}>
+                <Switch
+                  thumbColor={
+                    isTag1Selected
+                      ? theme.color['SECONDARY-SATURATED']
+                      : theme.color.BG
+                  }
+                  trackColor={{
+                    false: '#aaa',
+                    true: theme.color['SECONDARY-LIGHT'],
+                  }}
+                  value={isTag1Selected}
+                  onValueChange={() => handleTagChange(1)}
+                />
+                <CustomText type="span">Em grupo</CustomText>
+              </PairTouchable>
+              <PairTouchable onPress={() => handleTagChange(2)}>
+                <Switch
+                  thumbColor={
+                    isTag2Selected
+                      ? theme.color['SECONDARY-SATURATED']
+                      : theme.color.BG
+                  }
+                  trackColor={{
+                    false: '#aaa',
+                    true: theme.color['SECONDARY-LIGHT'],
+                  }}
+                  value={isTag2Selected}
+                  onValueChange={() => handleTagChange(2)}
+                />
+                <CustomText type="span">Atividade Física</CustomText>
+              </PairTouchable>
+              <PairTouchable onPress={() => handleTagChange(3)}>
+                <Switch
+                  thumbColor={
+                    isTag3Selected
+                      ? theme.color['SECONDARY-SATURATED']
+                      : theme.color.BG
+                  }
+                  trackColor={{
+                    false: '#aaa',
+                    true: theme.color['SECONDARY-LIGHT'],
+                  }}
+                  value={isTag3Selected}
+                  onValueChange={() => handleTagChange(3)}
+                />
+                <CustomText type="span">Aprender algo novo</CustomText>
+              </PairTouchable>
+            </Pair>
           </Forms>
         </ContainerHeader>
 

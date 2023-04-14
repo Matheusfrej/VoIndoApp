@@ -13,6 +13,15 @@ export const Container = styled.View`
   padding-bottom: 24px;
 `
 
+export const Tags = styled.View`
+  flex: 1;
+  gap: 10px;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 10px;
+`
+
 export const Pair = styled.View``
 
 export const FinalButton = styled.View`

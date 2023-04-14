@@ -24,6 +24,12 @@ export const Pair = styled.View`
   gap: 10px;
 `
 
+export const PairTouchable = styled.TouchableOpacity`
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+`
+
 export const TextInput = styled.TextInput`
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
