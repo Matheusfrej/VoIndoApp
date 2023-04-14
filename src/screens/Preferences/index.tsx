@@ -16,6 +16,10 @@ import { Tag } from '../../components/Tag'
 import { BackButton } from '../../components/BackButton'
 
 export function Preferences({ navigation }: any) {
+  const navigateToActivitiesList = (ordered: boolean) => {
+    navigation.push('activitiesList', { ordered })
+  }
+
   return (
     <PreferencesContainer>
       <BackButton
@@ -56,7 +60,7 @@ export function Preferences({ navigation }: any) {
             variantType="block"
             color="blue"
             onPress={() => {
-              navigation.push('activitiesList')
+              navigateToActivitiesList(false)
             }}
             textSize={16}
           />
@@ -68,7 +72,7 @@ export function Preferences({ navigation }: any) {
             textSize={16}
             style={{ width: '100%' }}
             onPress={() => {
-              navigation.push('activitiesList')
+              navigateToActivitiesList(true)
             }}
           />
         </Options>

@@ -15,18 +15,26 @@ import {
 import { useActivities } from '../../contexts/ActivitiesContext'
 import { BackButton } from '../../components/BackButton'
 
-export function ActivitiesList({ navigation }: any) {
-  const { activitiesList, areActivitiesLoading, getActivities, isLogged } =
-    useActivities()
+export function ActivitiesList({ navigation, route }: any) {
+  const {
+    activitiesList,
+    activitiesListOrdered,
+    areActivitiesLoading,
+    getActivities,
+    getActivityiesOrderByDistance,
+    isLogged,
+  } = useActivities()
 
   const [placeholderText, setPlaceholderText] = useState('Pesquisar atividade')
   const navigateToDetailedActivity = (id: string) => {
     navigation.push('detailedActivity', { id })
   }
+  const ordered = route.params
 
   useEffect(() => {
     if (isLogged) {
       getActivities()
+      getActivityiesOrderByDistance()
     }
   }, [])
 
@@ -70,7 +78,30 @@ export function ActivitiesList({ navigation }: any) {
         >
           {!areActivitiesLoading &&
             activitiesList !== undefined &&
+            !ordered &&
             activitiesList.map((activity) => {
+              return (
+                <ActivityCard
+                  key={activity.id}
+                  activity={activity.name}
+                  distance={100}
+                  quantity={Number(activity.participants_limit)}
+                  profissional={activity.professional_required}
+                  organizer={
+                    activity?.creator?.nickname || activity?.creator?.first_name
+                  }
+                  onPress={() => {
+                    if (activity.id !== undefined) {
+                      navigateToDetailedActivity(activity.id)
+                    }
+                  }}
+                />
+              )
+            })}
+          {!areActivitiesLoading &&
+            activitiesListOrdered !== undefined &&
+            ordered &&
+            activitiesListOrdered.map((activity) => {
               return (
                 <ActivityCard
                   key={activity.id}
