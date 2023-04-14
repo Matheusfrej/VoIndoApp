@@ -58,6 +58,7 @@ export function Confirm({ navigation, route }: any) {
       )
       // console.log(response)
       console.log(response.data)
+      navigation.push('home2')
     } catch (error) {
       console.log('ruim')
       // console.error(error)
