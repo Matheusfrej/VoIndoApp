@@ -66,6 +66,7 @@ export function Preferences({ navigation }: any) {
             variantType="outline"
             color="blue"
             textSize={16}
+            style={{ width: '100%' }}
             onPress={() => {
               navigation.push('activitiesList')
             }}

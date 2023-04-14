@@ -47,7 +47,6 @@ export const CentralizedCustomText = styled(StyledText)`
 `
 
 export const Options = styled.View`
-  width: 350px;
   margin: auto;
   align-items: center;
   gap: 16px;

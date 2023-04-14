@@ -1,10 +1,13 @@
 import styled from 'styled-components/native'
 
-export const BigContainer = styled.ScrollView``
+export const BigContainer = styled.ScrollView`
+  flex: 1;
+`
 
 export const Container = styled.View`
   flex: 1;
   padding: 0 24px;
+  justify-content: space-between;
   height: 100%;
 `
 
@@ -21,6 +24,12 @@ export const Pair = styled.View`
   gap: 10px;
 `
 
+export const PairTouchable = styled.TouchableOpacity`
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+`
+
 export const TextInput = styled.TextInput`
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -30,5 +39,8 @@ export const TextInput = styled.TextInput`
 `
 export const Button = styled.View`
   width: 100%;
-  margin-top: 70%;
+`
+
+export const ContainerHeader = styled.View`
+  flex: 1;
 `

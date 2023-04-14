@@ -14,6 +14,7 @@ import {
 } from './styles'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDropdown from 'react-native-select-dropdown'
+import { TagType } from '../../../contexts/ActivitiesContext'
 
 export function MoreInfos({ navigation, route }: any) {
   const goToAskAddress = (
@@ -22,15 +23,16 @@ export function MoreInfos({ navigation, route }: any) {
     desc: string,
     date: Date,
     max: string,
+    tagsSelected: TagType[],
   ) => {
-    navigation.push('askAddress', { need, name, desc, date, max })
+    navigation.push('askAddress', { need, name, desc, date, max, tagsSelected })
   }
 
-  const { need, name, desc } = route.params
+  const { need, name, desc, tagsSelected } = route.params
 
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
-  const [max, setMax] = useState('')
+  const [max, setMax] = useState('-1')
   const [showDate, setShowDate] = useState(false)
   const [showTime, setShowTime] = useState(false)
   const quantity = ['Sem limites', '1', '2', '3', '4', '5', '8', '10']
@@ -94,8 +96,17 @@ export function MoreInfos({ navigation, route }: any) {
             onPress={showTimepicker}
             style={{ width: 280 }}
           ></CustomButton>
-          <CustomText type="h3">
-            Data e hora selecionada: {date.toLocaleString()}
+          <CustomText type="h3" centered={true}>
+            Data e hora selecionada:{' '}
+            {date.toLocaleString('pt-BR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+              timeZone: 'America/Sao_Paulo',
+            })}
           </CustomText>
           {showDate && (
             <DateTimePicker
@@ -141,7 +152,7 @@ export function MoreInfos({ navigation, route }: any) {
             }}
             defaultValue={'Sem limites'}
             buttonStyle={{
-              width: 320,
+              width: '100%',
               borderColor: '#000',
               borderStyle: 'solid',
               borderWidth: 1,
@@ -153,10 +164,10 @@ export function MoreInfos({ navigation, route }: any) {
       <FinalButton>
         <CustomButton
           onPress={() => {
-            goToAskAddress(need, name, desc, date, max)
+            goToAskAddress(need, name, desc, date, max, tagsSelected)
           }}
           variantType="block"
-          text="Cadastrar"
+          text="Prosseguir"
         ></CustomButton>
       </FinalButton>
     </Container>
