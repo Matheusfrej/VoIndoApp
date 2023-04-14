@@ -33,8 +33,8 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
 
   const activity = getActivityById(id)
-  console.log(activity)
-  console.log(activity?.ocorrencias)
+  // console.log(activity)
+  // console.log(activity?.ocorrencias)
 
   return (
     <BigContainer>

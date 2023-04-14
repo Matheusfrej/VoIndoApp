@@ -12,8 +12,6 @@ import {
 
 export function Presentation({ navigation }: any) {
   const goToParticipation = () => {
-    console.log('apertou')
-
     navigation.push('participation')
   }
 

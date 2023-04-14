@@ -43,7 +43,7 @@ export function AskAdress({ navigation, route }: any) {
   }
   const theme = useTheme()
   const { need, name, desc, date, max, tagsSelected } = route.params
-  console.log('no ask adress', tagsSelected)
+  // console.log('no ask adress', tagsSelected)
 
   const [adress, setAdress] = useState('')
   const [addresses, setAddresses] = useState<AddressType[]>([])
@@ -56,26 +56,26 @@ export function AskAdress({ navigation, route }: any) {
 
   const getAddress = async (lat: number, long: number, adr: string) => {
     try {
-      console.log(lat, long, adr)
+      // console.log(lat, long, adr)
 
       const response = await api.get('/api/address/', {
         params: { lat: long, lon: lat, address: adr },
       })
-      console.log(response.data)
+      // console.log(response.data)
       if (typeof response.data === 'object' && response.data.length > 0) {
-        console.log('entrou no if')
+        // console.log('entrou no if')
 
         await setAddresses(response.data)
         setNoResult(false)
       } else {
-        console.log('entrou no else')
+        // console.log('entrou no else')
 
         setAddresses([])
         setNoResult(true)
       }
-      console.log('passou den ovo')
+      // console.log('passou den ovo')
     } catch (error) {
-      console.error(error)
+      // console.error(error)
     }
   }
 
