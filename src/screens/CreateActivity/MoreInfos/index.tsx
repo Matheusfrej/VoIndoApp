@@ -156,7 +156,7 @@ export function MoreInfos({ navigation, route }: any) {
             goToAskAddress(need, name, desc, date, max)
           }}
           variantType="block"
-          text="Cadastrar"
+          text="Prosseguir"
         ></CustomButton>
       </FinalButton>
     </Container>

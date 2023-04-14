@@ -1,11 +1,23 @@
+import { useTheme } from 'styled-components'
+import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
+import { CustomText } from '../../../components/CustomText'
 import { ActivityType } from '../../../contexts/ActivitiesContext'
 import api from '../../../services/api'
-import { FinalButton } from '../MoreInfos/styles'
-import { Container } from './styles'
+import {
+  Container,
+  Pair,
+  FinalButton,
+  Title,
+  BigContainer,
+  MyMapView,
+  WhereMap,
+} from './styles'
+import { Marker } from 'react-native-maps'
 
-export function Confirm({ route }: any) {
+export function Confirm({ navigation, route }: any) {
   const { need, name, desc, date, max, adr, latitude, longitude } = route.params
+  const theme = useTheme()
 
   const postNewActivity = async (
     need: boolean,
@@ -40,33 +52,111 @@ export function Confirm({ route }: any) {
         },
       )
       // console.log(response)
-      console.log('bom')
+      console.log(response.data)
     } catch (error) {
       console.log('ruim')
       // console.error(error)
     }
   }
   return (
-    <Container>
-      <FinalButton>
-        <CustomButton
+    <BigContainer>
+      <Container>
+        <BackButton
           onPress={() => {
-            postNewActivity(
-              need,
-              name,
-              desc,
-              adr,
-              date,
-              max,
+            navigation.goBack()
+          }}
+        />
+        <Title>
+          <CustomText
+            style={{ color: theme.color['BLACK-2'] }}
+            type="h1"
+            centered={true}
+          >
+            Confirmar criação da atividade
+          </CustomText>
+        </Title>
+        <Pair>
+          <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+            Nome da atividade:
+          </CustomText>
+
+          <CustomText type="body">{name}</CustomText>
+        </Pair>
+
+        <Pair>
+          <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+            Descrição da atividade:
+          </CustomText>
+
+          <CustomText type="body">{desc}</CustomText>
+        </Pair>
+
+        <Pair>
+          <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+            Data e hora:
+          </CustomText>
+
+          <CustomText type="body">{date.toLocaleString()}</CustomText>
+        </Pair>
+
+        <Pair>
+          <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+            Quantidade máxima de participantes:
+          </CustomText>
+
+          <CustomText type="body">
+            {max === -1 ? 'Sem limites' : max}
+          </CustomText>
+        </Pair>
+
+        <Pair>
+          <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+            Endereço:
+          </CustomText>
+
+          <CustomText type="body">{adr}</CustomText>
+        </Pair>
+
+        <MyMapView>
+          <WhereMap
+            initialRegion={{
               latitude,
               longitude,
-            )
-            // console.log(need, name, desc, adr, date, max, latitude, longitude)
-          }}
-          variantType="block"
-          text="Cadastrar"
-        ></CustomButton>
-      </FinalButton>
-    </Container>
+              latitudeDelta: 0.0022,
+              longitudeDelta: 0.0021,
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude,
+                longitude,
+              }}
+              title={name}
+              description="Ponto de encontro"
+            />
+          </WhereMap>
+        </MyMapView>
+
+        <FinalButton>
+          <CustomButton
+            onPress={() => {
+              postNewActivity(
+                need,
+                name,
+                desc,
+                adr,
+                date,
+                max,
+                latitude,
+                longitude,
+              )
+              // console.log(need, name, desc, adr, date, max, latitude, longitude)
+            }}
+            variantType="block"
+            text="Cadastrar"
+          ></CustomButton>
+        </FinalButton>
+      </Container>
+    </BigContainer>
   )
 }

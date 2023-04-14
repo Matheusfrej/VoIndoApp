@@ -1,10 +1,13 @@
 import styled from 'styled-components/native'
 
-export const BigContainer = styled.ScrollView``
+export const BigContainer = styled.ScrollView`
+  flex: 1;
+`
 
 export const Container = styled.View`
   flex: 1;
   padding: 0 24px;
+  justify-content: space-between;
   height: 100%;
 `
 
@@ -30,5 +33,8 @@ export const TextInput = styled.TextInput`
 `
 export const Button = styled.View`
   width: 100%;
-  margin-top: 70%;
+`
+
+export const ContainerHeader = styled.View`
+  flex: 1;
 `

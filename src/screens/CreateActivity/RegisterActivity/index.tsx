@@ -10,6 +10,7 @@ import {
   TextInput,
   Pair,
   Title,
+  ContainerHeader,
 } from './styles'
 import { useState } from 'react'
 
@@ -32,48 +33,50 @@ export function RegisterActivity({ route, navigation }: any) {
         style={{ marginLeft: 0 }}
       />
       <Container>
-        <Title>
-          <CustomText style={{ color: theme.color['BLACK-2'] }} type="h1">
-            Cadastar atividade
-          </CustomText>
-        </Title>
+        <ContainerHeader>
+          <Title>
+            <CustomText style={{ color: theme.color['BLACK-2'] }} type="h1">
+              Cadastar atividade
+            </CustomText>
+          </Title>
 
-        <Forms>
-          <Pair>
-            <CustomText type="h3">Nome da atividade</CustomText>
-            <TextInput
-              placeholder={'Insira o nome da atividade'}
-              selectionColor={'#000'}
-              placeholderTextColor={'#AAAAAA'}
-              value={name}
-              onChangeText={(newName) => setName(newName)}
-            />
-          </Pair>
-
-          <Pair>
-            <CustomText type="h3">Descrição da atividade</CustomText>
-            <TextInput
-              placeholder={'Insira a descrição da atividade'}
-              selectionColor={'#000'}
-              placeholderTextColor={'#AAAAAA'}
-              value={description}
-              onChangeText={(newDesc) => setDescription(newDesc)}
-            />
-          </Pair>
-
-          {need && (
+          <Forms>
             <Pair>
-              <CustomText type="h3">
-                Número do conselho do profissional
-              </CustomText>
+              <CustomText type="h3">Nome da atividade</CustomText>
               <TextInput
-                placeholder={'Exemplo: CRF, CREFITO, CREF, COREN... '}
+                placeholder={'Insira o nome da atividade'}
                 selectionColor={'#000'}
                 placeholderTextColor={'#AAAAAA'}
+                value={name}
+                onChangeText={(newName) => setName(newName)}
               />
             </Pair>
-          )}
-        </Forms>
+
+            <Pair>
+              <CustomText type="h3">Descrição da atividade</CustomText>
+              <TextInput
+                placeholder={'Insira a descrição da atividade'}
+                selectionColor={'#000'}
+                placeholderTextColor={'#AAAAAA'}
+                value={description}
+                onChangeText={(newDesc) => setDescription(newDesc)}
+              />
+            </Pair>
+
+            {need && (
+              <Pair>
+                <CustomText type="h3">
+                  Número do conselho do profissional
+                </CustomText>
+                <TextInput
+                  placeholder={'Exemplo: CRF, CREFITO, CREF, COREN... '}
+                  selectionColor={'#000'}
+                  placeholderTextColor={'#AAAAAA'}
+                />
+              </Pair>
+            )}
+          </Forms>
+        </ContainerHeader>
 
         <Button>
           <CustomButton
