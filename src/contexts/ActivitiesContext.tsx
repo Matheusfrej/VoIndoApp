@@ -19,6 +19,11 @@ export interface adressType {
   distance: number
 }
 
+export interface TagType {
+  id: number
+  name: string
+}
+
 export interface OcorrenciaType {
   atividade: number
   data_time: Date
