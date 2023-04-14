@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const AdressContainer = styled.View`
+export const AdressContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
@@ -10,4 +10,6 @@ export const AdressContainer = styled.View`
   border-top-color: ${(props) => props.theme.color['BLACK-2']};
 `
 
-export const AddressAndName = styled.View``
+export const AddressAndName = styled.View`
+  max-width: 70%;
+`

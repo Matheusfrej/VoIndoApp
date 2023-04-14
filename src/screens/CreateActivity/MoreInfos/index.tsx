@@ -14,16 +14,23 @@ import {
 } from './styles'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDropdown from 'react-native-select-dropdown'
-import { ActivityType } from '../../../contexts/ActivitiesContext'
-import api from '../../../services/api'
 
 export function MoreInfos({ navigation, route }: any) {
-  const { need, name, desc, adr } = route.params
+  const goToAskAddress = (
+    need: boolean,
+    name: string,
+    desc: string,
+    date: Date,
+    max: string,
+  ) => {
+    navigation.push('askAddress', { need, name, desc, date, max })
+  }
+
+  const { need, name, desc } = route.params
 
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
   const [max, setMax] = useState('')
-
   const [showDate, setShowDate] = useState(false)
   const [showTime, setShowTime] = useState(false)
   const quantity = ['Sem limites', '1', '2', '3', '4', '5', '8', '10']
@@ -32,42 +39,6 @@ export function MoreInfos({ navigation, route }: any) {
     const currentDate = selectedDate
     setShowDate(false)
     setDate(currentDate)
-  }
-
-  const postNewActivity = async (
-    need: boolean,
-    name: string,
-    desc: string,
-    adr: string,
-    date: Date,
-    max: string,
-  ) => {
-    const newActivity: ActivityType = {
-      name,
-      address: adr,
-      description: desc,
-      participants_limit: max,
-      professional_required: need,
-      latitude: -8.127497893953393,
-      longitude: -34.89946246037277,
-      ocorrencias: [{ data_time: date }],
-    }
-    try {
-      const headers = {
-        'Content-Type': 'application/json',
-      }
-      const response = await api.post(
-        '/api/atividades/create-update/',
-        newActivity,
-        {
-          withCredentials: false,
-          headers,
-        },
-      )
-      console.log(response)
-    } catch (error) {
-      console.error(error)
-    }
   }
 
   const onChangeTime = (event: any, selectedTime: any) => {
@@ -182,7 +153,7 @@ export function MoreInfos({ navigation, route }: any) {
       <FinalButton>
         <CustomButton
           onPress={() => {
-            postNewActivity(need, name, desc, adr, date, max)
+            goToAskAddress(need, name, desc, date, max)
           }}
           variantType="block"
           text="Cadastrar"

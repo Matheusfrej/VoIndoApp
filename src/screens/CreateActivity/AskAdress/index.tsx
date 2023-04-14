@@ -1,46 +1,66 @@
 import { useState } from 'react'
 import { AddressSugestion } from '../../../components/AddressSugestion'
 import { BackButton } from '../../../components/BackButton'
-import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
 import * as S from './styles'
+import api from '../../../services/api'
+import { CustomButton } from '../../../components/CustomButton'
+
+interface AddressType {
+  name: string
+  complement: string
+  distance: number
+  full_address: string[]
+  latitude: number
+  longitude: number
+}
 
 export function AskAdress({ navigation, route }: any) {
-  const { need, name, desc } = route.params
-
-  const [adress, setAdress] = useState('')
-
-  const mockedAdress = [
-    {
-      adress: 'Rua real da torre 705',
-      locationName: 'Casa de Mesel',
-      distance: 1000,
-    },
-    {
-      adress: 'Rua dom jose lopes 66',
-      locationName: 'Casa de Frej',
-      distance: 100,
-    },
-    {
-      adress: 'Rua da aurora 1000',
-      locationName: 'Casa de Gabriel',
-      distance: 500,
-    },
-    {
-      adress: 'Rua da hora 232',
-      locationName: 'Casa de Filipe',
-      distance: 100,
-    },
-    { adress: 'Rua 17 de agosto', locationName: 'Plaza', distance: 5000 },
-  ]
-
-  const goToMoreInfos = (
+  const goToConfirmation = (
     need: boolean,
     name: string,
     desc: string,
+    date: Date,
+    max: string,
     adr: string,
+    latitude: number,
+    longitude: number,
   ) => {
-    navigation.push('moreInfos', { need, name, desc, adr })
+    navigation.push('confirmation', {
+      need,
+      name,
+      desc,
+      date,
+      max,
+      adr,
+      latitude,
+      longitude,
+    })
+  }
+
+  const { need, name, desc, date, max } = route.params
+
+  const [adress, setAdress] = useState('')
+  const [addresses, setAddresses] = useState([])
+
+  const ufpeCoords = {
+    lat: -8.055363554937818,
+    long: -34.9513776120133,
+  }
+
+  const getAddress = async (lat: number, long: number, adr: string) => {
+    try {
+      const response = await api.get('/api/address/', {
+        params: { lat: long, lon: lat, address: adr },
+      })
+      setAddresses(response.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleTextInputChange = (newAdr: string) => {
+    setAdress(newAdr)
   }
 
   return (
@@ -59,35 +79,50 @@ export function AskAdress({ navigation, route }: any) {
 
         <S.Pair>
           <CustomText type="h3">Escolha o endereço:</CustomText>
-          <S.TextInput
-            placeholder={'Insira o endereço'}
-            selectionColor={'#000'}
-            placeholderTextColor={'#AAAAAA'}
-            value={adress}
-            onChangeText={(newAdr) => setAdress(newAdr)}
-          />
+          <S.FilterCont>
+            <S.TextInput
+              placeholder={'Insira o endereço'}
+              selectionColor={'#000'}
+              placeholderTextColor={'#AAAAAA'}
+              value={adress}
+              onChangeText={(newAdr) => handleTextInputChange(newAdr)}
+            />
+
+            <CustomButton
+              variantType="outline"
+              color="blue"
+              text="Pesquisar"
+              onPress={() =>
+                getAddress(ufpeCoords.lat, ufpeCoords.long, adress)
+              }
+            ></CustomButton>
+          </S.FilterCont>
         </S.Pair>
 
         <S.Suggestions>
-          {mockedAdress.map((add, index) => {
+          {addresses.map((add: AddressType, index) => {
             return (
               <AddressSugestion
                 key={index}
-                address={add.adress}
+                address={add.complement}
                 distance={add.distance}
-                locationName={add.locationName}
+                locationName={add.name}
+                onPress={() => {
+                  goToConfirmation(
+                    need,
+                    name,
+                    desc,
+                    date,
+                    max,
+                    add.name,
+                    add.latitude,
+                    add.longitude,
+                  )
+                }}
               ></AddressSugestion>
             )
           })}
         </S.Suggestions>
-
-        <S.Button>
-          <CustomButton
-            variantType="block"
-            text="Prosseguir"
-            onPress={() => goToMoreInfos(need, name, desc, 'casa de frej')}
-          ></CustomButton>
-        </S.Button>
       </S.Form>
     </S.Container>
   )

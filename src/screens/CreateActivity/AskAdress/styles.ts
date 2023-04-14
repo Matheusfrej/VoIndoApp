@@ -17,14 +17,20 @@ export const Pair = styled.View`
 export const TextInput = styled.TextInput`
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  width: 100%;
+  width: 60%;
   font-size: 16px;
   border-radius: 5px;
-`
-export const Suggestions = styled.ScrollView`
-  height: 50%;
+  flex: 1;
 `
 
-export const Button = styled.View`
-  justify-self: flex-end;
+export const FilterCont = styled.View`
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+`
+
+export const Suggestions = styled.ScrollView`
+  height: 80%;
 `

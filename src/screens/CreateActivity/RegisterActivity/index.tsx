@@ -20,8 +20,8 @@ export function RegisterActivity({ route, navigation }: any) {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
 
-  const goToAskAddress = (need: boolean, name: string, desc: string) => {
-    navigation.push('askAddress', { need, name, desc })
+  const goToMoreInfos = (need: boolean, name: string, desc: string) => {
+    navigation.push('moreInfos', { need, name, desc })
   }
   return (
     <BigContainer>
@@ -79,7 +79,7 @@ export function RegisterActivity({ route, navigation }: any) {
           <CustomButton
             variantType="block"
             text="Prosseguir"
-            onPress={() => goToAskAddress(need, name, description)}
+            onPress={() => goToMoreInfos(need, name, description)}
           ></CustomButton>
         </Button>
       </Container>
