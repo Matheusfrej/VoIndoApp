@@ -12,19 +12,25 @@ interface ActivitiesContextProviderProps {
   children: ReactNode
 }
 
-interface ActivityType {
-  id: string
+export interface adressType {
+  address: string
+  location: string
+  distance: number
+}
+
+export interface ActivityType {
+  id?: string
   tags?: string[]
   comorbidities?: string[]
-  ocorrencias?: string[]
-  creator: {
+  ocorrencias: {}[]
+  creator?: {
     id: string
     email: string
     nickname: string
     first_name: string
     last_name: string
   }
-  organizers: {
+  organizers?: {
     id: string
     email: string
     nickname: string
@@ -32,20 +38,24 @@ interface ActivityType {
     last_name: string
   }[]
   name: string
-  created: string
+  created?: string
   description: string
-  location: string
-  contact: string
+  address: string
+  contact?: string
   professional_required: boolean
-  participants_limit: number
-  is_active: boolean
-  is_boosted: boolean
+  participants_limit: string
+  is_active?: boolean
+  is_boosted?: boolean
+  latitude: number
+  longitude: number
 }
 
 interface ActivitiesContextType {
   activitiesList: ActivityType[] | undefined
   areActivitiesLoading: boolean
+  isLogged: boolean
   getActivityById: (id: string) => ActivityType | undefined
+  getActivities: () => void
 }
 
 export const ActivitiesContext = createContext({} as ActivitiesContextType)
@@ -94,26 +104,29 @@ export function ActivitiesContextProvider({
     postActivity()
   }, [])
 
-  useEffect(() => {
-    const getActivities = async () => {
-      try {
-        setAreActivitiesLoading(true)
-        const response = await api.get('/api/atividades/list-all/')
+  const getActivities = async () => {
+    try {
+      setAreActivitiesLoading(true)
+      const response = await api.get('/api/atividades/list-all/')
 
-        setActivitiesList(response.data)
-        console.log(response.data)
-      } catch (error) {
-        console.error(error)
-      } finally {
-        setAreActivitiesLoading(false)
-      }
+      setActivitiesList(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setAreActivitiesLoading(false)
     }
+  }
 
-    if (!activitiesList && isLogged) getActivities()
-  }, [activitiesList, isLogged])
   return (
     <ActivitiesContext.Provider
-      value={{ activitiesList, areActivitiesLoading, getActivityById }}
+      value={{
+        activitiesList,
+        areActivitiesLoading,
+        getActivityById,
+        isLogged,
+        getActivities,
+      }}
     >
       {children}
     </ActivitiesContext.Provider>

@@ -11,23 +11,27 @@ import {
   Pair,
   Title,
 } from './styles'
+import { useState } from 'react'
 
 export function RegisterActivity({ route, navigation }: any) {
   const { need } = route.params
   const theme = useTheme()
 
-  const goToMoreInfos = () => {
-    navigation.push('moreInfos')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+
+  const goToMoreInfos = (need: boolean, name: string, desc: string) => {
+    navigation.push('moreInfos', { need, name, desc })
   }
   return (
     <BigContainer>
+      <BackButton
+        onPress={() => {
+          navigation.goBack()
+        }}
+        style={{ marginLeft: 0 }}
+      />
       <Container>
-        <BackButton
-          onPress={() => {
-            navigation.goBack()
-          }}
-          style={{ marginLeft: 0 }}
-        />
         <Title>
           <CustomText style={{ color: theme.color['BLACK-2'] }} type="h1">
             Cadastar atividade
@@ -41,6 +45,8 @@ export function RegisterActivity({ route, navigation }: any) {
               placeholder={'Insira o nome da atividade'}
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
+              value={name}
+              onChangeText={(newName) => setName(newName)}
             />
           </Pair>
 
@@ -50,24 +56,8 @@ export function RegisterActivity({ route, navigation }: any) {
               placeholder={'Insira a descrição da atividade'}
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
-            />
-          </Pair>
-
-          <Pair>
-            <CustomText type="h3">Instruções de participação</CustomText>
-            <TextInput
-              placeholder={'Descreva como participar'}
-              selectionColor={'#000'}
-              placeholderTextColor={'#AAAAAA'}
-            />
-          </Pair>
-
-          <Pair>
-            <CustomText type="h3">Endereço da atividade</CustomText>
-            <TextInput
-              placeholder={'Insira o endereço'}
-              selectionColor={'#000'}
-              placeholderTextColor={'#AAAAAA'}
+              value={description}
+              onChangeText={(newDesc) => setDescription(newDesc)}
             />
           </Pair>
 
@@ -89,7 +79,7 @@ export function RegisterActivity({ route, navigation }: any) {
           <CustomButton
             variantType="block"
             text="Prosseguir"
-            onPress={goToMoreInfos}
+            onPress={() => goToMoreInfos(need, name, description)}
           ></CustomButton>
         </Button>
       </Container>

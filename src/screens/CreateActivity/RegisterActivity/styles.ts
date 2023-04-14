@@ -30,5 +30,5 @@ export const TextInput = styled.TextInput`
 `
 export const Button = styled.View`
   width: 100%;
-  margin-bottom: 24px;
+  margin-top: 70%;
 `

@@ -16,7 +16,7 @@ interface ActivityCardProps {
   activity: string
   quantity: number
   distance: number
-  organizer: string
+  organizer?: string
   onPress?: any
 }
 
@@ -46,7 +46,9 @@ export function ActivityCard({
           <ActivityName>
             <Image source={require('../../../assets/user.png')} alt="" />
 
-            <CustomText type="body">{quantity}</CustomText>
+            <CustomText type="body">
+              {quantity === -1 ? 'Sem limites' : quantity}
+            </CustomText>
           </ActivityName>
         </CardSectionContainer>
 

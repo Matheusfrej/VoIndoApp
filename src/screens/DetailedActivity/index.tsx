@@ -9,7 +9,6 @@ import {
   Avaliations,
   BigContainer,
   Container,
-  How,
   MyMapView,
   PersonWhoParticipated,
   PersonWhoParticipatedAndPossibleCheck,
@@ -34,6 +33,8 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
 
   const activity = getActivityById(id)
+  console.log(activity?.latitude)
+
   return (
     <BigContainer>
       <BackButton
@@ -44,7 +45,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
       <Container>
         <Title>
           <CustomText type="h2">{activity?.name}</CustomText>
-          {true && (
+          {false && (
             <Image source={require('../../../assets/verificado.png')} alt="" />
           )}
         </Title>
@@ -60,9 +61,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             Quem é o responsável?
           </CustomText>
 
-          <CustomText type="body">
-            {activity?.organizers[0].id}, idade anos.
-          </CustomText>
+          <CustomText type="body">Fulano, idade anos.</CustomText>
         </Who>
         <CustomButton
           variantType="outline"
@@ -72,37 +71,25 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           onPress={() => navigation.push('profile', { mine: false })}
         ></CustomButton>
 
-        <How>
-          <CustomText type="span" style={{ fontWeight: 'bold' }}>
-            Como participar?
-          </CustomText>
-
-          <CustomText type="body"> comoParticipar </CustomText>
-        </How>
-
         <Where>
           <CustomText type="span" style={{ fontWeight: 'bold' }}>
             Onde acontece?
           </CustomText>
-          <CustomText type="body"> {activity?.location} </CustomText>
-          <CustomText type="body">
-            {' '}
-            Ponto de encontro: {activity?.location}{' '}
-          </CustomText>
+          <CustomText type="body"> {activity?.address} </CustomText>
           <MyMapView>
             <WhereMap
               // -8.046485892509358, -34.90411727453414
               initialRegion={{
-                latitude: -8.046485892509358,
-                longitude: -34.90411727453414,
+                latitude: Number(activity?.latitude),
+                longitude: Number(activity?.longitude),
                 latitudeDelta: 0.0022,
                 longitudeDelta: 0.0021,
               }}
             >
               <Marker
                 coordinate={{
-                  latitude: -8.046485892509358,
-                  longitude: -34.90411727453414,
+                  latitude: Number(activity?.latitude),
+                  longitude: Number(activity?.longitude),
                 }}
                 title={activity?.name}
                 description="Ponto de encontro"
