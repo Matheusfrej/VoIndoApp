@@ -52,12 +52,13 @@ export function Confirm({ navigation, route }: any) {
       latitude,
       longitude,
       ocorrencias: [{ data_time: date }],
-      tags: tagsSelected,
     }
     try {
       const headers = {
         'Content-Type': 'application/json',
       }
+      console.log(newActivity)
+
       const response = await api.post(
         '/api/atividades/create-update/',
         newActivity,
