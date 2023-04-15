@@ -68,9 +68,6 @@ export function ActivitiesList({ navigation, route }: any) {
           text="Buscar"
           textSize={14}
           color="blue"
-          onPress={() => {
-            console.log(activitiesListOrdered)
-          }}
         />
       </FilterBar>
 
