@@ -6,7 +6,7 @@ import * as S from './styles'
 import api from '../../../services/api'
 import { CustomButton } from '../../../components/CustomButton'
 import { useTheme } from 'styled-components'
-import { TagType } from '../../../contexts/ActivitiesContext'
+import { TagType, useActivities } from '../../../contexts/ActivitiesContext'
 
 interface AddressType {
   name: string
@@ -43,39 +43,41 @@ export function AskAdress({ navigation, route }: any) {
   }
   const theme = useTheme()
   const { need, name, desc, date, max, tagsSelected } = route.params
-  console.log('no ask adress', tagsSelected)
+
+  const { getLocalization } = useActivities()
+  // console.log('no ask adress', tagsSelected)
 
   const [adress, setAdress] = useState('')
   const [addresses, setAddresses] = useState<AddressType[]>([])
   const [noResult, setNoResult] = useState(false)
 
-  const ufpeCoords = {
-    lat: -8.055363554937818,
-    long: -34.9513776120133,
-  }
-
-  const getAddress = async (lat: number, long: number, adr: string) => {
+  const getAddress = async (adr: string) => {
     try {
-      console.log(lat, long, adr)
+      // console.log(lat, long, adr)
+      console.log('entrou')
+      const location = await getLocalization()
+
+      const lat = location?.coords.latitude
+      const long = location?.coords.longitude
 
       const response = await api.get('/api/address/', {
         params: { lat: long, lon: lat, address: adr },
       })
-      console.log(response.data)
+      // console.log(response.data)
       if (typeof response.data === 'object' && response.data.length > 0) {
-        console.log('entrou no if')
+        // console.log('entrou no if')
 
         await setAddresses(response.data)
         setNoResult(false)
       } else {
-        console.log('entrou no else')
+        // console.log('entrou no else')
 
         setAddresses([])
         setNoResult(true)
       }
-      console.log('passou den ovo')
+      // console.log('passou den ovo')
     } catch (error) {
-      console.error(error)
+      // console.error(error)
     }
   }
 
@@ -105,7 +107,10 @@ export function AskAdress({ navigation, route }: any) {
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
               value={adress}
-              onChangeText={(newAdr) => handleTextInputChange(newAdr)}
+              onChangeText={(newAdr) => {
+                handleTextInputChange(newAdr)
+                // getAddress(newAdr)
+              }}
             />
 
             <CustomButton
@@ -113,7 +118,7 @@ export function AskAdress({ navigation, route }: any) {
               color="blue"
               text="Pesquisar"
               onPress={() => {
-                getAddress(ufpeCoords.lat, ufpeCoords.long, adress)
+                getAddress(adress)
               }}
             ></CustomButton>
           </S.FilterCont>
@@ -150,7 +155,8 @@ export function AskAdress({ navigation, route }: any) {
                 centered={true}
                 style={{ color: theme.color.GREY }}
               >
-                Não encontramos nenhum endereço para sua busca
+                Não encontramos nenhum endereço para sua busca. Continue
+                especificando mais o endereço
               </CustomText>
             </S.NoResult>
           )}

@@ -5,8 +5,6 @@ import { Button, Container, Title, Avatar, TextArea, TextArea2 } from './styles'
 
 export function Participation({ navigation }: any) {
   const goToHome2 = () => {
-    console.log('apertou')
-
     navigation.push('home2')
   }
 

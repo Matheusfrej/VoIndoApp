@@ -30,7 +30,7 @@ export function Confirm({ navigation, route }: any) {
     tagsSelected,
   } = route.params
   const theme = useTheme()
-  console.log('chegou no confirmation', tagsSelected)
+  // console.log('chegou no confirmation', tagsSelected)
 
   const postNewActivity = async (
     need: boolean,
@@ -52,12 +52,13 @@ export function Confirm({ navigation, route }: any) {
       latitude,
       longitude,
       ocorrencias: [{ data_time: date }],
+      tags: tagsSelected,
     }
     try {
       const headers = {
         'Content-Type': 'application/json',
       }
-      console.log(newActivity)
+      // console.log(newActivity)
 
       const response = await api.post(
         '/api/atividades/create-update/',
@@ -67,11 +68,11 @@ export function Confirm({ navigation, route }: any) {
           headers,
         },
       )
-      // console.log(response)
-      console.log(response.data)
+      console.log(response)
+      // console.log(response.data)
       navigation.push('home2')
     } catch (error) {
-      console.log('ruim')
+      // console.log('ruim')
       // console.error(error)
     }
   }

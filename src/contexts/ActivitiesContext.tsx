@@ -7,6 +7,7 @@ import React, {
 } from 'react'
 import api, { apiLogin } from '../services/api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Location from 'expo-location'
 
 interface ActivitiesContextProviderProps {
   children: ReactNode
@@ -61,14 +62,18 @@ export interface ActivityType {
   is_boosted?: boolean
   latitude: number
   longitude: number
+  distance?: number
 }
 
 interface ActivitiesContextType {
   activitiesList: ActivityType[] | undefined
+  activitiesListOrdered: ActivityType[] | undefined
   areActivitiesLoading: boolean
   isLogged: boolean
   getActivityById: (id: string) => ActivityType | undefined
   getActivities: () => void
+  getActivityiesOrderByDistance: () => void
+  getLocalization: () => Promise<Location.LocationObject | undefined>
 }
 
 export const ActivitiesContext = createContext({} as ActivitiesContextType)
@@ -77,6 +82,9 @@ export function ActivitiesContextProvider({
   children,
 }: ActivitiesContextProviderProps) {
   const [activitiesList, setActivitiesList] = useState<
+    ActivityType[] | undefined
+  >()
+  const [activitiesListOrdered, setActivitiesListOrdered] = useState<
     ActivityType[] | undefined
   >()
   const [areActivitiesLoading, setAreActivitiesLoading] = useState(true)
@@ -92,6 +100,17 @@ export function ActivitiesContextProvider({
   }
 
   // API CALLS
+
+  const getLocalization = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync()
+    if (status !== 'granted') {
+      console.log('Permissão negada')
+      return
+    }
+
+    const local = await Location.getCurrentPositionAsync({})
+    return local
+  }
 
   useEffect(() => {
     const postActivity = async () => {
@@ -123,7 +142,31 @@ export function ActivitiesContextProvider({
       const response = await api.get('/api/atividades/list-all/')
 
       setActivitiesList(response.data)
-      console.log(response.data)
+      // console.log(response.data)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setAreActivitiesLoading(false)
+    }
+  }
+
+  const getActivityiesOrderByDistance = async () => {
+    try {
+      const local = await getLocalization()
+      const lat = local?.coords.latitude
+      const lon = local?.coords.longitude
+      // console.log(lat)
+      // console.log(lon)
+      setAreActivitiesLoading(true)
+      const response = await api.get(
+        '/api/atividades/list-sugeridas-distance/',
+        {
+          params: { lat, lon },
+        },
+      )
+
+      setActivitiesListOrdered(response.data)
+      // console.log(response.data)
     } catch (error) {
       console.error(error)
     } finally {
@@ -135,10 +178,13 @@ export function ActivitiesContextProvider({
     <ActivitiesContext.Provider
       value={{
         activitiesList,
+        activitiesListOrdered,
         areActivitiesLoading,
         getActivityById,
         isLogged,
         getActivities,
+        getActivityiesOrderByDistance,
+        getLocalization,
       }}
     >
       {children}
