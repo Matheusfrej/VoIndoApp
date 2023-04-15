@@ -62,6 +62,7 @@ export interface ActivityType {
   is_boosted?: boolean
   latitude: number
   longitude: number
+  distance?: number
 }
 
 interface ActivitiesContextType {
@@ -72,6 +73,7 @@ interface ActivitiesContextType {
   getActivityById: (id: string) => ActivityType | undefined
   getActivities: () => void
   getActivityiesOrderByDistance: () => void
+  getLocalization: () => Promise<Location.LocationObject | undefined>
 }
 
 export const ActivitiesContext = createContext({} as ActivitiesContextType)
@@ -182,6 +184,7 @@ export function ActivitiesContextProvider({
         isLogged,
         getActivities,
         getActivityiesOrderByDistance,
+        getLocalization,
       }}
     >
       {children}

@@ -60,14 +60,16 @@ export function ActivityCard({
               </CustomText>
             </OrganizedBy>
 
-            {distance >= 1000 && (
+            {distance >= 1 && (
               <CustomText type="body">
-                {distance / 1000}km de distância
+                {distance.toPrecision(2)}km de distância
               </CustomText>
             )}
 
-            {distance < 1000 && (
-              <CustomText type="body">{distance}m de distância</CustomText>
+            {distance < 1 && (
+              <CustomText type="body">
+                {Math.round(distance * 1000)}m de distância
+              </CustomText>
             )}
           </CardFooterSectionContainer>
           {profissional && (

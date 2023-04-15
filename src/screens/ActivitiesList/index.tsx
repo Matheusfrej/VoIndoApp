@@ -68,6 +68,9 @@ export function ActivitiesList({ navigation, route }: any) {
           text="Buscar"
           textSize={14}
           color="blue"
+          onPress={() => {
+            console.log(activitiesListOrdered)
+          }}
         />
       </FilterBar>
 
@@ -106,7 +109,7 @@ export function ActivitiesList({ navigation, route }: any) {
                 <ActivityCard
                   key={activity.id}
                   activity={activity.name}
-                  distance={100}
+                  distance={activity.distance!}
                   quantity={Number(activity.participants_limit)}
                   profissional={activity.professional_required}
                   organizer={

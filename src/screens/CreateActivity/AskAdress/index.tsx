@@ -6,7 +6,7 @@ import * as S from './styles'
 import api from '../../../services/api'
 import { CustomButton } from '../../../components/CustomButton'
 import { useTheme } from 'styled-components'
-import { TagType } from '../../../contexts/ActivitiesContext'
+import { TagType, useActivities } from '../../../contexts/ActivitiesContext'
 
 interface AddressType {
   name: string
@@ -43,20 +43,21 @@ export function AskAdress({ navigation, route }: any) {
   }
   const theme = useTheme()
   const { need, name, desc, date, max, tagsSelected } = route.params
+
+  const { getLocalization } = useActivities()
   // console.log('no ask adress', tagsSelected)
 
   const [adress, setAdress] = useState('')
   const [addresses, setAddresses] = useState<AddressType[]>([])
   const [noResult, setNoResult] = useState(false)
 
-  const ufpeCoords = {
-    lat: -8.055363554937818,
-    long: -34.9513776120133,
-  }
-
-  const getAddress = async (lat: number, long: number, adr: string) => {
+  const getAddress = async (adr: string) => {
     try {
       // console.log(lat, long, adr)
+      const location = await getLocalization()
+
+      const lat = location?.coords.latitude
+      const long = location?.coords.longitude
 
       const response = await api.get('/api/address/', {
         params: { lat: long, lon: lat, address: adr },
@@ -113,7 +114,7 @@ export function AskAdress({ navigation, route }: any) {
               color="blue"
               text="Pesquisar"
               onPress={() => {
-                getAddress(ufpeCoords.lat, ufpeCoords.long, adress)
+                getAddress(adress)
               }}
             ></CustomButton>
           </S.FilterCont>
