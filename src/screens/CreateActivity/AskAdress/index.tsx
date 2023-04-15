@@ -54,6 +54,7 @@ export function AskAdress({ navigation, route }: any) {
   const getAddress = async (adr: string) => {
     try {
       // console.log(lat, long, adr)
+      console.log('entrou')
       const location = await getLocalization()
 
       const lat = location?.coords.latitude
@@ -106,7 +107,10 @@ export function AskAdress({ navigation, route }: any) {
               selectionColor={'#000'}
               placeholderTextColor={'#AAAAAA'}
               value={adress}
-              onChangeText={(newAdr) => handleTextInputChange(newAdr)}
+              onChangeText={(newAdr) => {
+                handleTextInputChange(newAdr)
+                // getAddress(newAdr)
+              }}
             />
 
             <CustomButton
@@ -151,7 +155,8 @@ export function AskAdress({ navigation, route }: any) {
                 centered={true}
                 style={{ color: theme.color.GREY }}
               >
-                Não encontramos nenhum endereço para sua busca
+                Não encontramos nenhum endereço para sua busca. Continue
+                especificando mais o endereço
               </CustomText>
             </S.NoResult>
           )}

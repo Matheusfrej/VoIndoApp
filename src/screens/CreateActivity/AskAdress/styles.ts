@@ -43,4 +43,5 @@ export const NoResult = styled.View`
   width: 80%;
   margin: 0 auto;
   justify-content: center;
+  margin-top: 20px;
 `
