@@ -152,7 +152,7 @@ export function AskAdress({ navigation, route }: any) {
                 style={{ color: theme.color.GREY }}
               >
                 Não encontramos nenhum endereço para sua busca. Tente
-                especificar mais o local
+                especificar mais o local.
               </CustomText>
             </S.NoResult>
           )}

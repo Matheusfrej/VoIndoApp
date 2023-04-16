@@ -36,6 +36,7 @@ export function ActivitiesList({ navigation, route }: any) {
       getActivities()
       getActivityiesOrderByDistance()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
