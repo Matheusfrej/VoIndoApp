@@ -58,7 +58,7 @@ export function AskAdress({ navigation, route }: any) {
       const long = location?.coords.longitude
 
       const response = await api.get('/api/address/', {
-        params: { lat: long, lon: lat, address: adr },
+        params: { lat, lon: long, address: adr },
       })
       // console.log(response.data)
       if (typeof response.data === 'object' && response.data.length > 0) {
