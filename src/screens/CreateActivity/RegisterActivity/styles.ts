@@ -28,6 +28,7 @@ export const PairTouchable = styled.TouchableOpacity`
   align-items: center;
   flex-direction: row;
   gap: 20px;
+  max-width: 80%;
 `
 
 export const TextInput = styled.TextInput`
