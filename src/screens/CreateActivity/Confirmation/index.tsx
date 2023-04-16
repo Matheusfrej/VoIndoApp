@@ -47,8 +47,9 @@ export function Confirm({ navigation, route }: any) {
       professional_required: need,
       latitude,
       longitude,
-      ocorrencias: [{ data_time: date }],
+      ocorrencias: [{ data_time: date.toJSON() }],
       tags: tagsSelected,
+      comorbidities: [],
     }
     try {
       const headers = {
