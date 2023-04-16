@@ -39,9 +39,8 @@ export const NoResult = styled.View`
   /* backgroundColor: 'blue'
                   height: 100
                   alignItems: 'center' */
-  height: 100px;
+  height: 200px;
   width: 80%;
   margin: 0 auto;
   justify-content: center;
-  margin-top: 20px;
 `

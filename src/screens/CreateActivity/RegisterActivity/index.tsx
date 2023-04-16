@@ -52,13 +52,8 @@ export function RegisterActivity({ route, navigation }: any) {
       setTagsSelected(
         tagsSelected.filter((tagSelected) => tagSelected.name !== tag.name),
       )
-      console.log(
-        'deletou: ',
-        tagsSelected.filter((tagSelected) => tagSelected.name !== tag.name),
-      )
     } else {
       setTagsSelected([...tagsSelected, tag])
-      console.log('adicionou: ', [...tagsSelected, tag])
     }
   }
 

@@ -70,10 +70,12 @@ interface ActivitiesContextType {
   activitiesListOrdered: ActivityType[] | undefined
   areActivitiesLoading: boolean
   isLogged: boolean
+  activityOrganizationDate: Date
   getActivityById: (id: string) => ActivityType | undefined
   getActivities: () => void
   getActivityiesOrderByDistance: () => void
   getLocalization: () => Promise<Location.LocationObject | undefined>
+  setActivityOrganizationDate: React.Dispatch<React.SetStateAction<Date>>
 }
 
 export const ActivitiesContext = createContext({} as ActivitiesContextType)
@@ -89,6 +91,9 @@ export function ActivitiesContextProvider({
   >()
   const [areActivitiesLoading, setAreActivitiesLoading] = useState(true)
   const [isLogged, setIsLogged] = useState(false)
+  const [activityOrganizationDate, setActivityOrganizationDate] = useState(
+    new Date(),
+  )
 
   // FUNCTIONS
 
@@ -180,8 +185,10 @@ export function ActivitiesContextProvider({
         activitiesList,
         activitiesListOrdered,
         areActivitiesLoading,
-        getActivityById,
         isLogged,
+        activityOrganizationDate,
+        setActivityOrganizationDate,
+        getActivityById,
         getActivities,
         getActivityiesOrderByDistance,
         getLocalization,

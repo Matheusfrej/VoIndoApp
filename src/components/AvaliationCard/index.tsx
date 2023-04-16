@@ -4,9 +4,7 @@ import { CardContainer, Top, Perfil, Stars } from '../AvaliationCard/styles'
 import { CustomText } from '../CustomText'
 
 export function AvaliationCard() {
-  const goToProfile = () => {
-    console.log('Apertou')
-  }
+  const goToProfile = () => {}
   return (
     <CardContainer>
       <Top>

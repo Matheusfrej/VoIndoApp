@@ -22,7 +22,6 @@ export function AskAdress({ navigation, route }: any) {
     need: boolean,
     name: string,
     desc: string,
-    date: Date,
     max: string,
     adr: string,
     latitude: number,
@@ -33,7 +32,6 @@ export function AskAdress({ navigation, route }: any) {
       need,
       name,
       desc,
-      date,
       max,
       adr,
       latitude,
@@ -42,7 +40,7 @@ export function AskAdress({ navigation, route }: any) {
     })
   }
   const theme = useTheme()
-  const { need, name, desc, date, max, tagsSelected } = route.params
+  const { need, name, desc, max, tagsSelected } = route.params
 
   const { getLocalization } = useActivities()
   // console.log('no ask adress', tagsSelected)
@@ -54,7 +52,6 @@ export function AskAdress({ navigation, route }: any) {
   const getAddress = async (adr: string) => {
     try {
       // console.log(lat, long, adr)
-      console.log('entrou')
       const location = await getLocalization()
 
       const lat = location?.coords.latitude
@@ -137,7 +134,6 @@ export function AskAdress({ navigation, route }: any) {
                     need,
                     name,
                     desc,
-                    date,
                     max,
                     add.name,
                     add.latitude,
@@ -155,8 +151,8 @@ export function AskAdress({ navigation, route }: any) {
                 centered={true}
                 style={{ color: theme.color.GREY }}
               >
-                Não encontramos nenhum endereço para sua busca. Continue
-                especificando mais o endereço
+                Não encontramos nenhum endereço para sua busca. Tente
+                especificar mais o local
               </CustomText>
             </S.NoResult>
           )}

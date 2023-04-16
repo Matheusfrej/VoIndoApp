@@ -2,7 +2,11 @@ import { useTheme } from 'styled-components'
 import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
-import { ActivityType, TagType } from '../../../contexts/ActivitiesContext'
+import {
+  ActivityType,
+  TagType,
+  useActivities,
+} from '../../../contexts/ActivitiesContext'
 import api from '../../../services/api'
 import {
   Container,
@@ -18,18 +22,10 @@ import { Marker } from 'react-native-maps'
 import { Tag } from '../../../components/Tag'
 
 export function Confirm({ navigation, route }: any) {
-  const {
-    need,
-    name,
-    desc,
-    date,
-    max,
-    adr,
-    latitude,
-    longitude,
-    tagsSelected,
-  } = route.params
+  const { need, name, desc, max, adr, latitude, longitude, tagsSelected } =
+    route.params
   const theme = useTheme()
+  const { activityOrganizationDate } = useActivities()
   // console.log('chegou no confirmation', tagsSelected)
 
   const postNewActivity = async (
@@ -128,7 +124,7 @@ export function Confirm({ navigation, route }: any) {
           </CustomText>
 
           <CustomText type="body">
-            {date.toLocaleString('pt-BR', {
+            {activityOrganizationDate.toLocaleString('pt-BR', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',
@@ -186,7 +182,7 @@ export function Confirm({ navigation, route }: any) {
                 name,
                 desc,
                 adr,
-                date,
+                activityOrganizationDate,
                 max,
                 latitude,
                 longitude,

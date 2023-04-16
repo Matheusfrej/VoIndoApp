@@ -29,7 +29,7 @@ export function ActivitiesList({ navigation, route }: any) {
   const navigateToDetailedActivity = (id: string) => {
     navigation.push('detailedActivity', { id })
   }
-  const ordered = route.params
+  const { ordered } = route.params
 
   useEffect(() => {
     if (isLogged) {

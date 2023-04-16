@@ -30,8 +30,8 @@ export const CardFooterContainer = styled.View`
   gap: 16px;
 `
 
-export const ProfessionalText = styled.Text`
-  font-size: 14px;
+export const ProfessionalText = styled.View`
+  max-width: 95%;
 `
 
 export const OrganizedBy = styled.View`

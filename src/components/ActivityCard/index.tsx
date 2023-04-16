@@ -61,7 +61,7 @@ export function ActivityCard({
             </OrganizedBy>
 
             {distance >= 1 && (
-              <CustomText type="body">
+              <CustomText type="body" style={{ maxWidth: '40%' }}>
                 {distance.toPrecision(2)}km de distância
               </CustomText>
             )}
@@ -74,7 +74,10 @@ export function ActivityCard({
           </CardFooterSectionContainer>
           {profissional && (
             <ProfessionalText>
-              Essa atividade é oferecida por um profissional
+              <CustomText type="body">
+                {''}
+                Essa atividade é oferecida por um profissional{''}
+              </CustomText>
             </ProfessionalText>
           )}
         </CardFooterContainer>

@@ -14,9 +14,19 @@ import {
 } from './styles'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDropdown from 'react-native-select-dropdown'
-import { TagType } from '../../../contexts/ActivitiesContext'
+import { TagType, useActivities } from '../../../contexts/ActivitiesContext'
 
 export function MoreInfos({ navigation, route }: any) {
+  const { need, name, desc, tagsSelected } = route.params
+  const { setActivityOrganizationDate } = useActivities()
+
+  const theme = useTheme()
+  const [date, setDate] = useState(new Date())
+  const [max, setMax] = useState('-1')
+  const [showDate, setShowDate] = useState(false)
+  const [showTime, setShowTime] = useState(false)
+  const quantity = ['Sem limites', '1', '2', '3', '4', '5', '8', '10']
+
   const goToAskAddress = (
     need: boolean,
     name: string,
@@ -25,17 +35,9 @@ export function MoreInfos({ navigation, route }: any) {
     max: string,
     tagsSelected: TagType[],
   ) => {
-    navigation.push('askAddress', { need, name, desc, date, max, tagsSelected })
+    setActivityOrganizationDate(date)
+    navigation.push('askAddress', { need, name, desc, max, tagsSelected })
   }
-
-  const { need, name, desc, tagsSelected } = route.params
-
-  const theme = useTheme()
-  const [date, setDate] = useState(new Date())
-  const [max, setMax] = useState('-1')
-  const [showDate, setShowDate] = useState(false)
-  const [showTime, setShowTime] = useState(false)
-  const quantity = ['Sem limites', '1', '2', '3', '4', '5', '8', '10']
 
   const onChangeDate = (event: any, selectedDate: any) => {
     const currentDate = selectedDate
