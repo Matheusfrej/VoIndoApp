@@ -72,7 +72,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             </CustomText>
             ,{' '}
             {new Date().getFullYear() -
-              new Date(activity?.creator.birth_date!).getFullYear()}{' '}
+              new Date(activity?.creator!.birth_date!).getFullYear()}{' '}
             anos.
           </CustomText>
         </Who>
