@@ -40,6 +40,7 @@ export const TextInput = styled.TextInput`
 `
 export const Button = styled.View`
   width: 100%;
+  margin-bottom: 10px;
 `
 
 export const ContainerHeader = styled.View`

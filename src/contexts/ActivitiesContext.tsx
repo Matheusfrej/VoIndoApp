@@ -37,7 +37,7 @@ export interface ActivityType {
   tags?: any
   comorbidities?: string[]
   ocorrencias: any
-  creator: {
+  creator?: {
     id: string
     email: string
     nickname: string

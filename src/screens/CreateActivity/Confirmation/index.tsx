@@ -75,12 +75,13 @@ export function Confirm({ navigation, route }: any) {
   }
   return (
     <BigContainer>
-      <Container>
-        <BackButton
+      <BackButton
           onPress={() => {
             navigation.goBack()
           }}
         />
+      <Container>
+        
         <Title>
           <CustomText
             style={{ color: theme.color['BLACK-2'] }}
