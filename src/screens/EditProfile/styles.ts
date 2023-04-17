@@ -1,5 +1,8 @@
 import styled from 'styled-components/native'
 
+export const Container = styled.ScrollView`
+`
+
 export const EditProfileContainer = styled.ScrollView`
   width: 100%;
   padding: 0 24px;

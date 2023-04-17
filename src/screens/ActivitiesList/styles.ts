@@ -18,7 +18,7 @@ export const TextAndLink = styled.View`
 `
 
 export const Title = styled.View`
-  width: 70%;
+  width: 80%;
   margin: auto;
 `
 

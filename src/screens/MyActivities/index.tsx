@@ -61,7 +61,7 @@ export function MyActivities({ navigation }: any) {
               profissional={false}
               activity="Caminhada em grupo"
               organizer="Lucia"
-              distance={100}
+              distance={0.1}
               quantity={8}
             ></ActivityCard>
             <CustomButton
@@ -83,7 +83,7 @@ export function MyActivities({ navigation }: any) {
               profissional={true}
               activity="Aula de Pilates"
               organizer="Bruno"
-              distance={1000}
+              distance={1}
               quantity={16}
             ></ActivityCard>
             <CustomButton

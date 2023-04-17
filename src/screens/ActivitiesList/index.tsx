@@ -53,7 +53,7 @@ export function ActivitiesList({ navigation, route }: any) {
 
         <TextAndLink>
           <Title>
-            <CustomText type="h3" centered={true}>
+            <CustomText type="h2" centered={true}>
               Buscando atividades sugeridas para você
             </CustomText>
           </Title>
