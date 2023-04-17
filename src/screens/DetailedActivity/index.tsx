@@ -221,6 +221,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           color="orange"
           text="Participar"
           textSize={16}
+          onPress={() => navigation.push('home2')}
         ></CustomButton>
       </Container>
     </BigContainer>
