@@ -38,10 +38,6 @@ export function ActivitiesList({ navigation, route }: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    console.log('mudaram')
-  }, [activitiesList, activitiesListOrdered])
-
   return (
     <ListContainer>
       <ListHeader>
