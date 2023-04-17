@@ -37,12 +37,13 @@ export interface ActivityType {
   tags?: any
   comorbidities?: string[]
   ocorrencias: any
-  creator?: {
+  creator: {
     id: string
     email: string
     nickname: string
     first_name: string
     last_name: string
+    birth_date: string
   }
   organizers?: {
     id: string
@@ -143,8 +144,13 @@ export function ActivitiesContextProvider({
 
   const getActivities = async () => {
     try {
+      const local = await getLocalization()
+      const lat = local?.coords.latitude
+      const lon = local?.coords.longitude
       setAreActivitiesLoading(true)
-      const response = await api.get('/api/atividades/list-all/')
+      const response = await api.get('/api/atividades/list-sugeridas-tags/', {
+        params: { lat, lon },
+      })
 
       setActivitiesList(response.data)
       // console.log(response.data)

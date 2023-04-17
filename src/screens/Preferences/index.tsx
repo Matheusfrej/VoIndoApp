@@ -60,7 +60,7 @@ export function Preferences({ navigation }: any) {
             variantType="block"
             color="blue"
             onPress={() => {
-              navigateToActivitiesList(true)
+              navigateToActivitiesList(false)
             }}
             textSize={16}
           />
@@ -72,7 +72,7 @@ export function Preferences({ navigation }: any) {
             textSize={16}
             style={{ width: '100%' }}
             onPress={() => {
-              navigateToActivitiesList(false)
+              navigateToActivitiesList(true)
             }}
           />
         </Options>

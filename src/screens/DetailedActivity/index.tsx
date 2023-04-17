@@ -50,7 +50,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             <Image source={require('../../../assets/verificado.png')} alt="" />
           )}
         </Title>
-        <CustomText type="body"> {activity?.description} </CustomText>
+        <CustomText type="body">{activity?.description}</CustomText>
 
         <Tags>
           {activity !== undefined &&
@@ -70,7 +70,10 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             <CustomText type="span">
               {activity?.creator?.nickname || activity?.creator?.first_name}
             </CustomText>
-            , idade anos.
+            ,{' '}
+            {new Date().getFullYear() -
+              new Date(activity?.creator.birth_date!).getFullYear()}{' '}
+            anos.
           </CustomText>
         </Who>
         <CustomButton
