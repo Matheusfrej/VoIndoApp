@@ -34,13 +34,13 @@ export const StyledText = styled.Text<StyledTextProps>`
       `) ||
     (props.type === 'span' &&
       css`
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 600;
         font-family: 'InterSemiBold';
       `) ||
     (props.type === 'body' &&
       css`
-        font-size: 16px;
+        font-size: 18px;
         font-weight: normal;
         font-family: 'InterRegular';
       `)}

@@ -49,8 +49,9 @@ export function Preferences({ navigation }: any) {
 
           <InterestsList>
             <Tag>Em grupo</Tag>
-            <Tag>Aprender algo novo</Tag>
             <Tag>Atividades Físicas</Tag>
+
+            <Tag>Aprender algo novo</Tag>
           </InterestsList>
         </Interests>
 

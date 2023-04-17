@@ -34,7 +34,7 @@ export const InterestsHeader = styled.View`
 export const InterestsList = styled.View`
   flex-direction: row;
   margin: 30px 40px;
-  gap: 16px;
+  gap: 10px;
   flex-wrap: wrap;
 `
 
@@ -49,8 +49,8 @@ export const CentralizedCustomText = styled(StyledText)`
 export const Options = styled.View`
   margin: auto;
   align-items: center;
-  gap: 16px;
-  margin-top: 62px;
+  gap: 10px;
+  margin-top: 20px;
 `
 
 export const Avatar = styled.View`

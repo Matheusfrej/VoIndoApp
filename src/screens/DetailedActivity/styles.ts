@@ -29,6 +29,7 @@ export const Tags = styled.View`
   gap: 10px;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
 `
 
 export const Who = styled.View`
