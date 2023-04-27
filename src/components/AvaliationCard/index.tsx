@@ -3,8 +3,15 @@ import { CardContainer, Top, Perfil, Stars } from '../AvaliationCard/styles'
 
 import { CustomText } from '../CustomText'
 
-export function AvaliationCard() {
+interface AvaliationCardProps {
+  id: number
+  nota: number
+  texto: string
+}
+
+export function AvaliationCard({ id, nota, texto }: AvaliationCardProps) {
   const goToProfile = () => {}
+  console.log(nota)
   return (
     <CardContainer>
       <Top>
@@ -13,30 +20,25 @@ export function AvaliationCard() {
       </Top>
 
       <Stars>
-        <Image
-          source={require('../../../assets/Star.png')}
-          alt=""
-          style={{ marginRight: 2 }}
-        />
-        <Image
-          source={require('../../../assets/Star.png')}
-          alt=""
-          style={{ marginRight: 2 }}
-        />
-        <Image
-          source={require('../../../assets/Star.png')}
-          alt=""
-          style={{ marginRight: 2 }}
-        />
-        <Image
-          source={require('../../../assets/Star.png')}
-          alt=""
-          style={{ marginRight: 2 }}
-        />
-        <Image source={require('../../../assets/Star.png')} alt="" />
+        {Array.from({ length: nota }).map((_, index) => (
+          <Image
+            key={index}
+            source={require('../../../assets/FullStar.png')}
+            alt=""
+            style={{ marginRight: 2 }}
+          />
+        ))}
+        {Array.from({ length: 5 - nota }).map((_, index) => (
+          <Image
+            key={index}
+            source={require('../../../assets/EmptyStar.png')}
+            alt=""
+            style={{ marginRight: 2 }}
+          />
+        ))}
       </Stars>
 
-      <CustomText type="body"> Gostei muito da atividade</CustomText>
+      <CustomText type="body"> {texto}</CustomText>
     </CardContainer>
   )
 }

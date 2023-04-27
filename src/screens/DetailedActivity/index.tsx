@@ -33,8 +33,10 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
 
   const activity = getActivityById(id)
-  // console.log(activity)
+  console.log(activity?.reviews)
   // console.log(activity?.ocorrencias)
+
+  const avaliations = activity?.reviews
 
   return (
     <BigContainer>
@@ -149,9 +151,18 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             horizontal={true}
             contentContainerStyle={{ gap: 20, paddingRight: 300 }}
           >
-            <AvaliationCard></AvaliationCard>
-            <AvaliationCard></AvaliationCard>
-            <AvaliationCard></AvaliationCard>
+            {avaliations !== undefined &&
+              avaliations.length > 0 &&
+              avaliations.map((aval) => {
+                return (
+                  <AvaliationCard
+                    key={aval.id}
+                    nota={aval.stars}
+                    id={aval.id}
+                    texto={aval.text}
+                  ></AvaliationCard>
+                )
+              })}
           </AvaliationCards>
         </Avaliations>
 

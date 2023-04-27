@@ -64,6 +64,11 @@ export interface ActivityType {
   latitude: number
   longitude: number
   distance?: number
+  reviews?: {
+    stars: number
+    id: number
+    text: string
+  }[]
 }
 
 interface ActivitiesContextType {
