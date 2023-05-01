@@ -48,3 +48,10 @@ export const AcitivitiesTextInput = styled.TextInput`
   font-size: 16px;
   border-radius: 5px;
 `
+
+export const LoadingContainer = styled.View`
+  height: 200px;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+`
