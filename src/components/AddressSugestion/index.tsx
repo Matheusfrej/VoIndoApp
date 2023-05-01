@@ -24,13 +24,12 @@ export function AddressSugestion({
           {address}
         </CustomText>
       </S.AddressAndName>
-      {distance >= 1 && 
-      <CustomText type="body">{Math.round(distance * 10) / 10}km</CustomText>
-    }
-    {distance < 1 && 
-      <CustomText type="body">{Math.round(distance * 1000)}m</CustomText>
-    }
-    
+      {distance >= 1 && (
+        <CustomText type="body">{Math.round(distance * 10) / 10}km</CustomText>
+      )}
+      {distance < 1 && (
+        <CustomText type="body">{Math.round(distance * 1000)}m</CustomText>
+      )}
     </S.AdressContainer>
   )
 }

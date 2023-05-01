@@ -8,12 +8,15 @@ import {
   FilterBar,
   ListContainer,
   ListHeader,
+  LoadingContainer,
   NewView,
   TextAndLink,
   Title,
 } from './styles'
 import { useActivities } from '../../contexts/ActivitiesContext'
 import { BackButton } from '../../components/BackButton'
+import { ActivityIndicator } from 'react-native'
+import { useTheme } from 'styled-components'
 
 export function ActivitiesList({ navigation, route }: any) {
   const {
@@ -23,7 +26,10 @@ export function ActivitiesList({ navigation, route }: any) {
     getActivities,
     getActivityiesOrderByDistance,
     isLogged,
+    onSetAreActivitiesLoading,
   } = useActivities()
+
+  const theme = useTheme()
 
   const [placeholderText, setPlaceholderText] = useState('Pesquisar atividade')
   const navigateToDetailedActivity = (id: string) => {
@@ -31,9 +37,14 @@ export function ActivitiesList({ navigation, route }: any) {
   }
   const { ordered } = route.params
   useEffect(() => {
+    onSetAreActivitiesLoading(true)
     if (isLogged) {
-      getActivities()
-      getActivityiesOrderByDistance()
+      if (!ordered) {
+        getActivities()
+        console.log('entrou aqui')
+      } else {
+        getActivityiesOrderByDistance()
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -55,21 +66,22 @@ export function ActivitiesList({ navigation, route }: any) {
           </Title>
         </TextAndLink>
       </ListHeader>
-
-      <FilterBar>
-        <AcitivitiesTextInput
-          placeholder={placeholderText}
-          selectionColor={'#000'}
-          placeholderTextColor={'#AAAAAA'}
-          onFocus={() => setPlaceholderText('')}
-        />
-        <CustomButton
-          variantType="outline"
-          text="Buscar"
-          textSize={14}
-          color="blue"
-        />
-      </FilterBar>
+      {!areActivitiesLoading && (
+        <FilterBar>
+          <AcitivitiesTextInput
+            placeholder={placeholderText}
+            selectionColor={'#000'}
+            placeholderTextColor={'#AAAAAA'}
+            onFocus={() => setPlaceholderText('')}
+          />
+          <CustomButton
+            variantType="outline"
+            text="Buscar"
+            textSize={14}
+            color="blue"
+          />
+        </FilterBar>
+      )}
 
       <NewView>
         <ActivitiesContainer
@@ -120,6 +132,12 @@ export function ActivitiesList({ navigation, route }: any) {
                 />
               )
             })}
+          {areActivitiesLoading && (
+            <LoadingContainer>
+              <ActivityIndicator size="large" color={theme.color.PRIMARY} />
+              <CustomText type="body">Carregando atividades...</CustomText>
+            </LoadingContainer>
+          )}
         </ActivitiesContainer>
       </NewView>
     </ListContainer>

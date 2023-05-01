@@ -77,6 +77,7 @@ interface ActivitiesContextType {
   getActivityiesOrderByDistance: () => void
   getLocalization: () => Promise<Location.LocationObject | undefined>
   setActivityOrganizationDate: React.Dispatch<React.SetStateAction<Date>>
+  onSetAreActivitiesLoading: (value: boolean) => void
 }
 
 export const ActivitiesContext = createContext({} as ActivitiesContextType)
@@ -103,6 +104,10 @@ export function ActivitiesContextProvider({
       return activitiesList.find((activity) => activity.id === id)
     }
     return undefined
+  }
+
+  const onSetAreActivitiesLoading = (value: boolean) => {
+    setAreActivitiesLoading(value)
   }
 
   // API CALLS
@@ -198,6 +203,7 @@ export function ActivitiesContextProvider({
         getActivities,
         getActivityiesOrderByDistance,
         getLocalization,
+        onSetAreActivitiesLoading,
       }}
     >
       {children}
