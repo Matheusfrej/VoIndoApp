@@ -7,6 +7,7 @@ import api from '../../../services/api'
 import { CustomButton } from '../../../components/CustomButton'
 import { useTheme } from 'styled-components'
 import { TagType, useActivities } from '../../../contexts/ActivitiesContext'
+import { ActivityIndicator } from 'react-native'
 
 interface AddressType {
   name: string
@@ -48,10 +49,12 @@ export function AskAdress({ navigation, route }: any) {
   const [adress, setAdress] = useState('')
   const [addresses, setAddresses] = useState<AddressType[]>([])
   const [noResult, setNoResult] = useState(false)
+  const [areAdressessNotLoading, setAreAdressessNotLoading] = useState(false)
 
   const getAddress = async (adr: string) => {
     try {
       // console.log(lat, long, adr)
+      setAreAdressessNotLoading(true)
       const location = await getLocalization()
 
       const lat = location?.coords.latitude
@@ -66,6 +69,7 @@ export function AskAdress({ navigation, route }: any) {
 
         await setAddresses(response.data)
         setNoResult(false)
+        setAreAdressessNotLoading(false)
       } else {
         // console.log('entrou no else')
 
@@ -121,28 +125,29 @@ export function AskAdress({ navigation, route }: any) {
         </S.Pair>
 
         <S.Suggestions>
-          {addresses.map((add: AddressType, index) => {
-            return (
-              <AddressSugestion
-                key={index}
-                address={add.complement}
-                distance={add.distance}
-                locationName={add.name}
-                onPress={() => {
-                  goToConfirmation(
-                    need,
-                    name,
-                    desc,
-                    max,
-                    add.name,
-                    add.latitude,
-                    add.longitude,
-                    tagsSelected,
-                  )
-                }}
-              ></AddressSugestion>
-            )
-          })}
+          {!areAdressessNotLoading &&
+            addresses.map((add: AddressType, index) => {
+              return (
+                <AddressSugestion
+                  key={index}
+                  address={add.complement}
+                  distance={add.distance}
+                  locationName={add.name}
+                  onPress={() => {
+                    goToConfirmation(
+                      need,
+                      name,
+                      desc,
+                      max,
+                      add.name,
+                      add.latitude,
+                      add.longitude,
+                      tagsSelected,
+                    )
+                  }}
+                ></AddressSugestion>
+              )
+            })}
           {noResult && (
             <S.NoResult>
               <CustomText
@@ -154,6 +159,12 @@ export function AskAdress({ navigation, route }: any) {
                 especificar mais o local.
               </CustomText>
             </S.NoResult>
+          )}
+          {areAdressessNotLoading && (
+            <S.LoadingContainer>
+              <ActivityIndicator size="large" color={theme.color.PRIMARY} />
+              <CustomText type="body">Buscando endereços...</CustomText>
+            </S.LoadingContainer>
           )}
         </S.Suggestions>
       </S.Form>
