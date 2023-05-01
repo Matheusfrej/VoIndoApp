@@ -41,7 +41,6 @@ export function ActivitiesList({ navigation, route }: any) {
     if (isLogged) {
       if (!ordered) {
         getActivities()
-        console.log('entrou aqui')
       } else {
         getActivityiesOrderByDistance()
       }

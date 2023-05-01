@@ -25,7 +25,33 @@ export function MoreInfos({ navigation, route }: any) {
   const [max, setMax] = useState('-1')
   const [showDate, setShowDate] = useState(false)
   const [showTime, setShowTime] = useState(false)
-  const quantity = ['Sem limites', '1', '2', '3', '4', '5', '8', '10']
+  const quantity = [
+    'Sem limites',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+  ]
 
   const goToAskAddress = (
     need: boolean,
