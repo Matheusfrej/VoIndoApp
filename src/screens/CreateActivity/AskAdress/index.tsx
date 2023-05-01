@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AddressSugestion } from '../../../components/AddressSugestion'
 import { BackButton } from '../../../components/BackButton'
 import { CustomText } from '../../../components/CustomText'
@@ -50,24 +50,35 @@ export function AskAdress({ navigation, route }: any) {
   const [addresses, setAddresses] = useState<AddressType[]>([])
   const [noResult, setNoResult] = useState(false)
   const [areAdressessNotLoading, setAreAdressessNotLoading] = useState(false)
+  const [localization, setLocalization] = useState<any>()
+
+  useEffect(() => {
+    setLocalization(getLocalization())
+  }, [])
 
   const getAddress = async (adr: string) => {
     try {
       // console.log(lat, long, adr)
-      setAreAdressessNotLoading(true)
-      const location = await getLocalization()
+      console.log('entrou na funcao')
+      console.log(localization)
 
-      const lat = location?.coords.latitude
-      const long = location?.coords.longitude
+      setAreAdressessNotLoading(true)
+      setNoResult(false)
+      console.log('veio até essa parte')
+
+      console.log('veio até aqui')
+
+      const lat = localization._j.coords.latitude
+      const long = localization._j.coords.longitude
 
       const response = await api.get('/api/address/', {
         params: { lat, lon: long, address: adr },
       })
-      // console.log(response.data)
+      console.log(response.data)
       if (typeof response.data === 'object' && response.data.length > 0) {
         // console.log('entrou no if')
 
-        await setAddresses(response.data)
+        setAddresses(response.data)
         setNoResult(false)
         setAreAdressessNotLoading(false)
       } else {
@@ -75,10 +86,13 @@ export function AskAdress({ navigation, route }: any) {
 
         setAddresses([])
         setNoResult(true)
+        setAreAdressessNotLoading(false)
       }
       // console.log('passou den ovo')
     } catch (error) {
-      // console.error(error)
+      setAddresses([])
+      setNoResult(true)
+      setAreAdressessNotLoading(false)
     }
   }
 
