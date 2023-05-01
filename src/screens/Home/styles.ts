@@ -2,10 +2,10 @@ import styled from 'styled-components/native'
 import { StyledText } from '../../components/CustomText/styles'
 
 export const HomeContainer = styled.View`
-  flex: 1;
   justify-content: space-around;
   align-items: center;
   padding: 24px;
+  margin: auto 0;
 `
 
 export const LogoImg = styled.Image`

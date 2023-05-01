@@ -17,12 +17,8 @@ export function EditProfile({ navigation }: any) {
 
   return (
     <Container>
-      <BackButton
-          onPress={() => navigation.goBack()}
-          style={{ marginLeft: 0 }}
-        />
+      <BackButton onPress={() => navigation.goBack()} />
       <EditProfileContainer>
-        
         <EditProfileTitle>
           <CustomText
             type="h1"
