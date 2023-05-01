@@ -88,7 +88,6 @@ export function AskAdress({ navigation, route }: any) {
         onPress={() => {
           navigation.goBack()
         }}
-        style={{ marginLeft: 0 }}
       />
 
       <S.Form>
