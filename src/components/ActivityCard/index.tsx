@@ -76,7 +76,7 @@ export function ActivityCard({
             <ProfessionalText>
               <CustomText type="body">
                 {''}
-                Essa atividade é oferecida por um profissional{''}
+                Oferecido por profissional{''}
               </CustomText>
             </ProfessionalText>
           )}

@@ -96,6 +96,7 @@ export function ActivitiesContextProvider({
   const [activityOrganizationDate, setActivityOrganizationDate] = useState(
     new Date(),
   )
+  const [local, setLocal] = useState<any>()
 
   // FUNCTIONS
 
@@ -147,11 +148,15 @@ export function ActivitiesContextProvider({
     postActivity()
   }, [])
 
+  // pega o local quando abre o aplicativo
+  useEffect(() => {
+    setLocal(getLocalization())
+  }, [])
+
   const getActivities = async () => {
     try {
-      const local = await getLocalization()
-      const lat = local?.coords.latitude
-      const lon = local?.coords.longitude
+      const lat = local._j.coords.latitude
+      const lon = local._j.coords.longitude
       setAreActivitiesLoading(true)
       const response = await api.get('/api/atividades/list-sugeridas-tags/', {
         params: { lat, lon },
@@ -168,9 +173,8 @@ export function ActivitiesContextProvider({
 
   const getActivityiesOrderByDistance = async () => {
     try {
-      const local = await getLocalization()
-      const lat = local?.coords.latitude
-      const lon = local?.coords.longitude
+      const lat = local._j.coords.latitude
+      const lon = local._j.coords.longitude
       // console.log(lat)
       // console.log(lon)
       setAreActivitiesLoading(true)
