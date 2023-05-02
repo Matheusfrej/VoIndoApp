@@ -38,7 +38,6 @@ export function MyActivities({ navigation }: any) {
         ])
         setAtividadesOrganizando(response1.data)
         setAtividadesParticipando(response2.data)
-        console.log(response1.data, response2.data)
       } catch (error) {
         console.error(error)
       }
