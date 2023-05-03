@@ -7,16 +7,26 @@ interface AvaliationCardProps {
   id: number
   nota: number
   texto: string
+  idUser: number
+  navigation: any
 }
 
-export function AvaliationCard({ id, nota, texto }: AvaliationCardProps) {
-  const goToProfile = () => {}
-  console.log(nota)
+export function AvaliationCard({
+  id,
+  nota,
+  texto,
+  idUser,
+  navigation,
+}: AvaliationCardProps) {
+  const goToProfile = () => {
+    if (idUser === 7) navigation.push('profile', { mine: true, id: 7 })
+    else navigation.push('profile', { mine: false, id: idUser })
+  }
   return (
     <CardContainer>
       <Top>
         <CustomText type="span"> Rodrigo </CustomText>
-        <Perfil onPress={goToProfile}> Ver Perfil </Perfil>
+        <Perfil onPress={() => goToProfile()}> Ver Perfil </Perfil>
       </Top>
 
       <Stars>

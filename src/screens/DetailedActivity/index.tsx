@@ -32,12 +32,16 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { getActivityById } = useActivities()
   const { id } = route.params
 
+  const goToAvaliate = () => {
+    navigation.push('avaliateActivity', id)
+  }
+
   const activity = getActivityById(id)
-  console.log(activity?.reviews)
+  //  console.log(activity?.reviews)
   // console.log(activity?.ocorrencias)
 
   const avaliations = activity?.reviews
-
+  // console.log(avaliations)
   return (
     <BigContainer>
       <BackButton
@@ -160,6 +164,8 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                     nota={aval.stars}
                     id={aval.id}
                     texto={aval.text}
+                    idUser={aval.author.id}
+                    navigation={navigation}
                   ></AvaliationCard>
                 )
               })}
@@ -226,6 +232,14 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             </PersonWhoParticipated>
           </WhoParticipatedList>
         </WhoParticipated>
+
+        <CustomButton
+          variantType="large"
+          color="orange"
+          text="Avaliar"
+          textSize={16}
+          onPress={goToAvaliate}
+        ></CustomButton>
 
         <CustomButton
           variantType="large"
