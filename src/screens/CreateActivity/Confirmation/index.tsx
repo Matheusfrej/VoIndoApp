@@ -26,8 +26,7 @@ export function Confirm({ navigation, route }: any) {
   const { need, name, desc, max, adr, latitude, longitude, tagsSelected } =
     route.params
   const theme = useTheme()
-  const { activityOrganizationDate, snackBarSuccess, setSnackBarStatus } =
-    useActivities()
+  const { activityOrganizationDate, setSnackBarStatus } = useActivities()
   // console.log('chegou no confirmation', tagsSelected)
 
   const postNewActivity = async (
@@ -203,7 +202,7 @@ export function Confirm({ navigation, route }: any) {
           ></CustomButton>
         </FinalButton>
       </Container>
-      {snackBarSuccess !== null && <CustomSnackBar success={snackBarSuccess} />}
+      <CustomSnackBar />
     </BigContainer>
   )
 }

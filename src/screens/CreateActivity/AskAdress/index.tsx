@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { AddressSugestion } from '../../../components/AddressSugestion'
 import { BackButton } from '../../../components/BackButton'
 import { CustomText } from '../../../components/CustomText'
@@ -43,25 +43,25 @@ export function AskAdress({ navigation, route }: any) {
   const theme = useTheme()
   const { need, name, desc, max, tagsSelected } = route.params
 
-  const { getLocalization } = useActivities()
+  const { local } = useActivities()
   // console.log('no ask adress', tagsSelected)
 
   const [adress, setAdress] = useState('')
   const [addresses, setAddresses] = useState<AddressType[]>([])
   const [noResult, setNoResult] = useState(false)
   const [areAdressessNotLoading, setAreAdressessNotLoading] = useState(false)
-  const [localization, setLocalization] = useState<any>()
+  // const [localization, setLocalization] = useState<any>()
 
-  useEffect(() => {
-    setLocalization(getLocalization())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // useEffect(() => {
+  //   setLocalization(getLocalization())
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   const getAddress = async (adr: string) => {
     try {
       // console.log(lat, long, adr)
       console.log('entrou na funcao')
-      console.log(localization)
+      // console.log(localization)
 
       setAreAdressessNotLoading(true)
       setNoResult(false)
@@ -69,8 +69,8 @@ export function AskAdress({ navigation, route }: any) {
 
       console.log('veio até aqui')
 
-      const lat = localization._j.coords.latitude
-      const long = localization._j.coords.longitude
+      const lat = local._j.coords.latitude
+      const long = local._j.coords.longitude
 
       const response = await api.get('/api/address/', {
         params: { lat, lon: long, address: adr },
