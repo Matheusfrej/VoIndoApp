@@ -1,7 +1,6 @@
-import { Snackbar } from '@react-native-material/core'
-import { View } from 'react-native'
-import { useTheme } from 'styled-components'
 import { useActivities } from '../../contexts/ActivitiesContext'
+import { CustomText } from '../CustomText'
+import { SnackBarContainer, SnackbarInnerContainer } from './styles'
 
 interface CustomSnackBarProps {
   success: boolean
@@ -9,35 +8,22 @@ interface CustomSnackBarProps {
 
 export function CustomSnackBar({ success }: CustomSnackBarProps) {
   const { snackBarMessage } = useActivities()
-  const theme = useTheme()
 
   return (
-    <View>
+    <SnackBarContainer>
       {success ? (
-        <Snackbar
-          message={snackBarMessage}
-          style={{
-            position: 'absolute',
-            start: 16,
-            end: 16,
-            bottom: 16,
-            zIndex: 1,
-            backgroundColor: theme.color.OK,
-          }}
-        />
+        <SnackbarInnerContainer success={true}>
+          <CustomText type="span" style={{ fontSize: 18, color: '#fff' }}>
+            {snackBarMessage}
+          </CustomText>
+        </SnackbarInnerContainer>
       ) : (
-        <Snackbar
-          message={snackBarMessage}
-          style={{
-            position: 'absolute',
-            start: 16,
-            end: 16,
-            bottom: 16,
-            zIndex: 1,
-            backgroundColor: theme.color.RED,
-          }}
-        />
+        <SnackbarInnerContainer success={false}>
+          <CustomText type="span" style={{ fontSize: 18, color: '#fff' }}>
+            {snackBarMessage}
+          </CustomText>
+        </SnackbarInnerContainer>
       )}
-    </View>
+    </SnackBarContainer>
   )
 }
