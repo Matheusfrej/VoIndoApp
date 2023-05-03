@@ -87,6 +87,7 @@ interface ActivitiesContextType {
   activityOrganizationDate: Date
   snackBarSuccess: boolean | null
   snackBarMessage: string
+  local: any
   setSnackBarStatus: (success: boolean, message: string) => void
   getActivityById: (id: string) => ActivityType | undefined
   getActivities: () => void
@@ -112,7 +113,7 @@ export function ActivitiesContextProvider({
   const [activityOrganizationDate, setActivityOrganizationDate] = useState(
     new Date(),
   )
-  const [local, setLocal] = useState<any>()
+  const [local, setLocal] = useState<any>({ _j: null })
   const [snackBarSuccess, setSnackBarSuccess] = useState<boolean | null>(null)
   const [snackBarMessage, setSnackBarMessage] = useState('')
 
@@ -182,8 +183,10 @@ export function ActivitiesContextProvider({
 
   // pega o local quando abre o aplicativo
   useEffect(() => {
+    console.log(local)
+
     setLocal(getLocalization())
-  }, [])
+  }, [isLogged])
 
   const getActivities = async () => {
     try {
@@ -236,6 +239,7 @@ export function ActivitiesContextProvider({
         activityOrganizationDate,
         snackBarSuccess,
         snackBarMessage,
+        local,
         setSnackBarStatus,
         setActivityOrganizationDate,
         getActivityById,
