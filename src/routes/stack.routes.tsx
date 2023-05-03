@@ -17,6 +17,7 @@ import { Profile } from '../screens/Profile'
 import { EditProfile } from '../screens/EditProfile'
 import { AskAdress } from '../screens/CreateActivity/AskAdress'
 import { Confirm } from '../screens/CreateActivity/Confirmation'
+import { AvaliateActivity } from '../screens/AvaliateActivity'
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
@@ -44,6 +45,12 @@ export function StackRoutes() {
       <Screen name="editProfile" component={EditProfile} />
       <Screen name="askAddress" component={AskAdress} />
       <Screen name="confirmation" component={Confirm} />
+
+      <Screen name="avaliateActivity" component={AvaliateActivity} />
+
+      {/* <Screen name="searchActivities" component={SearchActivities} /> */}
+
+
     </Navigator>
   )
 }

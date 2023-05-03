@@ -17,15 +17,53 @@ import {
 import { CustomText } from '../../components/CustomText'
 import { Tag } from '../../components/Tag'
 import { useTheme } from 'styled-components'
+import api from '../../services/api'
+import { useEffect, useState } from 'react'
+import { TagType } from '../../contexts/ActivitiesContext'
 
 interface ProfileProps {
   navigation: any
   route: any
 }
 
+export interface UserInfo {
+  id: number
+  email: string
+  nickname?: string
+  first_name: string
+  last_name: string
+  birth_date: Date | null
+  tags?: TagType[]
+  comorbidities?: any
+  age: number
+  total_participacoes: number
+  total_atividades_organizadas: number
+}
+
 export function Profile({ navigation, route }: ProfileProps) {
-  const { mine } = route.params
+  const { mine, id } = route.params
   const theme = useTheme()
+  const [infos, setInfos] = useState<UserInfo>()
+
+  const getProfileInfos = async () => {
+    try {
+      if (mine) {
+        const response = await api.get('api/users/detail/2')
+        setInfos(response.data)
+      } else {
+        const response = await api.get(`api/users/detail/${id}`)
+        setInfos(response.data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getProfileInfos()
+    console.log(infos)
+  }, [])
+
   return (
     <ProfileContainer>
       <ProfileContainerHeader>
@@ -39,7 +77,7 @@ export function Profile({ navigation, route }: ProfileProps) {
             variantType="small"
             textSize={16}
             color="grey"
-            onPress={() => navigation.push('editProfile')}
+            onPress={() => navigation.push('editProfile', { infos })}
           />
         )}
       </ProfileContainerHeader>
@@ -54,7 +92,7 @@ export function Profile({ navigation, route }: ProfileProps) {
           centered={true}
           style={{ color: theme.color['BLACK-2'], marginTop: 24 }}
         >
-          Maria Conceição
+          {infos?.first_name} {infos?.last_name}
         </CustomText>
         <PersonSubtitle>
           <CustomText
@@ -62,14 +100,7 @@ export function Profile({ navigation, route }: ProfileProps) {
             centered={true}
             style={{ color: theme.color['BLACK-2'] }}
           >
-            72 anos.
-          </CustomText>
-          <CustomText
-            type="subtitle"
-            centered={true}
-            style={{ color: theme.color['BLACK-2'] }}
-          >
-            Membro desde jan/2023
+            {infos?.age} anos
           </CustomText>
         </PersonSubtitle>
         <Identity>
@@ -97,7 +128,7 @@ export function Profile({ navigation, route }: ProfileProps) {
                 style={{ color: theme.color['SECONDARY-SATURATED'] }}
                 centered={true}
               >
-                8
+                {infos?.total_participacoes}
               </CustomText>
               <CustomText type="subtitle" centered={true}>
                 participações em atividades
@@ -109,7 +140,7 @@ export function Profile({ navigation, route }: ProfileProps) {
                 style={{ color: theme.color['SECONDARY-SATURATED'] }}
                 centered={true}
               >
-                0
+                {infos?.total_atividades_organizadas}
               </CustomText>
               <CustomText type="subtitle" centered={true}>
                 atividades organizadas
@@ -126,8 +157,11 @@ export function Profile({ navigation, route }: ProfileProps) {
         <PreferencesProfileContainer>
           <CustomText type="h3">Preferências</CustomText>
           <PreferencesList>
-            <Tag>Atividade Física</Tag>
-            <Tag>Em grupo</Tag>
+            {infos?.tags !== undefined &&
+              infos!.tags?.length > 0 &&
+              infos?.tags.map((tag) => {
+                return <Tag key={tag.id}>{tag.name}</Tag>
+              })}
           </PreferencesList>
         </PreferencesProfileContainer>
       </PersonProfileContainer>

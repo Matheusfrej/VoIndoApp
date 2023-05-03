@@ -64,6 +64,19 @@ export interface ActivityType {
   latitude: number
   longitude: number
   distance?: number
+  reviews?: {
+    stars: number
+    id: number
+    text: string
+    author: {
+      birth_date: Date
+      email: string
+      first_name: string
+      id: number
+      last_name: string
+      nickname: string
+    }
+  }[]
 }
 
 interface ActivitiesContextType {
