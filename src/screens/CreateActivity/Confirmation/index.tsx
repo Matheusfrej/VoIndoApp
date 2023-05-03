@@ -67,7 +67,7 @@ export function Confirm({ navigation, route }: any) {
           headers,
         },
       )
-      console.log(response)
+      console.log(response.data)
       setSnackBarStatus(true, 'Atividade criada com sucesso!')
       // console.log(response.data)
       setTimeout(() => {
@@ -203,8 +203,7 @@ export function Confirm({ navigation, route }: any) {
           ></CustomButton>
         </FinalButton>
       </Container>
-      {snackBarSuccess && <CustomSnackBar success />}
-      {snackBarSuccess === false && <CustomSnackBar success={false} />}
+      {snackBarSuccess !== null && <CustomSnackBar success={snackBarSuccess} />}
     </BigContainer>
   )
 }

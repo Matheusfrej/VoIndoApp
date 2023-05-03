@@ -17,7 +17,6 @@ import { useActivities } from '../../contexts/ActivitiesContext'
 import { BackButton } from '../../components/BackButton'
 import { ActivityIndicator } from 'react-native'
 import { useTheme } from 'styled-components'
-import { CustomSnackBar } from '../../components/CustomSnackBar'
 
 export function ActivitiesList({ navigation, route }: any) {
   const {
@@ -31,7 +30,6 @@ export function ActivitiesList({ navigation, route }: any) {
   } = useActivities()
 
   const theme = useTheme()
-  const { snackBarSuccess } = useActivities()
 
   const [placeholderText, setPlaceholderText] = useState('Pesquisar atividade')
   const navigateToDetailedActivity = (id: string) => {
@@ -141,8 +139,6 @@ export function ActivitiesList({ navigation, route }: any) {
           )}
         </ActivitiesContainer>
       </NewView>
-      {snackBarSuccess && <CustomSnackBar success />}
-      {snackBarSuccess === false && <CustomSnackBar success={false} />}
     </ListContainer>
   )
 }
