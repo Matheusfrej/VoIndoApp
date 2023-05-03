@@ -50,3 +50,13 @@ export const PastActivities = styled.View`
 `
 
 export const PastActivityCardContainer = styled.ScrollView``
+
+export const NoResult = styled.View`
+  /* backgroundColor: 'blue'
+                  height: 100
+                  alignItems: 'center' */
+  height: 150px;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+`

@@ -85,6 +85,9 @@ interface ActivitiesContextType {
   areActivitiesLoading: boolean
   isLogged: boolean
   activityOrganizationDate: Date
+  snackBarSuccess: boolean | null
+  snackBarMessage: string
+  setSnackBarStatus: (success: boolean, message: string) => void
   getActivityById: (id: string) => ActivityType | undefined
   getActivities: () => void
   getActivityiesOrderByDistance: () => void
@@ -109,6 +112,9 @@ export function ActivitiesContextProvider({
   const [activityOrganizationDate, setActivityOrganizationDate] = useState(
     new Date(),
   )
+  const [local, setLocal] = useState<any>()
+  const [snackBarSuccess, setSnackBarSuccess] = useState<boolean | null>(null)
+  const [snackBarMessage, setSnackBarMessage] = useState('')
 
   // FUNCTIONS
 
@@ -123,6 +129,11 @@ export function ActivitiesContextProvider({
     setAreActivitiesLoading(value)
   }
 
+  const setSnackBarStatus = (success: boolean, message: string) => {
+    setSnackBarSuccess(success)
+    setSnackBarMessage(message)
+  }
+
   // API CALLS
 
   const getLocalization = async () => {
@@ -135,6 +146,15 @@ export function ActivitiesContextProvider({
     const local = await Location.getCurrentPositionAsync({})
     return local
   }
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSnackBarSuccess(null)
+    }, 3000)
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [snackBarSuccess])
 
   useEffect(() => {
     const postActivity = async () => {
@@ -160,11 +180,15 @@ export function ActivitiesContextProvider({
     postActivity()
   }, [])
 
+  // pega o local quando abre o aplicativo
+  useEffect(() => {
+    setLocal(getLocalization())
+  }, [])
+
   const getActivities = async () => {
     try {
-      const local = await getLocalization()
-      const lat = local?.coords.latitude
-      const lon = local?.coords.longitude
+      const lat = local._j.coords.latitude
+      const lon = local._j.coords.longitude
       setAreActivitiesLoading(true)
       const response = await api.get('/api/atividades/list-sugeridas-tags/', {
         params: { lat, lon },
@@ -181,9 +205,8 @@ export function ActivitiesContextProvider({
 
   const getActivityiesOrderByDistance = async () => {
     try {
-      const local = await getLocalization()
-      const lat = local?.coords.latitude
-      const lon = local?.coords.longitude
+      const lat = local._j.coords.latitude
+      const lon = local._j.coords.longitude
       // console.log(lat)
       // console.log(lon)
       setAreActivitiesLoading(true)
@@ -211,6 +234,9 @@ export function ActivitiesContextProvider({
         areActivitiesLoading,
         isLogged,
         activityOrganizationDate,
+        snackBarSuccess,
+        snackBarMessage,
+        setSnackBarStatus,
         setActivityOrganizationDate,
         getActivityById,
         getActivities,

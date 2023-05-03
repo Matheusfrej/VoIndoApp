@@ -20,12 +20,14 @@ import {
 } from './styles'
 import { Marker } from 'react-native-maps'
 import { Tag } from '../../../components/Tag'
+import { CustomSnackBar } from '../../../components/CustomSnackBar'
 
 export function Confirm({ navigation, route }: any) {
   const { need, name, desc, max, adr, latitude, longitude, tagsSelected } =
     route.params
   const theme = useTheme()
-  const { activityOrganizationDate } = useActivities()
+  const { activityOrganizationDate, snackBarSuccess, setSnackBarStatus } =
+    useActivities()
   // console.log('chegou no confirmation', tagsSelected)
 
   const postNewActivity = async (
@@ -65,10 +67,15 @@ export function Confirm({ navigation, route }: any) {
           headers,
         },
       )
-      console.log(response)
+      console.log(response.data)
+      setSnackBarStatus(true, 'Atividade criada com sucesso!')
       // console.log(response.data)
-      navigation.push('home2')
+      setTimeout(() => {
+        navigation.push('home2')
+      }, 3000)
     } catch (error) {
+      setSnackBarStatus(false, 'Houve um erro ao criar a atividade')
+
       // console.log('ruim')
       // console.error(error)
     }
@@ -196,6 +203,7 @@ export function Confirm({ navigation, route }: any) {
           ></CustomButton>
         </FinalButton>
       </Container>
+      {snackBarSuccess !== null && <CustomSnackBar success={snackBarSuccess} />}
     </BigContainer>
   )
 }

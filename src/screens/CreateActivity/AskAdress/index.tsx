@@ -54,6 +54,7 @@ export function AskAdress({ navigation, route }: any) {
 
   useEffect(() => {
     setLocalization(getLocalization())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getAddress = async (adr: string) => {
