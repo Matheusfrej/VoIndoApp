@@ -67,7 +67,10 @@ export function Profile({ navigation, route }: ProfileProps) {
   return (
     <ProfileContainer>
       <ProfileContainerHeader>
-        <BackButton onPress={() => navigation.goBack()}></BackButton>
+        <BackButton
+          onPress={() => navigation.goBack()}
+          style={{ marginTop: 15 }}
+        ></BackButton>
         {mine && (
           <CustomButton
             text="Editar"

@@ -23,7 +23,11 @@ const { Screen, Navigator } = createNativeStackNavigator()
 
 export function StackRoutes() {
   return (
-    <Navigator>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Screen name="home" component={Home} />
       <Screen name="home2" component={Home2} />
       <Screen name="hub" component={Hub} />
@@ -41,9 +45,12 @@ export function StackRoutes() {
       <Screen name="editProfile" component={EditProfile} />
       <Screen name="askAddress" component={AskAdress} />
       <Screen name="confirmation" component={Confirm} />
+
       <Screen name="avaliateActivity" component={AvaliateActivity} />
 
       {/* <Screen name="searchActivities" component={SearchActivities} /> */}
+
+
     </Navigator>
   )
 }

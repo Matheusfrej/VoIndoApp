@@ -71,7 +71,6 @@ export function RegisterActivity({ route, navigation }: any) {
         onPress={() => {
           navigation.goBack()
         }}
-        style={{ marginLeft: 0 }}
       />
       <Container>
         <ContainerHeader>

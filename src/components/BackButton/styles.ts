@@ -6,10 +6,8 @@ export const Back = styled.TouchableHighlight`
   justify-content: center;
   width: 100px;
   border-radius: 8px;
-
-  /* position: fixed; */
-  /* top: 8px; */
-  /* left: 4px; */
+  margin-top: 50px;
+  margin-left: 20px;
 `
 
 export const BackButtonContainer = styled.View`

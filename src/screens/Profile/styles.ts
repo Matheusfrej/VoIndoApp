@@ -8,6 +8,7 @@ export const ProfileContainerHeader = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-right: 24px;
+  margin-top: 40px;
 `
 
 export const PersonProfileContainer = styled.View`

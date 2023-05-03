@@ -44,3 +44,10 @@ export const NoResult = styled.View`
   margin: 0 auto;
   justify-content: center;
 `
+
+export const LoadingContainer = styled.View`
+  height: 200px;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+`
