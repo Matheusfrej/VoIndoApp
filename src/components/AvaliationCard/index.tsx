@@ -7,7 +7,7 @@ interface AvaliationCardProps {
   id: number
   nota: number
   texto: string
-  idUser: number
+  idOfWhoDid: number
   navigation: any
 }
 
@@ -15,12 +15,11 @@ export function AvaliationCard({
   id,
   nota,
   texto,
-  idUser,
+  idOfWhoDid,
   navigation,
 }: AvaliationCardProps) {
   const goToProfile = () => {
-    if (idUser === 7) navigation.push('profile', { mine: true, id: 7 })
-    else navigation.push('profile', { mine: false, id: idUser })
+    navigation.push('profile', { id: idOfWhoDid })
   }
   return (
     <CardContainer>

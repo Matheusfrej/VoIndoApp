@@ -41,9 +41,20 @@ export interface UserInfo {
 }
 
 export function Profile({ navigation, route }: ProfileProps) {
-  const { mine, id } = route.params
+  const { id } = route.params
   const theme = useTheme()
+
+  const [mine, setMine] = useState(false)
   const [infos, setInfos] = useState<UserInfo>()
+
+  const getUserId = async () => {
+    try {
+      const response = await api.get('/api/users/get-my-id/')
+      if (id === response.data.id) setMine(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const getProfileInfos = async () => {
     try {
@@ -55,8 +66,8 @@ export function Profile({ navigation, route }: ProfileProps) {
   }
 
   useEffect(() => {
+    getUserId()
     getProfileInfos()
-    console.log(infos)
   }, [])
 
   return (
