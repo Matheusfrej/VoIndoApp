@@ -2,8 +2,12 @@ import { Image } from 'react-native'
 import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import { Container, Avatar, TextContainer, Buttons } from './styles'
+import { useEffect, useState } from 'react'
+import api from '../../services/api'
 
 export function Home2({ navigation }: any) {
+  const [id, setId] = useState(0)
+
   const goToPreferences = () => {
     navigation.push('preferences')
   }
@@ -12,8 +16,21 @@ export function Home2({ navigation }: any) {
     navigation.push('needProf')
   }
 
+  const getUserId = async () => {
+    try {
+      const response = await api.get('/api/users/get-my-id/')
+      setId(response.data.id)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getUserId()
+  }, [])
+
   const goToProfile = () => {
-    navigation.push('profile', { mine: true, id: 1 })
+    navigation.push('profile', { mine: true, id })
   }
   return (
     <Container>

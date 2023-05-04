@@ -60,14 +60,14 @@ export function AskAdress({ navigation, route }: any) {
   const getAddress = async (adr: string) => {
     try {
       // console.log(lat, long, adr)
-      console.log('entrou na funcao')
+      // console.log('entrou na funcao')
       // console.log(localization)
 
       setAreAdressessNotLoading(true)
       setNoResult(false)
-      console.log('veio até essa parte')
+      // console.log('veio até essa parte')
 
-      console.log('veio até aqui')
+      // console.log('veio até aqui')
 
       const lat = local._j.coords.latitude
       const long = local._j.coords.longitude

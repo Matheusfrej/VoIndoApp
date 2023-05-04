@@ -2,11 +2,11 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const apiLogin = axios.create({
-  baseURL: 'http://34.30.162.63:8000/',
+  baseURL: 'https://3aad-177-221-36-161.sa.ngrok.io',
 })
 
 const api = axios.create({
-  baseURL: 'http://34.30.162.63:8000/',
+  baseURL: 'https://3aad-177-221-36-161.sa.ngrok.io',
 })
 
 api.interceptors.request.use(async (request) => {

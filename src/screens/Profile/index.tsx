@@ -47,13 +47,8 @@ export function Profile({ navigation, route }: ProfileProps) {
 
   const getProfileInfos = async () => {
     try {
-      if (mine) {
-        const response = await api.get('api/users/detail/2')
-        setInfos(response.data)
-      } else {
-        const response = await api.get(`api/users/detail/${id}`)
-        setInfos(response.data)
-      }
+      const response = await api.get(`api/users/detail/${id}`)
+      setInfos(response.data)
     } catch (error) {
       console.log(error)
     }
