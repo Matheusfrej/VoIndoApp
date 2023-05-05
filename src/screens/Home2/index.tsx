@@ -9,7 +9,7 @@ export function Home2({ navigation }: any) {
   const [id, setId] = useState(0)
 
   const goToPreferences = () => {
-    navigation.push('preferences')
+    navigation.push('preferences', { id })
   }
 
   const goToNeedProf = () => {

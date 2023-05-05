@@ -89,7 +89,7 @@ export function EditProfile({ navigation, route }: any) {
       console.log(response.data)
       setSnackBarStatus(true, 'Perfil editado com sucesso!')
       setTimeout(() => {
-        navigation.push('profile', { id: infos.id })
+        navigation.goBack()
       }, 3000)
     } catch (error) {
       console.log(error)
@@ -118,7 +118,7 @@ export function EditProfile({ navigation, route }: any) {
     <Container>
       <BackButton
         onPress={() => navigation.goBack()}
-        style={{ marginLeft: 0 }}
+        style={{ marginLeft: 24 }}
       />
 
       <EditProfileContainer>

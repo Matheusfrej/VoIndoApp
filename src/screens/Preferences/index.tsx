@@ -14,11 +14,31 @@ import {
 } from './styles'
 import { Tag } from '../../components/Tag'
 import { BackButton } from '../../components/BackButton'
+import { UserInfo } from '../Profile'
+import { useEffect, useState } from 'react'
+import api from '../../services/api'
 
-export function Preferences({ navigation }: any) {
+export function Preferences({ navigation, route }: any) {
+  const { id } = route.params
+  const [infos, setInfos] = useState<UserInfo>()
+
   const navigateToActivitiesList = (ordered: boolean) => {
     navigation.push('activitiesList', { ordered })
   }
+
+  useEffect(() => {
+    const getProfileInfos = async () => {
+      try {
+        const response = await api.get(`api/users/detail/${id}`)
+        setInfos(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getProfileInfos()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [infos])
 
   return (
     <PreferencesContainer>
@@ -43,15 +63,15 @@ export function Preferences({ navigation }: any) {
               text="Editar"
               color="blue"
               textSize={16}
-              onPress={() => navigation.push('editProfile')}
+              onPress={() => navigation.push('editProfile', { infos })}
             ></CustomButton>
           </InterestsHeader>
 
           <InterestsList>
-            <Tag>Em grupo</Tag>
-            <Tag>Atividades Físicas</Tag>
-
-            <Tag>Aprender algo novo</Tag>
+            {infos !== undefined &&
+              infos.tags?.map((tag, idx) => {
+                return <Tag key={idx}>{tag.name}</Tag>
+              })}
           </InterestsList>
         </Interests>
 

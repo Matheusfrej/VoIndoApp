@@ -25,6 +25,8 @@ import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import { useActivities } from '../../contexts/ActivitiesContext'
 import { CustomSnackBar } from '../../components/CustomSnackBar'
+import { useTheme } from 'styled-components'
+import { NoResult } from '../MyActivities/styles'
 
 interface DetailedActivityProps {
   route: any
@@ -35,6 +37,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
   const [activity, setActivity] = useState<any>()
   const { setSnackBarStatus } = useActivities()
+  const theme = useTheme()
 
   useEffect(() => {
     const getActivityById = async () => {
@@ -146,6 +149,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
               </CustomText>
 
               {activity !== undefined &&
+                activity.proximas_ocorrencias.length > 0 &&
                 activity?.proximas_ocorrencias.map(
                   (ocorrencia: any, index: any) => {
                     return (
@@ -165,6 +169,18 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                       </CustomText>
                     )
                   },
+                )}
+              {activity !== undefined &&
+                activity.proximas_ocorrencias.length === 0 && (
+                  <NoResult>
+                    <CustomText
+                      type="h2"
+                      style={{ color: theme.color.GREY }}
+                      centered
+                    >
+                      Essa atividade já aconteceu
+                    </CustomText>
+                  </NoResult>
                 )}
             </Who>
 
@@ -218,6 +234,17 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                     )
                   })}
               </AvaliationCards>
+              {avaliations !== undefined && avaliations.length === 0 && (
+                <NoResult>
+                  <CustomText
+                    type="h2"
+                    style={{ color: theme.color.GREY }}
+                    centered
+                  >
+                    Essa atividade ainda não tem nenhuma avaliação
+                  </CustomText>
+                </NoResult>
+              )}
             </Avaliations>
 
             <WhoParticipated>
