@@ -26,10 +26,12 @@ export interface TagType {
 }
 
 export interface OcorrenciaType {
+  id: number
   atividade: number
   data_time: Date
-  id: number
   participantes: []
+  recorrencia: number
+  data_limite: Date | null
 }
 
 export interface ActivityType {
@@ -89,7 +91,7 @@ interface ActivitiesContextType {
   snackBarMessage: string
   local: any
   setSnackBarStatus: (success: boolean, message: string) => void
-  getActivityById: (id: string) => ActivityType | undefined
+  getActivityById: (id: string) => any | undefined
   getActivities: () => void
   getActivityiesOrderByDistance: () => void
   getLocalization: () => Promise<Location.LocationObject | undefined>
@@ -190,8 +192,16 @@ export function ActivitiesContextProvider({
 
   const getActivities = async () => {
     try {
-      const lat = local._j.coords.latitude
-      const lon = local._j.coords.longitude
+      let lat = 0
+      let lon = 0
+      if (local._j === null) {
+        const localaux = await getLocalization()
+        lat = localaux!.coords.latitude
+        lon = localaux!.coords.longitude
+      } else {
+        lat = local._j.coords.latitude
+        lon = local._j.coords.longitude
+      }
       setAreActivitiesLoading(true)
       const response = await api.get('/api/atividades/list-sugeridas-tags/', {
         params: { lat, lon },
@@ -208,11 +218,16 @@ export function ActivitiesContextProvider({
 
   const getActivityiesOrderByDistance = async () => {
     try {
-      const lat = local._j.coords.latitude
-      const lon = local._j.coords.longitude
-      // console.log(lat)
-      // console.log(lon)
-      setAreActivitiesLoading(true)
+      let lat = 0
+      let lon = 0
+      if (local._j === null) {
+        const localaux = await getLocalization()
+        lat = localaux!.coords.latitude
+        lon = localaux!.coords.longitude
+      } else {
+        lat = local._j.coords.latitude
+        lon = local._j.coords.longitude
+      }
       const response = await api.get(
         '/api/atividades/list-sugeridas-distance/',
         {
