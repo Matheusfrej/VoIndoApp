@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { ActivityCard } from '../../components/ActivityCard'
-import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import {
-  AcitivitiesTextInput,
   ActivitiesContainer,
-  FilterBar,
   ListContainer,
   ListHeader,
   LoadingContainer,
@@ -31,7 +28,6 @@ export function ActivitiesList({ navigation, route }: any) {
 
   const theme = useTheme()
 
-  const [placeholderText, setPlaceholderText] = useState('Pesquisar atividade')
   const navigateToDetailedActivity = (id: string) => {
     navigation.push('detailedActivity', { id })
   }
@@ -65,22 +61,6 @@ export function ActivitiesList({ navigation, route }: any) {
           </Title>
         </TextAndLink>
       </ListHeader>
-      {!areActivitiesLoading && (
-        <FilterBar>
-          <AcitivitiesTextInput
-            placeholder={placeholderText}
-            selectionColor={'#000'}
-            placeholderTextColor={'#AAAAAA'}
-            onFocus={() => setPlaceholderText('')}
-          />
-          <CustomButton
-            variantType="outline"
-            text="Buscar"
-            textSize={14}
-            color="blue"
-          />
-        </FilterBar>
-      )}
 
       <NewView>
         <ActivitiesContainer

@@ -2,7 +2,6 @@ import { BackButton } from '../../components/BackButton'
 import { CustomButton } from '../../components/CustomButton'
 import { Image } from 'react-native'
 import {
-  IconAndLevel,
   Identity,
   LevelContainer,
   MainLevelContent,
@@ -69,6 +68,7 @@ export function Profile({ navigation, route }: ProfileProps) {
   useEffect(() => {
     getProfileInfos()
     getUserId()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -143,10 +143,6 @@ export function Profile({ navigation, route }: ProfileProps) {
         </Identity>
 
         <LevelContainer>
-          <IconAndLevel>
-            <Image source={require('../../../assets/crown.png')} alt="" />
-            <CustomText type="h2">Nivel 2</CustomText>
-          </IconAndLevel>
           <MainLevelContent>
             <QuantityAndText>
               <CustomText

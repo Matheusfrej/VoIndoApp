@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 
 export const BigContainer = styled.ScrollView`
   flex: 1;
+  height: 100%;
 `
 
 export const Container = styled.View`

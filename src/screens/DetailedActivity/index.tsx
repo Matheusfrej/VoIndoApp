@@ -23,6 +23,10 @@ import {
 import { BackButton } from '../../components/BackButton'
 import { useEffect, useState } from 'react'
 import api from '../../services/api'
+import { useActivities } from '../../contexts/ActivitiesContext'
+import { CustomSnackBar } from '../../components/CustomSnackBar'
+import { useTheme } from 'styled-components'
+import { NoResult } from '../MyActivities/styles'
 
 interface DetailedActivityProps {
   route: any
@@ -32,10 +36,8 @@ interface DetailedActivityProps {
 export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
   const [activity, setActivity] = useState<any>()
-
-  const goToAvaliate = () => {
-    navigation.push('avaliateActivity', id)
-  }
+  const { setSnackBarStatus } = useActivities()
+  const theme = useTheme()
 
   useEffect(() => {
     const getActivityById = async () => {
@@ -49,10 +51,42 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
     }
 
     getActivityById()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   //  console.log(activity?.reviews)
   // console.log(activity?.ocorrencias)
+
+  const participateActivity = async () => {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+      }
+      // console.log(newActivity)
+
+      const response = await api.post(
+        `/api/atividades/entrar-atividade/${activity.id}`,
+        {
+          withCredentials: false,
+          headers,
+        },
+      )
+      console.log(response.data)
+      setSnackBarStatus(true, 'Você se cadastrou na atividade com sucesso!')
+      // console.log(response.data)
+      setTimeout(() => {
+        navigation.push('home2')
+      }, 3000)
+    } catch (error) {
+      setSnackBarStatus(
+        false,
+        'Houve um erro ao tentar participar da atividade',
+      )
+
+      // console.log('ruim')
+      // console.error(error)
+    }
+  }
 
   const avaliations = activity?.reviews
   // console.log(avaliations)
@@ -115,6 +149,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
               </CustomText>
 
               {activity !== undefined &&
+                activity.proximas_ocorrencias.length > 0 &&
                 activity?.proximas_ocorrencias.map(
                   (ocorrencia: any, index: any) => {
                     return (
@@ -134,6 +169,18 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                       </CustomText>
                     )
                   },
+                )}
+              {activity !== undefined &&
+                activity.proximas_ocorrencias.length === 0 && (
+                  <NoResult>
+                    <CustomText
+                      type="h2"
+                      style={{ color: theme.color.GREY }}
+                      centered
+                    >
+                      Essa atividade já aconteceu
+                    </CustomText>
+                  </NoResult>
                 )}
             </Who>
 
@@ -187,6 +234,17 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                     )
                   })}
               </AvaliationCards>
+              {avaliations !== undefined && avaliations.length === 0 && (
+                <NoResult>
+                  <CustomText
+                    type="h2"
+                    style={{ color: theme.color.GREY }}
+                    centered
+                  >
+                    Essa atividade ainda não tem nenhuma avaliação
+                  </CustomText>
+                </NoResult>
+              )}
             </Avaliations>
 
             <WhoParticipated>
@@ -271,21 +329,14 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
             <CustomButton
               variantType="large"
               color="orange"
-              text="Avaliar"
-              textSize={16}
-              onPress={goToAvaliate}
-            ></CustomButton>
-
-            <CustomButton
-              variantType="large"
-              color="orange"
               text="Participar"
               textSize={16}
-              onPress={() => navigation.push('home2')}
+              onPress={() => participateActivity()}
             ></CustomButton>
           </Container>
         </>
       )}
+      <CustomSnackBar />
     </BigContainer>
   )
 }

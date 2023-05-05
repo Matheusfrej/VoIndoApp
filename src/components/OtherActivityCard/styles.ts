@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const PastActivityCardContainer = styled.View`
+export const PastActivityCardContainer = styled.TouchableOpacity`
   width: 100%;
   padding: 16px 32px;
   gap: 24px;

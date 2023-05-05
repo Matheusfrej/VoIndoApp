@@ -13,6 +13,10 @@ interface OtherActivityCardProps {
   activity: string
   organizer?: string
   mine?: boolean
+  id?: number
+  navigation?: any
+  onPress?: any
+  onPressDelete?: any
 }
 
 export function OtherActivityCard({
@@ -20,9 +24,13 @@ export function OtherActivityCard({
   activity,
   organizer,
   mine,
+  id,
+  navigation,
+  onPress,
+  onPressDelete,
 }: OtherActivityCardProps) {
   return (
-    <PastActivityCardContainer>
+    <PastActivityCardContainer onPress={onPress}>
       <Header>
         <HeaderTitle>
           <CustomText type="span" centered={true}>
@@ -47,28 +55,20 @@ export function OtherActivityCard({
             text="Avaliar atividade"
             variantType="block"
             color="blue"
+            onPress={() => navigation.push('avaliateActivity', id)}
           />
         ) : (
-          <CustomButton
-            textSize={16}
-            text="Editar"
-            variantType="outline"
-            color="blue"
-          />
+          <></>
         )}
         {!mine ? (
-          <CustomButton
-            textSize={14}
-            text="Denunciar"
-            variantType="block"
-            color="red"
-          />
+          <></>
         ) : (
           <CustomButton
             textSize={16}
             text="Deletar"
             variantType="block"
             color="red"
+            onPress={onPressDelete}
           />
         )}
       </Footer>

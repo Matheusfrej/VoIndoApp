@@ -2,6 +2,8 @@ import { Image } from 'react-native'
 import { CardContainer, Top, Perfil, Stars } from '../AvaliationCard/styles'
 
 import { CustomText } from '../CustomText'
+import { useEffect, useState } from 'react'
+import api from '../../services/api'
 
 interface AvaliationCardProps {
   id: number
@@ -21,10 +23,28 @@ export function AvaliationCard({
   const goToProfile = () => {
     navigation.push('profile', { id: idOfWhoDid })
   }
+
+  const [name, setName] = useState()
+
+  useEffect(() => {
+    const getProfileInfos = async () => {
+      try {
+        const response = await api.get(`api/users/detail/${idOfWhoDid}`)
+        console.log(response.data)
+
+        setName(response.data.first_name)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getProfileInfos()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <CardContainer>
       <Top>
-        <CustomText type="span"> Rodrigo </CustomText>
+        <CustomText type="span"> {name} </CustomText>
         <Perfil onPress={() => goToProfile()}> Ver Perfil </Perfil>
       </Top>
 
@@ -47,7 +67,7 @@ export function AvaliationCard({
         ))}
       </Stars>
 
-      <CustomText type="body"> {texto}</CustomText>
+      <CustomText type="body"> {texto} </CustomText>
     </CardContainer>
   )
 }

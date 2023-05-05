@@ -110,7 +110,7 @@ export function Confirm({ navigation, route }: any) {
 
         <Pair>
           <CustomText type="h3" style={{ fontWeight: 'bold' }}>
-            Categorias:
+            Preferências:
           </CustomText>
 
           <Tags>
