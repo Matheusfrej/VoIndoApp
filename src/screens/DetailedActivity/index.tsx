@@ -181,7 +181,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                         nota={aval.stars}
                         id={aval.id}
                         texto={aval.text}
-                        idUser={aval.author.id}
+                        idOfWhoDid={aval.author.id}
                         navigation={navigation}
                       ></AvaliationCard>
                     )

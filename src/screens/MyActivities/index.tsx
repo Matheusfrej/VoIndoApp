@@ -65,7 +65,7 @@ export function MyActivities({ navigation }: any) {
         {atividadesOrganizando !== undefined ? (
           <PastActivityCardContainer
             horizontal={true}
-            contentContainerStyle={{ gap: 20, paddingRight: 200 }}
+            contentContainerStyle={{ gap: 20, paddingRight: 400 }}
           >
             {atividadesOrganizando.map((atividade, idx) => {
               return (
