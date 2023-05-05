@@ -2,11 +2,7 @@ import { useTheme } from 'styled-components'
 import { BackButton } from '../../../components/BackButton'
 import { CustomButton } from '../../../components/CustomButton'
 import { CustomText } from '../../../components/CustomText'
-import {
-  ActivityType,
-  TagType,
-  useActivities,
-} from '../../../contexts/ActivitiesContext'
+import { TagType, useActivities } from '../../../contexts/ActivitiesContext'
 import api from '../../../services/api'
 import {
   Container,
@@ -40,7 +36,7 @@ export function Confirm({ navigation, route }: any) {
     longitude: number,
     tagsSelected: TagType[],
   ) => {
-    const newActivity: ActivityType = {
+    const newActivity: any = {
       name,
       address: adr,
       description: desc,
