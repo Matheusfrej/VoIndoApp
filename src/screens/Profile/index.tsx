@@ -38,22 +38,29 @@ export interface UserInfo {
   age: number
   total_participacoes: number
   total_atividades_organizadas: number
+  profile_image: string
 }
 
 export function Profile({ navigation, route }: ProfileProps) {
-  const { mine, id } = route.params
+  const { id } = route.params
   const theme = useTheme()
+
+  const [mine, setMine] = useState(false)
   const [infos, setInfos] = useState<UserInfo>()
+
+  const getUserId = async () => {
+    try {
+      const response = await api.get('/api/users/get-my-id/')
+      if (id === response.data.id) setMine(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const getProfileInfos = async () => {
     try {
-      if (mine) {
-        const response = await api.get('api/users/detail/2')
-        setInfos(response.data)
-      } else {
-        const response = await api.get(`api/users/detail/${id}`)
-        setInfos(response.data)
-      }
+      const response = await api.get(`api/users/detail/${id}`)
+      setInfos(response.data)
     } catch (error) {
       console.log(error)
     }
@@ -61,7 +68,7 @@ export function Profile({ navigation, route }: ProfileProps) {
 
   useEffect(() => {
     getProfileInfos()
-    console.log(infos)
+    getUserId()
   }, [])
 
   return (
@@ -82,11 +89,20 @@ export function Profile({ navigation, route }: ProfileProps) {
         )}
       </ProfileContainerHeader>
       <PersonProfileContainer>
-        <Image
-          source={require('../../../assets/senhora.png')}
-          alt=""
-          style={{ width: 100, height: 100 }}
-        />
+        {infos?.profile_image !== undefined ? (
+          <Image
+            source={{ uri: infos.profile_image }}
+            alt=""
+            style={{ width: 100, height: 100, borderRadius: 20 }}
+          />
+        ) : (
+          <Image
+            source={require('../../../assets/NoProfilePic.png')}
+            alt=""
+            style={{ width: 100, height: 100, borderRadius: 20 }}
+          />
+        )}
+
         <CustomText
           type="h1"
           centered={true}
@@ -95,13 +111,23 @@ export function Profile({ navigation, route }: ProfileProps) {
           {infos?.first_name} {infos?.last_name}
         </CustomText>
         <PersonSubtitle>
-          <CustomText
-            type="subtitle"
-            centered={true}
-            style={{ color: theme.color['BLACK-2'] }}
-          >
-            {infos?.age} anos
-          </CustomText>
+          {infos?.age !== undefined && infos?.age > 0 ? (
+            <CustomText
+              type="subtitle"
+              centered={true}
+              style={{ color: theme.color['BLACK-2'] }}
+            >
+              {infos?.age} anos
+            </CustomText>
+          ) : (
+            <CustomText
+              type="subtitle"
+              centered={true}
+              style={{ color: theme.color['BLACK-2'] }}
+            >
+              Idade não informada
+            </CustomText>
+          )}
         </PersonSubtitle>
         <Identity>
           <CustomText type="subtitle" style={{ fontSize: 20 }}>

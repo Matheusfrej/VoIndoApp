@@ -185,7 +185,7 @@ export function ActivitiesContextProvider({
 
   // pega o local quando abre o aplicativo
   useEffect(() => {
-    console.log(local)
+    // console.log(local)
 
     setLocal(getLocalization())
   }, [isLogged])
