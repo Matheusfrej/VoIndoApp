@@ -17,27 +17,27 @@ import {
   TitleContainer,
 } from './styles'
 import api from '../../services/api'
-import { ActivityType } from '../../contexts/ActivitiesContext'
 import { useTheme } from 'styled-components'
 
 export function MyActivities({ navigation }: any) {
   const theme = useTheme()
-  const [atividadesOrganizando, setAtividadesOrganizando] = useState<
-    ActivityType[] | undefined
-  >(undefined)
-  const [atividadesParticipando, setAtividadesParticipando] = useState<
-    ActivityType[] | undefined
-  >(undefined)
+  const [atividadesOrganizando, setAtividadesOrganizando] =
+    useState<any>(undefined)
+  const [atividadesConfirmadas, setAtividadesConfirmadas] =
+    useState<any>(undefined)
+  const [atividadesPassadas, setAtividadesPassadas] = useState<any>(undefined)
 
   useEffect(() => {
     const getMinhasAtividades = async () => {
       try {
-        const [response1, response2] = await Promise.all([
+        const [response1, response2, response3] = await Promise.all([
           api.get('/api/atividades/list-organizando/'),
-          api.get('/api/atividades/list-participando/'),
+          api.get('/api/atividades/list-confirmadas/'),
+          api.get('/api/atividades/list-passadas/'),
         ])
         setAtividadesOrganizando(response1.data)
-        setAtividadesParticipando(response2.data)
+        setAtividadesConfirmadas(response2.data)
+        setAtividadesPassadas(response3.data)
       } catch (error) {
         console.error(error)
       }
@@ -67,7 +67,7 @@ export function MyActivities({ navigation }: any) {
             horizontal={true}
             contentContainerStyle={{ gap: 20, paddingRight: 400 }}
           >
-            {atividadesOrganizando.map((atividade, idx) => {
+            {atividadesOrganizando.map((atividade: any, idx: any) => {
               return (
                 <OtherActivityCard
                   key={idx}

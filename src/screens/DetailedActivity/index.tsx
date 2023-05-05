@@ -23,6 +23,8 @@ import {
 import { BackButton } from '../../components/BackButton'
 import { useEffect, useState } from 'react'
 import api from '../../services/api'
+import { useActivities } from '../../contexts/ActivitiesContext'
+import { CustomSnackBar } from '../../components/CustomSnackBar'
 
 interface DetailedActivityProps {
   route: any
@@ -32,6 +34,7 @@ interface DetailedActivityProps {
 export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
   const [activity, setActivity] = useState<any>()
+  const { setSnackBarStatus } = useActivities()
 
   const goToAvaliate = () => {
     navigation.push('avaliateActivity', id)
@@ -53,6 +56,37 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
 
   //  console.log(activity?.reviews)
   // console.log(activity?.ocorrencias)
+
+  const participateActivity = async () => {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+      }
+      // console.log(newActivity)
+
+      const response = await api.post(
+        `/api/atividades/entrar-atividade/${activity.id}`,
+        {
+          withCredentials: false,
+          headers,
+        },
+      )
+      console.log(response.data)
+      setSnackBarStatus(true, 'Você se cadastrou na atividade com sucesso!')
+      // console.log(response.data)
+      setTimeout(() => {
+        navigation.push('home2')
+      }, 3000)
+    } catch (error) {
+      setSnackBarStatus(
+        false,
+        'Houve um erro ao tentar participar da atividade',
+      )
+
+      // console.log('ruim')
+      // console.error(error)
+    }
+  }
 
   const avaliations = activity?.reviews
   // console.log(avaliations)
@@ -281,11 +315,12 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
               color="orange"
               text="Participar"
               textSize={16}
-              onPress={() => navigation.push('home2')}
+              onPress={() => participateActivity()}
             ></CustomButton>
           </Container>
         </>
       )}
+      <CustomSnackBar />
     </BigContainer>
   )
 }

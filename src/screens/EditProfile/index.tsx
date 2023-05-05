@@ -13,14 +13,16 @@ import {
   Pair,
 } from './styles'
 import { CustomButton } from '../../components/CustomButton'
-import { TagType } from '../../contexts/ActivitiesContext'
+import { TagType, useActivities } from '../../contexts/ActivitiesContext'
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api'
 import { Switch } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { CustomSnackBar } from '../../components/CustomSnackBar'
 
 export function EditProfile({ navigation, route }: any) {
   const theme = useTheme()
+  const { setSnackBarStatus } = useActivities()
   const { infos } = route.params
 
   const [firstName, setFirstName] = useState('')
@@ -62,6 +64,34 @@ export function EditProfile({ navigation, route }: any) {
       setTags(response.data)
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  const submitEditProfile = async () => {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+      }
+      const data = {
+        nickname,
+        first_name: firstName,
+        last_name: lastName,
+        birth_date: date.toISOString().split('T')[0],
+      }
+      console.log(data)
+
+      const response = await api.put('/api/users/edit-profile/', data, {
+        withCredentials: false,
+        headers,
+      })
+      console.log(response.data)
+      setSnackBarStatus(true, 'Perfil editado com sucesso!')
+      setTimeout(() => {
+        navigation.push('home2')
+      }, 3000)
+    } catch (error) {
+      console.log(error)
+      setSnackBarStatus(false, 'Houve um erro ao editar o perfil')
     }
   }
 
@@ -202,10 +232,11 @@ export function EditProfile({ navigation, route }: any) {
             variantType="block"
             color="orange"
             text="Editar"
-            onPress={console.log(date)}
+            onPress={() => submitEditProfile()}
           />
         </ButtonContainer>
       </EditProfileContainer>
+      <CustomSnackBar />
     </Container>
   )
 }
