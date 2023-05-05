@@ -18,6 +18,8 @@ import {
 } from './styles'
 import api from '../../services/api'
 import { useTheme } from 'styled-components'
+import { CustomSnackBar } from '../../components/CustomSnackBar'
+import { useActivities } from '../../contexts/ActivitiesContext'
 
 export function MyActivities({ navigation }: any) {
   const theme = useTheme()
@@ -26,6 +28,7 @@ export function MyActivities({ navigation }: any) {
   const [atividadesConfirmadas, setAtividadesConfirmadas] =
     useState<any>(undefined)
   const [atividadesPassadas, setAtividadesPassadas] = useState<any>(undefined)
+  const { setSnackBarStatus } = useActivities()
 
   useEffect(() => {
     const getMinhasAtividades = async () => {
@@ -46,6 +49,38 @@ export function MyActivities({ navigation }: any) {
     getMinhasAtividades()
   }, [])
 
+  const deleteActivity = async (id: number) => {
+    try {
+      const response = api.delete(`api/atividades/delete/${id}`)
+      console.log(response)
+      setSnackBarStatus(true, 'Atividade deletada com sucesso')
+      const filteredActivities = atividadesOrganizando.filter(
+        (item: any) => item.id !== id,
+      )
+
+      setAtividadesOrganizando(filteredActivities)
+      setSnackBarStatus(true, 'Atividade deletada com sucesso')
+    } catch (error) {
+      console.log(error)
+      setSnackBarStatus(false, 'Houve um erro ao deletar a atividade')
+    }
+  }
+
+  const leaveActivity = async (id: number) => {
+    try {
+      const response = api.post(`api/atividades/sair-atividade/${id}`)
+      console.log(response)
+      setSnackBarStatus(true, 'Presença cancelada com sucesso')
+      const filteredActivities = atividadesConfirmadas.filter(
+        (item: any) => item.id !== id,
+      )
+      setAtividadesConfirmadas(filteredActivities)
+    } catch (error) {
+      console.log(error)
+      setSnackBarStatus(false, 'Houve um erro ao sair da atividade')
+    }
+  }
+
   return (
     <MyActivitiesContainer>
       <MyActivitiesHeader>
@@ -62,7 +97,8 @@ export function MyActivities({ navigation }: any) {
       </TitleContainer>
       <PastActivities>
         <CustomText type="h2">Atividades que estou organizando</CustomText>
-        {atividadesOrganizando !== undefined ? (
+        {atividadesOrganizando !== undefined &&
+        atividadesOrganizando.length > 0 ? (
           <PastActivityCardContainer
             horizontal={true}
             contentContainerStyle={{ gap: 20, paddingRight: 400 }}
@@ -73,6 +109,10 @@ export function MyActivities({ navigation }: any) {
                   key={idx}
                   activity={atividade.name}
                   mine={true}
+                  onPress={() =>
+                    navigation.push('detailedActivity', { id: atividade.id })
+                  }
+                  onPressDelete={() => deleteActivity(atividade.id)}
                 ></OtherActivityCard>
               )
             })}
@@ -100,77 +140,76 @@ export function MyActivities({ navigation }: any) {
 
       <MainContentContainer>
         <CustomText type="h2">Atividades Confirmadas</CustomText>
-
-        <ConfirmedActivitiesContainer>
-          <ActivityAndButtons>
-            <ActivityCard
-              check={true}
-              profissional={false}
-              activity="Caminhada em grupo"
-              organizer="Lucia"
-              distance={0.1}
-              quantity={8}
-            ></ActivityCard>
-            <CustomButton
-              text="Adicionar alarme para essa atividade"
-              textSize={14}
-              variantType="block"
-              color="blue"
-            />
-            <CustomButton
-              text="Cancelar presença"
-              textSize={14}
-              variantType="outline"
-              color="red"
-            />
-          </ActivityAndButtons>
-          <ActivityAndButtons>
-            <ActivityCard
-              check={true}
-              profissional={true}
-              activity="Aula de Pilates"
-              organizer="Bruno"
-              distance={1}
-              quantity={16}
-            ></ActivityCard>
-            <CustomButton
-              text="Adicionar alarme para essa atividade"
-              textSize={14}
-              variantType="block"
-              color="blue"
-            />
-            <CustomButton
-              text="Cancelar presença"
-              textSize={14}
-              variantType="outline"
-              color="red"
-            />
-          </ActivityAndButtons>
-        </ConfirmedActivitiesContainer>
+        {atividadesConfirmadas !== undefined &&
+        atividadesConfirmadas.length > 0 ? (
+          <ConfirmedActivitiesContainer>
+            {atividadesConfirmadas.map((atividade: any, idx: any) => {
+              return (
+                <ActivityAndButtons key={idx}>
+                  <ActivityCard
+                    check={true}
+                    profissional={false}
+                    activity={atividade.name}
+                    organizer={
+                      atividade.creator.nickname || atividade.creator.first_name
+                    }
+                    distance={0.1}
+                    quantity={8}
+                    onPress={() =>
+                      navigation.push('detailedActivity', { id: atividade.id })
+                    }
+                  ></ActivityCard>
+                  <CustomButton
+                    text="Cancelar presença"
+                    textSize={14}
+                    variantType="outline"
+                    color="red"
+                    onPress={() => leaveActivity(atividade.id)}
+                  />
+                </ActivityAndButtons>
+              )
+            })}
+          </ConfirmedActivitiesContainer>
+        ) : (
+          <NoResult>
+            <CustomText type="h2" style={{ color: theme.color.GREY }} centered>
+              Você não está participando de nenhuma atividade no momento
+            </CustomText>
+          </NoResult>
+        )}
       </MainContentContainer>
       <PastActivities>
         <CustomText type="h2">Atividades Passadas</CustomText>
-        <PastActivityCardContainer
-          horizontal={true}
-          contentContainerStyle={{ gap: 20, paddingRight: 200 }}
-        >
-          <OtherActivityCard
-            activity="Oficina de Tricô"
-            check={true}
-            organizer="Lúcia"
-          ></OtherActivityCard>
-          <OtherActivityCard
-            activity="Jogo de Baralho"
-            check={true}
-            organizer="Maria"
-          ></OtherActivityCard>
-          <OtherActivityCard
-            activity="Campeonato de Dominó"
-            check={true}
-            organizer="Roberto"
-          ></OtherActivityCard>
-        </PastActivityCardContainer>
+        {atividadesPassadas !== undefined && atividadesPassadas.length > 0 ? (
+          <PastActivityCardContainer
+            horizontal={true}
+            contentContainerStyle={{ gap: 20, paddingRight: 200 }}
+          >
+            {atividadesPassadas.map((atividade: any, idx: any) => {
+              return (
+                <OtherActivityCard
+                  key={idx}
+                  activity={atividade.name}
+                  check={true}
+                  organizer={atividade.creator.first_name}
+                  navigation={navigation}
+                  id={atividade.id}
+                  onPress={() =>
+                    navigation.push('detailedActivity', { id: atividade.id })
+                  }
+                ></OtherActivityCard>
+              )
+            })}
+          </PastActivityCardContainer>
+        ) : (
+          <NoResult>
+            <CustomText type="h2" style={{ color: theme.color.GREY }} centered>
+              Você ainda não participou de nenhuma atividade
+            </CustomText>
+          </NoResult>
+        )}
       </PastActivities>
+      <CustomSnackBar />
     </MyActivitiesContainer>
   )
 }

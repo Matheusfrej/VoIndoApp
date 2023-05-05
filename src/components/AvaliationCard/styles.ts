@@ -2,8 +2,7 @@ import styled from 'styled-components/native'
 
 export const CardContainer = styled.View`
   width: 100%;
-  max-width: 300px;
-  min-width: 200px;
+  width: 300px;
   padding: 16px;
   border: 1px solid black;
   border-radius: 4px;

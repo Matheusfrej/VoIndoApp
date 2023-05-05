@@ -36,10 +36,6 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const [activity, setActivity] = useState<any>()
   const { setSnackBarStatus } = useActivities()
 
-  const goToAvaliate = () => {
-    navigation.push('avaliateActivity', id)
-  }
-
   useEffect(() => {
     const getActivityById = async () => {
       try {
@@ -52,6 +48,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
     }
 
     getActivityById()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   //  console.log(activity?.reviews)
@@ -301,14 +298,6 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                 </PersonWhoParticipated>
               </WhoParticipatedList>
             </WhoParticipated>
-
-            <CustomButton
-              variantType="large"
-              color="orange"
-              text="Avaliar"
-              textSize={16}
-              onPress={goToAvaliate}
-            ></CustomButton>
 
             <CustomButton
               variantType="large"

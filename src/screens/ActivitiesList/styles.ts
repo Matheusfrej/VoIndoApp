@@ -20,6 +20,7 @@ export const TextAndLink = styled.View`
 export const Title = styled.View`
   width: 80%;
   margin: auto;
+  margin-bottom: 40px;
 `
 
 export const FilterBar = styled.View`

@@ -39,6 +39,7 @@ export const ConfirmedActivitiesContainer = styled.View`
 
 export const ActivityAndButtons = styled.View`
   gap: 16px;
+  max-width: 95%;
 `
 
 export const PastActivities = styled.View`

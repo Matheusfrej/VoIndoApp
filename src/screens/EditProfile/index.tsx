@@ -55,6 +55,7 @@ export function EditProfile({ navigation, route }: any) {
     if (infos.birth_date !== null) {
       setDate(new Date(infos.birth_date))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getTags = async () => {
@@ -77,6 +78,7 @@ export function EditProfile({ navigation, route }: any) {
         first_name: firstName,
         last_name: lastName,
         birth_date: date.toISOString().split('T')[0],
+        tags: tagsSelected,
       }
       console.log(data)
 
@@ -87,7 +89,7 @@ export function EditProfile({ navigation, route }: any) {
       console.log(response.data)
       setSnackBarStatus(true, 'Perfil editado com sucesso!')
       setTimeout(() => {
-        navigation.push('home2')
+        navigation.push('profile', { id: infos.id })
       }, 3000)
     } catch (error) {
       console.log(error)
