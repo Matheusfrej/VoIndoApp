@@ -43,7 +43,7 @@ export function AskAdress({ navigation, route }: any) {
   const theme = useTheme()
   const { need, name, desc, max, tagsSelected } = route.params
 
-  const { local } = useActivities()
+  const { local, getLocalization } = useActivities()
   // console.log('no ask adress', tagsSelected)
 
   const [adress, setAdress] = useState('')
@@ -67,13 +67,20 @@ export function AskAdress({ navigation, route }: any) {
       setNoResult(false)
       // console.log('veio até essa parte')
 
-      // console.log('veio até aqui')
-
-      const lat = local._j.coords.latitude
-      const long = local._j.coords.longitude
+      console.log('veio até aqui')
+      let lat = 0
+      let lon = 0
+      if (local._j === null) {
+        const localaux = await getLocalization()
+        lat = localaux!.coords.latitude
+        lon = localaux!.coords.longitude
+      } else {
+        lat = local._j.coords.latitude
+        lon = local._j.coords.longitude
+      }
 
       const response = await api.get('/api/address/', {
-        params: { lat, lon: long, address: adr },
+        params: { lat, lon, address: adr },
       })
       console.log(response.data)
       if (typeof response.data === 'object' && response.data.length > 0) {
