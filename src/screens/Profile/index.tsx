@@ -38,6 +38,7 @@ export interface UserInfo {
   age: number
   total_participacoes: number
   total_atividades_organizadas: number
+  profile_image: string
 }
 
 export function Profile({ navigation, route }: ProfileProps) {
@@ -66,8 +67,8 @@ export function Profile({ navigation, route }: ProfileProps) {
   }
 
   useEffect(() => {
-    getUserId()
     getProfileInfos()
+    getUserId()
   }, [])
 
   return (
@@ -88,11 +89,20 @@ export function Profile({ navigation, route }: ProfileProps) {
         )}
       </ProfileContainerHeader>
       <PersonProfileContainer>
-        <Image
-          source={require('../../../assets/senhora.png')}
-          alt=""
-          style={{ width: 100, height: 100 }}
-        />
+        {infos?.profile_image !== undefined ? (
+          <Image
+            source={{ uri: infos.profile_image }}
+            alt=""
+            style={{ width: 100, height: 100, borderRadius: 20 }}
+          />
+        ) : (
+          <Image
+            source={require('../../../assets/NoProfilePic.png')}
+            alt=""
+            style={{ width: 100, height: 100, borderRadius: 20 }}
+          />
+        )}
+
         <CustomText
           type="h1"
           centered={true}
@@ -101,13 +111,23 @@ export function Profile({ navigation, route }: ProfileProps) {
           {infos?.first_name} {infos?.last_name}
         </CustomText>
         <PersonSubtitle>
-          <CustomText
-            type="subtitle"
-            centered={true}
-            style={{ color: theme.color['BLACK-2'] }}
-          >
-            {infos?.age} anos
-          </CustomText>
+          {infos?.age !== undefined && infos?.age > 0 ? (
+            <CustomText
+              type="subtitle"
+              centered={true}
+              style={{ color: theme.color['BLACK-2'] }}
+            >
+              {infos?.age} anos
+            </CustomText>
+          ) : (
+            <CustomText
+              type="subtitle"
+              centered={true}
+              style={{ color: theme.color['BLACK-2'] }}
+            >
+              Idade não informada
+            </CustomText>
+          )}
         </PersonSubtitle>
         <Identity>
           <CustomText type="subtitle" style={{ fontSize: 20 }}>
