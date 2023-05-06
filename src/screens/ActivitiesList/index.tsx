@@ -81,6 +81,7 @@ export function ActivitiesList({ navigation, route }: any) {
                   organizer={
                     activity?.creator?.nickname || activity?.creator?.first_name
                   }
+                  paid={activity.price?.toString() !== '0.00'}
                   onPress={() => {
                     if (activity.id !== undefined) {
                       navigateToDetailedActivity(activity.id)
@@ -105,6 +106,7 @@ export function ActivitiesList({ navigation, route }: any) {
                   organizer={
                     activity?.creator?.nickname || activity?.creator?.first_name
                   }
+                  paid={activity.price?.toString() !== '0.00'}
                   onPress={() => {
                     if (activity.id !== undefined) {
                       navigateToDetailedActivity(activity.id)

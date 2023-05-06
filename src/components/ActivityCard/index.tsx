@@ -6,9 +6,12 @@ import {
   CardFooterContainer,
   CardFooterSectionContainer,
   CardSectionContainer,
+  MoneyAndQuantity,
   OrganizedBy,
   ProfessionalText,
 } from './styles'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
+import { useTheme } from 'styled-components'
 
 interface ActivityCardProps {
   check?: boolean
@@ -18,6 +21,7 @@ interface ActivityCardProps {
   distance: number
   organizer?: string
   onPress?: any
+  paid?: boolean
 }
 
 export function ActivityCard({
@@ -28,7 +32,9 @@ export function ActivityCard({
   quantity = 0,
   distance = 0,
   organizer = '',
+  paid = false,
 }: ActivityCardProps) {
+  const theme = useTheme()
   return (
     <TouchableOpacity onPress={onPress}>
       <CardContainer>
@@ -42,14 +48,29 @@ export function ActivityCard({
               />
             )}
           </ActivityName>
+          {paid && (
+            <MoneyAndQuantity>
+              {paid && (
+                <FontAwesome name="money" color={theme.color.OK} size={24} />
+              )}
+              <ActivityName>
+                <Image source={require('../../../assets/user.png')} alt="" />
 
-          <ActivityName>
-            <Image source={require('../../../assets/user.png')} alt="" />
+                <CustomText type="body">
+                  {quantity === -1 ? 'Sem limites' : quantity}
+                </CustomText>
+              </ActivityName>
+            </MoneyAndQuantity>
+          )}
+          {!paid && (
+            <ActivityName>
+              <Image source={require('../../../assets/user.png')} alt="" />
 
-            <CustomText type="body">
-              {quantity === -1 ? 'Sem limites' : quantity}
-            </CustomText>
-          </ActivityName>
+              <CustomText type="body">
+                {quantity === -1 ? 'Sem limites' : quantity}
+              </CustomText>
+            </ActivityName>
+          )}
         </CardSectionContainer>
 
         <CardFooterContainer>
@@ -76,7 +97,7 @@ export function ActivityCard({
             <ProfessionalText>
               <CustomText type="body">
                 {''}
-                Oferecido por profissional{''}
+                Oferecida por profissional{''}
               </CustomText>
             </ProfessionalText>
           )}

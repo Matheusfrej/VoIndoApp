@@ -40,7 +40,7 @@ export const ActivitiesContainer = styled.ScrollView`
 export const NewView = styled.View`
   margin: 0 auto;
   height: 100%;
-  max-width: 95%;
+  max-width: 90%;
 `
 
 export const AcitivitiesTextInput = styled.TextInput`

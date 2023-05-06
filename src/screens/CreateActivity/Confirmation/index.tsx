@@ -19,8 +19,17 @@ import { Tag } from '../../../components/Tag'
 import { CustomSnackBar } from '../../../components/CustomSnackBar'
 
 export function Confirm({ navigation, route }: any) {
-  const { need, name, desc, max, adr, latitude, longitude, tagsSelected } =
-    route.params
+  const {
+    need,
+    name,
+    desc,
+    max,
+    adr,
+    latitude,
+    longitude,
+    tagsSelected,
+    price,
+  } = route.params
   const theme = useTheme()
   const { activityOrganizationDate, setSnackBarStatus } = useActivities()
   // console.log('chegou no confirmation', tagsSelected)
@@ -35,19 +44,38 @@ export function Confirm({ navigation, route }: any) {
     latitude: number,
     longitude: number,
     tagsSelected: TagType[],
+    price: string,
   ) => {
-    const newActivity: any = {
-      name,
-      address: adr,
-      description: desc,
-      participants_limit: max,
-      professional_required: need,
-      latitude,
-      longitude,
-      ocorrencias: [{ data_time: date.toJSON() }],
-      tags: tagsSelected,
-      comorbidities: [],
+    let newActivity: any
+    if (price === '') {
+      newActivity = {
+        name,
+        address: adr,
+        description: desc,
+        participants_limit: max,
+        professional_required: need,
+        latitude,
+        longitude,
+        ocorrencias: [{ data_time: date.toJSON() }],
+        tags: tagsSelected,
+        comorbidities: [],
+      }
+    } else {
+      newActivity = {
+        name,
+        address: adr,
+        description: desc,
+        participants_limit: max,
+        professional_required: need,
+        latitude,
+        longitude,
+        ocorrencias: [{ data_time: date.toJSON() }],
+        tags: tagsSelected,
+        comorbidities: [],
+        price,
+      }
     }
+
     try {
       const headers = {
         'Content-Type': 'application/json',
@@ -151,6 +179,16 @@ export function Confirm({ navigation, route }: any) {
 
         <Pair>
           <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+            Preço:
+          </CustomText>
+
+          <CustomText type="body">
+            {price === '' ? 'Grátis' : `R$ ${price.replace('.', ',')}`}
+          </CustomText>
+        </Pair>
+
+        <Pair>
+          <CustomText type="h3" style={{ fontWeight: 'bold' }}>
             Endereço:
           </CustomText>
 
@@ -190,6 +228,7 @@ export function Confirm({ navigation, route }: any) {
                 latitude,
                 longitude,
                 tagsSelected,
+                price,
               )
               // console.log(need, name, desc, adr, date, max, latitude, longitude)
             }}

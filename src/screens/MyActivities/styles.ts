@@ -28,6 +28,7 @@ export const TitleContainer = styled.View`
 
 export const MainContentContainer = styled.View`
   margin: auto;
+  margin-left: 24px;
   gap: 20px;
   margin-top: 40px;
 `

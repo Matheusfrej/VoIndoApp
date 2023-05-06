@@ -101,7 +101,7 @@ export function MyActivities({ navigation }: any) {
         atividadesOrganizando.length > 0 ? (
           <PastActivityCardContainer
             horizontal={true}
-            contentContainerStyle={{ gap: 20, paddingRight: 400 }}
+            contentContainerStyle={{ gap: 20, paddingRight: 700 }}
           >
             {atividadesOrganizando.map((atividade: any, idx: any) => {
               return (
@@ -153,6 +153,7 @@ export function MyActivities({ navigation }: any) {
                     organizer={
                       atividade.creator.nickname || atividade.creator.first_name
                     }
+                    paid={atividade.price.toString() !== '0.00'}
                     distance={0.1}
                     quantity={8}
                     onPress={() =>
