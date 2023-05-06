@@ -2,6 +2,7 @@ import { BackButton } from '../../components/BackButton'
 import { CustomButton } from '../../components/CustomButton'
 import { Image } from 'react-native'
 import {
+  Confirmed,
   Identity,
   LevelContainer,
   MainLevelContent,
@@ -71,7 +72,6 @@ export function Profile({ navigation, route }: ProfileProps) {
   useEffect(() => {
     getProfileInfos()
     getUserId()
-    console.log(infos?.profile_image)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -151,7 +151,7 @@ export function Profile({ navigation, route }: ProfileProps) {
             </>
           )}
           {infos?.is_verified && (
-            <>
+            <Confirmed>
               <CustomText type="subtitle" style={{ fontSize: 20 }}>
                 Identidade confirmada
               </CustomText>
@@ -159,7 +159,7 @@ export function Profile({ navigation, route }: ProfileProps) {
                 source={require('../../../assets/verificado.png')}
                 alt=""
               />
-            </>
+            </Confirmed>
           )}
         </Identity>
 
