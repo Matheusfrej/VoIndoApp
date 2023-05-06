@@ -43,7 +43,14 @@ export function OtherActivityCard({
         {!mine && (
           <HeaderTitle>
             <CustomText type="body" centered={true}>
-              Organizado por {organizer}
+              Organizado por{' '}
+              <CustomText
+                type="body"
+                centered={true}
+                style={{ fontWeight: 'bold' }}
+              >
+                {organizer}
+              </CustomText>
             </CustomText>
           </HeaderTitle>
         )}

@@ -191,7 +191,9 @@ export function MyActivities({ navigation }: any) {
                   key={idx}
                   activity={atividade.name}
                   check={true}
-                  organizer={atividade.creator.first_name}
+                  organizer={
+                    atividade.creator.nickname || atividade.creator.first_name
+                  }
                   navigation={navigation}
                   id={atividade.id}
                   onPress={() =>
