@@ -23,7 +23,7 @@ export const ActivityName = styled.View`
   flex-direction: row;
   gap: 8px;
   align-items: center;
-  max-width: 55%;
+  max-width: 45%;
 `
 
 export const CardFooterContainer = styled.View`

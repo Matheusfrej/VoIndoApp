@@ -11,7 +11,6 @@ import {
   Container,
   MyMapView,
   PersonWhoParticipated,
-  PersonWhoParticipatedAndPossibleCheck,
   Tags,
   Title,
   Where,
@@ -268,87 +267,48 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
               </CustomText>
               <WhoParticipatedList
                 horizontal={true}
-                contentContainerStyle={{ gap: 16, paddingRight: 20 }}
+                contentContainerStyle={{
+                  gap: 16,
+                  paddingRight: 20,
+                  marginTop: 10,
+                }}
               >
-                {activity.participantes_anteriores !== undefined &&
-                  activity.participantes_anteriores.length > 0 &&
+                {activity?.participantes_anteriores?.length > 0 &&
                   activity.participantes_anteriores.map(
                     (participante: any, idx: any) => {
-                      if (participante.is_verified) {
-                        console.log(participante.profile_image)
-
-                        return (
-                          <PersonWhoParticipatedAndPossibleCheck key={idx}>
+                      const key = `participante-${participante.id}-${idx}`
+                      const isVerified = participante.is_verified
+                      const imageSource = participante.profile_image
+                        ? { uri: participante.profile_image }
+                        : require('../../../assets/NoProfilePic.png')
+                      return (
+                        <PersonWhoParticipated
+                          key={key}
+                          onPress={() =>
+                            navigation.push('profile', {
+                              id: participante.id,
+                            })
+                          }
+                        >
+                          {isVerified && (
                             <Image
                               source={require('../../../assets/verificado.png')}
                               alt=""
-                              style={{ marginBottom: -16, zIndex: 1 }}
-                            />
-                            <PersonWhoParticipated
-                              onPress={() =>
-                                navigation.push('profile', {
-                                  id: participante.id,
-                                })
-                              }
-                            >
-                              {participante.profile_image !== undefined &&
-                              participante.profile_image !== null ? (
-                                <Image
-                                  source={{ uri: participante.profile_image }}
-                                  alt=""
-                                  style={{
-                                    width: 100,
-                                    height: 100,
-                                    borderRadius: 20,
-                                  }}
-                                />
-                              ) : (
-                                <Image
-                                  source={require('../../../assets/NoProfilePic.png')}
-                                  alt=""
-                                  style={{
-                                    width: 100,
-                                    height: 100,
-                                    borderRadius: 20,
-                                  }}
-                                />
-                              )}
-                              <CustomText type="body">
-                                {participante.nickname ||
-                                  participante.first_name}
-                              </CustomText>
-                            </PersonWhoParticipated>
-                          </PersonWhoParticipatedAndPossibleCheck>
-                        )
-                      }
-                      return (
-                        <PersonWhoParticipated
-                          key={idx}
-                          onPress={() =>
-                            navigation.push('profile', { id: participante.id })
-                          }
-                        >
-                          {participante.profile_image !== null ? (
-                            <Image
-                              source={{ uri: participante.profile_image }}
-                              alt=""
                               style={{
-                                width: 100,
-                                height: 100,
-                                borderRadius: 20,
-                              }}
-                            />
-                          ) : (
-                            <Image
-                              source={require('../../../assets/NoProfilePic.png')}
-                              alt=""
-                              style={{
-                                width: 100,
-                                height: 100,
-                                borderRadius: 20,
+                                marginBottom: -32,
+                                marginLeft: 'auto',
                               }}
                             />
                           )}
+                          <Image
+                            source={imageSource}
+                            alt=""
+                            style={{
+                              width: 100,
+                              height: 100,
+                              borderRadius: 1000,
+                            }}
+                          />
                           <CustomText type="body">
                             {participante.nickname || participante.first_name}
                           </CustomText>
@@ -380,85 +340,43 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                   horizontal={true}
                   contentContainerStyle={{ gap: 16, paddingRight: 20 }}
                 >
-                  {activity.participantes_atuais !== undefined &&
-                    activity.participantes_atuais.length > 0 &&
+                  {activity?.participantes_atuais?.length > 0 &&
                     activity.participantes_atuais.map(
                       (participante: any, idx: any) => {
-                        if (participante.is_verified) {
-                          return (
-                            <PersonWhoParticipatedAndPossibleCheck key={idx}>
-                              <Image
-                                source={require('../../../assets/verificado.png')}
-                                alt=""
-                                style={{ marginBottom: -16, zIndex: 1 }}
-                              />
-                              <PersonWhoParticipated
-                                onPress={() =>
-                                  navigation.push('profile', {
-                                    id: participante.id,
-                                  })
-                                }
-                              >
-                                {participante.profile_image !== undefined &&
-                                participante.profile_image !== null ? (
-                                  <Image
-                                    source={{ uri: participante.profile_image }}
-                                    alt=""
-                                    style={{
-                                      width: 100,
-                                      height: 100,
-                                      borderRadius: 20,
-                                    }}
-                                  />
-                                ) : (
-                                  <Image
-                                    source={require('../../../assets/NoProfilePic.png')}
-                                    alt=""
-                                    style={{
-                                      width: 100,
-                                      height: 100,
-                                      borderRadius: 20,
-                                    }}
-                                  />
-                                )}
-                                <CustomText type="body">
-                                  {participante.nickname ||
-                                    participante.first_name}
-                                </CustomText>
-                              </PersonWhoParticipated>
-                            </PersonWhoParticipatedAndPossibleCheck>
-                          )
-                        }
+                        const key = `participante-${participante.id}-${idx}`
+                        const isVerified = participante.is_verified
+                        const imageSource = participante.profile_image
+                          ? { uri: participante.profile_image }
+                          : require('../../../assets/NoProfilePic.png')
+
                         return (
                           <PersonWhoParticipated
-                            key={idx}
+                            key={key}
                             onPress={() =>
                               navigation.push('profile', {
                                 id: participante.id,
                               })
                             }
                           >
-                            {participante.profile_image !== null ? (
+                            {isVerified && (
                               <Image
-                                source={{ uri: participante.profile_image }}
+                                source={require('../../../assets/verificado.png')}
                                 alt=""
                                 style={{
-                                  width: 100,
-                                  height: 100,
-                                  borderRadius: 20,
-                                }}
-                              />
-                            ) : (
-                              <Image
-                                source={require('../../../assets/NoProfilePic.png')}
-                                alt=""
-                                style={{
-                                  width: 100,
-                                  height: 100,
-                                  borderRadius: 20,
+                                  marginBottom: -32,
+                                  marginLeft: 'auto',
                                 }}
                               />
                             )}
+                            <Image
+                              source={imageSource}
+                              alt=""
+                              style={{
+                                width: 100,
+                                height: 100,
+                                borderRadius: 1000,
+                              }}
+                            />
                             <CustomText type="body">
                               {participante.nickname || participante.first_name}
                             </CustomText>
