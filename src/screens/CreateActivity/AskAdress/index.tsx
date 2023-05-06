@@ -28,6 +28,7 @@ export function AskAdress({ navigation, route }: any) {
     latitude: number,
     longitude: number,
     tagsSelected: TagType[],
+    price: string,
   ) => {
     navigation.push('confirmation', {
       need,
@@ -38,10 +39,11 @@ export function AskAdress({ navigation, route }: any) {
       latitude,
       longitude,
       tagsSelected,
+      price,
     })
   }
   const theme = useTheme()
-  const { need, name, desc, max, tagsSelected } = route.params
+  const { need, name, desc, max, tagsSelected, price } = route.params
 
   const { local, getLocalization } = useActivities()
   // console.log('no ask adress', tagsSelected)
@@ -165,6 +167,7 @@ export function AskAdress({ navigation, route }: any) {
                       add.latitude,
                       add.longitude,
                       tagsSelected,
+                      price,
                     )
                   }}
                 ></AddressSugestion>

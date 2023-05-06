@@ -198,6 +198,30 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                 )}
             </Who>
 
+            <Who>
+              <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+                Quantidade máxima de participantes:
+              </CustomText>
+
+              <CustomText type="body">
+                {activity.participants_limit.toString() === '-1'
+                  ? 'Sem limites'
+                  : activity.participants_limit.toString()}
+              </CustomText>
+            </Who>
+
+            <Who>
+              <CustomText type="h3" style={{ fontWeight: 'bold' }}>
+                Preço:
+              </CustomText>
+
+              <CustomText type="body">
+                {activity.price.toString() === '0.00'
+                  ? 'Grátis'
+                  : `R$ ${activity.price.toString().replace('.', ',')}`}
+              </CustomText>
+            </Who>
+
             <Where>
               <CustomText type="span" style={{ fontWeight: 'bold' }}>
                 Onde acontece?

@@ -22,6 +22,7 @@ export function MoreInfos({ navigation, route }: any) {
 
   const theme = useTheme()
   const [date, setDate] = useState(new Date())
+  const [price, setPrice] = useState('')
   const [max, setMax] = useState('-1')
   const [showDate, setShowDate] = useState(false)
   const [showTime, setShowTime] = useState(false)
@@ -60,9 +61,20 @@ export function MoreInfos({ navigation, route }: any) {
     date: Date,
     max: string,
     tagsSelected: TagType[],
+    price: string,
   ) => {
+    price = price.replace(',', '.')
+    console.log(price)
+
     setActivityOrganizationDate(date)
-    navigation.push('askAddress', { need, name, desc, max, tagsSelected })
+    navigation.push('askAddress', {
+      need,
+      name,
+      desc,
+      max,
+      tagsSelected,
+      price,
+    })
   }
 
   const onChangeDate = (event: any, selectedDate: any) => {
@@ -159,11 +171,17 @@ export function MoreInfos({ navigation, route }: any) {
         </Button>
 
         <Pair>
-          <CustomText type="h3">Existe uma frequência?</CustomText>
+          <CustomText type="h3">
+            Qual é o preço para participar da atividade?
+          </CustomText>
+          <CustomText type="body" style={{ color: theme.color.GREY }}>
+            Caso a atividade seja de graça, não preencha este campo
+          </CustomText>
           <TextInput
-            placeholder={'Insira a frequência da atividade'}
-            selectionColor={'#000'}
-            placeholderTextColor={'#AAAAAA'}
+            placeholder="Insira o preço"
+            keyboardType="numeric"
+            onChangeText={(newPrice) => setPrice(newPrice)}
+            value={price}
           />
         </Pair>
 
@@ -192,7 +210,7 @@ export function MoreInfos({ navigation, route }: any) {
       <FinalButton>
         <CustomButton
           onPress={() => {
-            goToAskAddress(need, name, desc, date, max, tagsSelected)
+            goToAskAddress(need, name, desc, date, max, tagsSelected, price)
           }}
           variantType="block"
           text="Prosseguir"

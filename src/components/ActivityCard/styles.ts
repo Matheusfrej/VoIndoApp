@@ -31,9 +31,26 @@ export const CardFooterContainer = styled.View`
 `
 
 export const ProfessionalText = styled.View`
-  max-width: 95%;
+  max-width: 90%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const PriceText = styled.View`
+  width: 90%;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 export const OrganizedBy = styled.View`
   max-width: 50%;
+`
+
+export const MoneyAndQuantity = styled.View`
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px;
 `
