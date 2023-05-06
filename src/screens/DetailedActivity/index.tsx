@@ -113,7 +113,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           <Container>
             <Title>
               <CustomText type="h2">{activity?.name}</CustomText>
-              {false && (
+              {activity.creator.is_verified && (
                 <Image
                   source={require('../../../assets/verificado.png')}
                   alt=""

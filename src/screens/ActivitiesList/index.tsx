@@ -86,6 +86,7 @@ export function ActivitiesList({ navigation, route }: any) {
                       navigateToDetailedActivity(activity.id)
                     }
                   }}
+                  check={activity?.creator?.is_verified}
                 />
               )
             })}

@@ -46,6 +46,7 @@ export interface ActivityType {
     first_name: string
     last_name: string
     birth_date: string
+    is_verified: boolean
   }
   organizers?: {
     id: string
@@ -66,6 +67,7 @@ export interface ActivityType {
   latitude: number
   longitude: number
   distance?: number
+  price?: number
   reviews?: {
     stars: number
     id: number
@@ -77,6 +79,7 @@ export interface ActivityType {
       id: number
       last_name: string
       nickname: string
+      is_verified: boolean
     }
   }[]
 }

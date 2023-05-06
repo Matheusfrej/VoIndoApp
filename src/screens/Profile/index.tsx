@@ -38,6 +38,7 @@ export interface UserInfo {
   total_participacoes: number
   total_atividades_organizadas: number
   profile_image: string
+  is_verified: boolean
 }
 
 export function Profile({ navigation, route }: ProfileProps) {
@@ -134,16 +135,31 @@ export function Profile({ navigation, route }: ProfileProps) {
           )}
         </PersonSubtitle>
         <Identity>
-          <CustomText type="subtitle" style={{ fontSize: 20 }}>
-            Identidade não confirmada
-          </CustomText>
-          {mine && (
-            <CustomButton
-              text="Confirmar identidade"
-              color="blue"
-              variantType="default"
-              onPress={() => navigation.push('confirmIdentity')}
-            />
+          {!infos?.is_verified && (
+            <>
+              <CustomText type="subtitle" style={{ fontSize: 20 }}>
+                Identidade não confirmada
+              </CustomText>
+              {mine && (
+                <CustomButton
+                  text="Confirmar identidade"
+                  color="blue"
+                  variantType="default"
+                  onPress={() => navigation.push('confirmIdentity')}
+                />
+              )}
+            </>
+          )}
+          {infos?.is_verified && (
+            <>
+              <CustomText type="subtitle" style={{ fontSize: 20 }}>
+                Identidade confirmada
+              </CustomText>
+              <Image
+                source={require('../../../assets/verificado.png')}
+                alt=""
+              />
+            </>
           )}
         </Identity>
 
