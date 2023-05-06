@@ -70,6 +70,8 @@ export function Profile({ navigation, route }: ProfileProps) {
   useEffect(() => {
     getProfileInfos()
     getUserId()
+    console.log(infos?.profile_image)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -140,6 +142,7 @@ export function Profile({ navigation, route }: ProfileProps) {
               text="Confirmar identidade"
               color="blue"
               variantType="default"
+              onPress={() => navigation.push('confirmIdentity')}
             />
           )}
         </Identity>
@@ -171,12 +174,6 @@ export function Profile({ navigation, route }: ProfileProps) {
               </CustomText>
             </QuantityAndText>
           </MainLevelContent>
-          <CustomText
-            type="body"
-            style={{ color: theme.color.GREY, paddingRight: 30 }}
-          >
-            Você pode aumentar seu nível participando ou organizando atividades
-          </CustomText>
         </LevelContainer>
         <PreferencesProfileContainer>
           <CustomText type="h3">Preferências</CustomText>

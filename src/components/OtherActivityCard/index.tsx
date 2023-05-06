@@ -59,7 +59,7 @@ export function OtherActivityCard({
         {!mine ? (
           <CustomButton
             textSize={14}
-            text="Avaliar atividade"
+            text="Avaliar"
             variantType="block"
             color="blue"
             onPress={() => navigation.push('avaliateActivity', id)}
