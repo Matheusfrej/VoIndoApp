@@ -59,6 +59,8 @@ export function Profile({ navigation, route }: ProfileProps) {
   const getProfileInfos = async () => {
     try {
       const response = await api.get(`api/users/detail/${id}`)
+      console.log(response.data)
+
       setInfos(response.data)
     } catch (error) {
       console.log(error)
@@ -89,7 +91,7 @@ export function Profile({ navigation, route }: ProfileProps) {
         )}
       </ProfileContainerHeader>
       <PersonProfileContainer>
-        {infos?.profile_image !== undefined ? (
+        {infos?.profile_image !== undefined && infos?.profile_image !== null ? (
           <Image
             source={{ uri: infos.profile_image }}
             alt=""

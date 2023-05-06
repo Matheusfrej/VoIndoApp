@@ -140,7 +140,9 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
               color="blue"
               text="Visualizar perfil do responsável"
               textSize={16}
-              onPress={() => navigation.push('profile', { mine: false })}
+              onPress={() =>
+                navigation.push('profile', { id: activity.creator.id })
+              }
             ></CustomButton>
 
             <Who>
