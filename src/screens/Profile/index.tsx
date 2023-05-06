@@ -2,6 +2,7 @@ import { BackButton } from '../../components/BackButton'
 import { CustomButton } from '../../components/CustomButton'
 import { Image } from 'react-native'
 import {
+  Confirmed,
   Identity,
   LevelContainer,
   MainLevelContent,
@@ -38,6 +39,7 @@ export interface UserInfo {
   total_participacoes: number
   total_atividades_organizadas: number
   profile_image: string
+  is_verified: boolean
 }
 
 export function Profile({ navigation, route }: ProfileProps) {
@@ -59,6 +61,8 @@ export function Profile({ navigation, route }: ProfileProps) {
   const getProfileInfos = async () => {
     try {
       const response = await api.get(`api/users/detail/${id}`)
+      console.log(response.data)
+
       setInfos(response.data)
     } catch (error) {
       console.log(error)
@@ -68,6 +72,7 @@ export function Profile({ navigation, route }: ProfileProps) {
   useEffect(() => {
     getProfileInfos()
     getUserId()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -89,7 +94,7 @@ export function Profile({ navigation, route }: ProfileProps) {
         )}
       </ProfileContainerHeader>
       <PersonProfileContainer>
-        {infos?.profile_image !== undefined ? (
+        {infos?.profile_image !== undefined && infos?.profile_image !== null ? (
           <Image
             source={{ uri: infos.profile_image }}
             alt=""
@@ -130,15 +135,31 @@ export function Profile({ navigation, route }: ProfileProps) {
           )}
         </PersonSubtitle>
         <Identity>
-          <CustomText type="subtitle" style={{ fontSize: 20 }}>
-            Identidade não confirmada
-          </CustomText>
-          {mine && (
-            <CustomButton
-              text="Confirmar identidade"
-              color="blue"
-              variantType="default"
-            />
+          {!infos?.is_verified && (
+            <>
+              <CustomText type="subtitle" style={{ fontSize: 20 }}>
+                Identidade não confirmada
+              </CustomText>
+              {mine && (
+                <CustomButton
+                  text="Confirmar identidade"
+                  color="blue"
+                  variantType="default"
+                  onPress={() => navigation.push('confirmIdentity')}
+                />
+              )}
+            </>
+          )}
+          {infos?.is_verified && (
+            <Confirmed>
+              <CustomText type="subtitle" style={{ fontSize: 20 }}>
+                Identidade confirmada
+              </CustomText>
+              <Image
+                source={require('../../../assets/verificado.png')}
+                alt=""
+              />
+            </Confirmed>
           )}
         </Identity>
 
@@ -169,12 +190,6 @@ export function Profile({ navigation, route }: ProfileProps) {
               </CustomText>
             </QuantityAndText>
           </MainLevelContent>
-          <CustomText
-            type="body"
-            style={{ color: theme.color.GREY, paddingRight: 30 }}
-          >
-            Você pode aumentar seu nível participando ou organizando atividades
-          </CustomText>
         </LevelContainer>
         <PreferencesProfileContainer>
           <CustomText type="h3">Preferências</CustomText>

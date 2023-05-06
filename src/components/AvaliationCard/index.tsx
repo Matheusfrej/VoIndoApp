@@ -32,7 +32,7 @@ export function AvaliationCard({
         const response = await api.get(`api/users/detail/${idOfWhoDid}`)
         console.log(response.data)
 
-        setName(response.data.first_name)
+        setName(response.data.nickname || response.data.first_name)
       } catch (error) {
         console.log(error)
       }

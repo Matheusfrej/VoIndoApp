@@ -43,7 +43,14 @@ export function OtherActivityCard({
         {!mine && (
           <HeaderTitle>
             <CustomText type="body" centered={true}>
-              Organizado por {organizer}
+              Organizado por{' '}
+              <CustomText
+                type="body"
+                centered={true}
+                style={{ fontWeight: 'bold' }}
+              >
+                {organizer}
+              </CustomText>
             </CustomText>
           </HeaderTitle>
         )}
@@ -52,7 +59,7 @@ export function OtherActivityCard({
         {!mine ? (
           <CustomButton
             textSize={14}
-            text="Avaliar atividade"
+            text="Avaliar"
             variantType="block"
             color="blue"
             onPress={() => navigation.push('avaliateActivity', id)}

@@ -18,6 +18,7 @@ import { EditProfile } from '../screens/EditProfile'
 import { AskAdress } from '../screens/CreateActivity/AskAdress'
 import { Confirm } from '../screens/CreateActivity/Confirmation'
 import { AvaliateActivity } from '../screens/AvaliateActivity'
+import { ConfirmIdentity } from '../screens/ConfirmIdentity'
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
@@ -47,10 +48,8 @@ export function StackRoutes() {
       <Screen name="confirmation" component={Confirm} />
 
       <Screen name="avaliateActivity" component={AvaliateActivity} />
-
+      <Screen name="confirmIdentity" component={ConfirmIdentity} />
       {/* <Screen name="searchActivities" component={SearchActivities} /> */}
-
-
     </Navigator>
   )
 }

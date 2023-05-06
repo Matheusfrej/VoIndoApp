@@ -86,6 +86,7 @@ export function ActivitiesList({ navigation, route }: any) {
                       navigateToDetailedActivity(activity.id)
                     }
                   }}
+                  check={activity?.creator?.is_verified}
                 />
               )
             })}
@@ -100,6 +101,7 @@ export function ActivitiesList({ navigation, route }: any) {
                   distance={activity.distance!}
                   quantity={Number(activity.participants_limit)}
                   profissional={activity.professional_required}
+                  check={activity?.creator?.is_verified}
                   organizer={
                     activity?.creator?.nickname || activity?.creator?.first_name
                   }

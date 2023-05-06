@@ -37,16 +37,29 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
   const { id } = route.params
   const [activity, setActivity] = useState<any>()
   const { setSnackBarStatus } = useActivities()
+  const [isUserOrganizer, setIsUserOrganizer] = useState(false)
   const theme = useTheme()
 
   useEffect(() => {
     const getActivityById = async () => {
       try {
         const response = await api.get(`/api/atividades/detail/${id}`)
-        console.log(response.data)
         setActivity(response.data)
+        getUserId(response.data.creator.id)
       } catch (error) {
         console.log('deu erro')
+      }
+    }
+
+    const getUserId = async (idCreator: number) => {
+      try {
+        const response = await api.get('/api/users/get-my-id/')
+
+        if (idCreator === response.data.id) {
+          setIsUserOrganizer(true)
+        }
+      } catch (error) {
+        console.log(error)
       }
     }
 
@@ -64,6 +77,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
       }
       // console.log(newActivity)
 
+      // eslint-disable-next-line no-unused-vars
       const response = await api.post(
         `/api/atividades/entrar-atividade/${activity.id}`,
         {
@@ -71,7 +85,6 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           headers,
         },
       )
-      console.log(response.data)
       setSnackBarStatus(true, 'Você se cadastrou na atividade com sucesso!')
       // console.log(response.data)
       setTimeout(() => {
@@ -102,7 +115,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
           <Container>
             <Title>
               <CustomText type="h2">{activity?.name}</CustomText>
-              {false && (
+              {activity.creator.is_verified && (
                 <Image
                   source={require('../../../assets/verificado.png')}
                   alt=""
@@ -140,7 +153,9 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
               color="blue"
               text="Visualizar perfil do responsável"
               textSize={16}
-              onPress={() => navigation.push('profile', { mine: false })}
+              onPress={() =>
+                navigation.push('profile', { id: activity.creator.id })
+              }
             ></CustomButton>
 
             <Who>
@@ -255,84 +270,227 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
                 horizontal={true}
                 contentContainerStyle={{ gap: 16, paddingRight: 20 }}
               >
-                <PersonWhoParticipatedAndPossibleCheck>
-                  <Image
-                    source={require('../../../assets/verificado.png')}
-                    alt=""
-                    style={{ marginBottom: -16, zIndex: 1 }}
-                  />
-                  <PersonWhoParticipated
-                    onPress={() => navigation.push('profile', { mine: false })}
-                  >
-                    <Image
-                      source={require('../../../assets/senhor.png')}
-                      alt=""
-                    />
-                    <CustomText type="body">Mário</CustomText>
-                  </PersonWhoParticipated>
-                </PersonWhoParticipatedAndPossibleCheck>
-                <PersonWhoParticipated
-                  onPress={() => navigation.push('profile', { mine: false })}
-                >
-                  <Image
-                    source={require('../../../assets/senhora.png')}
-                    alt=""
-                  />
-                  <CustomText type="body">Rita</CustomText>
-                </PersonWhoParticipated>
-                <PersonWhoParticipated
-                  onPress={() => navigation.push('profile', { mine: false })}
-                >
-                  <Image
-                    source={require('../../../assets/senhor.png')}
-                    alt=""
-                  />
-                  <CustomText type="body">Mário</CustomText>
-                </PersonWhoParticipated>
-                <PersonWhoParticipatedAndPossibleCheck>
-                  <Image
-                    source={require('../../../assets/verificado.png')}
-                    alt=""
-                    style={{ marginBottom: -16, zIndex: 1 }}
-                  />
-                  <PersonWhoParticipated
-                    onPress={() => navigation.push('profile', { mine: false })}
-                  >
-                    <Image
-                      source={require('../../../assets/senhora.png')}
-                      alt=""
-                    />
-                    <CustomText type="body">Rita</CustomText>
-                  </PersonWhoParticipated>
-                </PersonWhoParticipatedAndPossibleCheck>
-                <PersonWhoParticipated
-                  onPress={() => navigation.push('profile', { mine: false })}
-                >
-                  <Image
-                    source={require('../../../assets/senhor.png')}
-                    alt=""
-                  />
-                  <CustomText type="body">Mário</CustomText>
-                </PersonWhoParticipated>
-                <PersonWhoParticipated
-                  onPress={() => navigation.push('profile', { mine: false })}
-                >
-                  <Image
-                    source={require('../../../assets/senhora.png')}
-                    alt=""
-                  />
-                  <CustomText type="body">Rita</CustomText>
-                </PersonWhoParticipated>
+                {activity.participantes_anteriores !== undefined &&
+                  activity.participantes_anteriores.length > 0 &&
+                  activity.participantes_anteriores.map(
+                    (participante: any, idx: any) => {
+                      if (participante.is_verified) {
+                        console.log(participante.profile_image)
+
+                        return (
+                          <PersonWhoParticipatedAndPossibleCheck key={idx}>
+                            <Image
+                              source={require('../../../assets/verificado.png')}
+                              alt=""
+                              style={{ marginBottom: -16, zIndex: 1 }}
+                            />
+                            <PersonWhoParticipated
+                              onPress={() =>
+                                navigation.push('profile', {
+                                  id: participante.id,
+                                })
+                              }
+                            >
+                              {participante.profile_image !== undefined &&
+                              participante.profile_image !== null ? (
+                                <Image
+                                  source={{ uri: participante.profile_image }}
+                                  alt=""
+                                  style={{
+                                    width: 100,
+                                    height: 100,
+                                    borderRadius: 20,
+                                  }}
+                                />
+                              ) : (
+                                <Image
+                                  source={require('../../../assets/NoProfilePic.png')}
+                                  alt=""
+                                  style={{
+                                    width: 100,
+                                    height: 100,
+                                    borderRadius: 20,
+                                  }}
+                                />
+                              )}
+                              <CustomText type="body">
+                                {participante.nickname ||
+                                  participante.first_name}
+                              </CustomText>
+                            </PersonWhoParticipated>
+                          </PersonWhoParticipatedAndPossibleCheck>
+                        )
+                      }
+                      return (
+                        <PersonWhoParticipated
+                          key={idx}
+                          onPress={() =>
+                            navigation.push('profile', { id: participante.id })
+                          }
+                        >
+                          {participante.profile_image !== null ? (
+                            <Image
+                              source={{ uri: participante.profile_image }}
+                              alt=""
+                              style={{
+                                width: 100,
+                                height: 100,
+                                borderRadius: 20,
+                              }}
+                            />
+                          ) : (
+                            <Image
+                              source={require('../../../assets/NoProfilePic.png')}
+                              alt=""
+                              style={{
+                                width: 100,
+                                height: 100,
+                                borderRadius: 20,
+                              }}
+                            />
+                          )}
+                          <CustomText type="body">
+                            {participante.nickname || participante.first_name}
+                          </CustomText>
+                        </PersonWhoParticipated>
+                      )
+                    },
+                  )}
               </WhoParticipatedList>
+              {activity.participantes_anteriores !== undefined &&
+                activity.participantes_anteriores.length === 0 && (
+                  <NoResult>
+                    <CustomText
+                      type="h2"
+                      style={{ color: theme.color.GREY }}
+                      centered
+                    >
+                      Essa atividade ainda não tem participantes anteriores
+                    </CustomText>
+                  </NoResult>
+                )}
             </WhoParticipated>
 
-            <CustomButton
-              variantType="large"
-              color="orange"
-              text="Participar"
-              textSize={16}
-              onPress={() => participateActivity()}
-            ></CustomButton>
+            {isUserOrganizer && (
+              <WhoParticipated>
+                <CustomText type="span" style={{ fontWeight: 'bold' }}>
+                  Participantes confirmados
+                </CustomText>
+                <WhoParticipatedList
+                  horizontal={true}
+                  contentContainerStyle={{ gap: 16, paddingRight: 20 }}
+                >
+                  {activity.participantes_atuais !== undefined &&
+                    activity.participantes_atuais.length > 0 &&
+                    activity.participantes_atuais.map(
+                      (participante: any, idx: any) => {
+                        if (participante.is_verified) {
+                          return (
+                            <PersonWhoParticipatedAndPossibleCheck key={idx}>
+                              <Image
+                                source={require('../../../assets/verificado.png')}
+                                alt=""
+                                style={{ marginBottom: -16, zIndex: 1 }}
+                              />
+                              <PersonWhoParticipated
+                                onPress={() =>
+                                  navigation.push('profile', {
+                                    id: participante.id,
+                                  })
+                                }
+                              >
+                                {participante.profile_image !== undefined &&
+                                participante.profile_image !== null ? (
+                                  <Image
+                                    source={{ uri: participante.profile_image }}
+                                    alt=""
+                                    style={{
+                                      width: 100,
+                                      height: 100,
+                                      borderRadius: 20,
+                                    }}
+                                  />
+                                ) : (
+                                  <Image
+                                    source={require('../../../assets/NoProfilePic.png')}
+                                    alt=""
+                                    style={{
+                                      width: 100,
+                                      height: 100,
+                                      borderRadius: 20,
+                                    }}
+                                  />
+                                )}
+                                <CustomText type="body">
+                                  {participante.nickname ||
+                                    participante.first_name}
+                                </CustomText>
+                              </PersonWhoParticipated>
+                            </PersonWhoParticipatedAndPossibleCheck>
+                          )
+                        }
+                        return (
+                          <PersonWhoParticipated
+                            key={idx}
+                            onPress={() =>
+                              navigation.push('profile', {
+                                id: participante.id,
+                              })
+                            }
+                          >
+                            {participante.profile_image !== null ? (
+                              <Image
+                                source={{ uri: participante.profile_image }}
+                                alt=""
+                                style={{
+                                  width: 100,
+                                  height: 100,
+                                  borderRadius: 20,
+                                }}
+                              />
+                            ) : (
+                              <Image
+                                source={require('../../../assets/NoProfilePic.png')}
+                                alt=""
+                                style={{
+                                  width: 100,
+                                  height: 100,
+                                  borderRadius: 20,
+                                }}
+                              />
+                            )}
+                            <CustomText type="body">
+                              {participante.nickname || participante.first_name}
+                            </CustomText>
+                          </PersonWhoParticipated>
+                        )
+                      },
+                    )}
+                </WhoParticipatedList>
+                {activity.participantes_atuais !== undefined &&
+                  activity.participantes_atuais.length === 0 && (
+                    <NoResult>
+                      <CustomText
+                        type="h2"
+                        style={{ color: theme.color.GREY }}
+                        centered
+                      >
+                        Essa atividade ainda não tem participantes confirmados
+                      </CustomText>
+                    </NoResult>
+                  )}
+              </WhoParticipated>
+            )}
+
+            {!isUserOrganizer && (
+              <CustomButton
+                variantType="large"
+                color="orange"
+                text="Participar"
+                textSize={16}
+                onPress={() => participateActivity()}
+              ></CustomButton>
+            )}
           </Container>
         </>
       )}

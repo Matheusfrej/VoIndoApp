@@ -147,8 +147,8 @@ export function MyActivities({ navigation }: any) {
               return (
                 <ActivityAndButtons key={idx}>
                   <ActivityCard
-                    check={true}
-                    profissional={false}
+                    check={atividade.creator.is_verified}
+                    profissional={atividade.professional_required}
                     activity={atividade.name}
                     organizer={
                       atividade.creator.nickname || atividade.creator.first_name
@@ -190,8 +190,10 @@ export function MyActivities({ navigation }: any) {
                 <OtherActivityCard
                   key={idx}
                   activity={atividade.name}
-                  check={true}
-                  organizer={atividade.creator.first_name}
+                  check={atividade.creator.is_verified}
+                  organizer={
+                    atividade.creator.nickname || atividade.creator.first_name
+                  }
                   navigation={navigation}
                   id={atividade.id}
                   onPress={() =>

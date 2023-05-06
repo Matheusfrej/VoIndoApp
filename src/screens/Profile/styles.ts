@@ -71,3 +71,9 @@ export const PreferencesList = styled.View`
   gap: 16px;
   flex-wrap: wrap;
 `
+
+export const Confirmed = styled.View`
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+`
