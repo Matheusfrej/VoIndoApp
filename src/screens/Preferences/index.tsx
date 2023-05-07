@@ -19,9 +19,7 @@ import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-
 export function Preferences({ navigation }: any) {
-
   const [infos, setInfos] = useState<UserInfo>()
 
   const navigateToActivitiesList = (ordered: boolean) => {
@@ -37,7 +35,7 @@ export function Preferences({ navigation }: any) {
     }
   }
 
-  const getProfileInfos = async (id:number) => {
+  const getProfileInfos = async (id: number) => {
     try {
       const response = await api.get(`api/users/detail/${id}`)
       setInfos(response.data)
@@ -46,7 +44,6 @@ export function Preferences({ navigation }: any) {
     }
   }
   useEffect(() => {
-
     getUserId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -74,7 +71,10 @@ export function Preferences({ navigation }: any) {
               text="Editar"
               color="blue"
               textSize={16}
-              onPress={() => {if(infos !== undefined) navigation.push('editProfile', { infos })}}
+              onPress={() => {
+                if (infos !== undefined)
+                  navigation.push('editProfile', { infos })
+              }}
             ></CustomButton>
           </InterestsHeader>
 

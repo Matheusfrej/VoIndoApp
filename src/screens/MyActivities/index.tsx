@@ -99,10 +99,7 @@ export function MyActivities({ navigation }: any) {
         <CustomText type="h2">Atividades que estou organizando</CustomText>
         {atividadesOrganizando !== undefined &&
         atividadesOrganizando.length > 0 ? (
-          <PastActivityCardContainer
-            horizontal={true}
-            contentContainerStyle={{ gap: 20, paddingRight: 700 }}
-          >
+          <PastActivityCardContainer horizontal={true}>
             {atividadesOrganizando.map((atividade: any, idx: any) => {
               return (
                 <OtherActivityCard
@@ -182,10 +179,7 @@ export function MyActivities({ navigation }: any) {
       <PastActivities>
         <CustomText type="h2">Atividades Passadas</CustomText>
         {atividadesPassadas !== undefined && atividadesPassadas.length > 0 ? (
-          <PastActivityCardContainer
-            horizontal={true}
-            contentContainerStyle={{ gap: 20, paddingRight: 200 }}
-          >
+          <PastActivityCardContainer horizontal={true}>
             {atividadesPassadas.map((atividade: any, idx: any) => {
               return (
                 <OtherActivityCard

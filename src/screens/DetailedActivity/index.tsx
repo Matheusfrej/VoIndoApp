@@ -28,7 +28,6 @@ import { useTheme } from 'styled-components'
 import { NoResult } from '../MyActivities/styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-
 interface DetailedActivityProps {
   route: any
   navigation: any
@@ -48,13 +47,13 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
         setActivity(response.data)
         getUserId(response.data.creator.id)
       } catch (error) {
-        console.log('deu erro')
+        console.log(error)
       }
     }
 
     const getUserId = async (idCreator: number) => {
       try {
-        let id = await AsyncStorage.getItem('myid') || '' 
+        const id = (await AsyncStorage.getItem('myid')) || ''
         if (id !== '' && idCreator === parseInt(id)) {
           setIsUserOrganizer(true)
         }
@@ -256,7 +255,7 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
               </CustomText>
               <AvaliationCards
                 horizontal={true}
-                contentContainerStyle={{ gap: 20, paddingRight: 300 }}
+                contentContainerStyle={{ gap: 20 }}
               >
                 {avaliations !== undefined &&
                   avaliations.length > 0 &&

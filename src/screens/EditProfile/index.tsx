@@ -80,7 +80,7 @@ export function EditProfile({ navigation, route }: any) {
         birth_date: date.toISOString().split('T')[0],
         tags: tagsSelected,
       }
-      console.log(data)
+      // console.log(data)
 
       const response = await api.put('/api/users/edit-profile/', data, {
         withCredentials: false,

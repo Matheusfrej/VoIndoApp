@@ -15,6 +15,7 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDropdown from 'react-native-select-dropdown'
 import { TagType, useActivities } from '../../../contexts/ActivitiesContext'
+import { Platform } from 'react-native'
 
 export function MoreInfos({ navigation, route }: any) {
   const { need, name, desc, tagsSelected } = route.params
@@ -64,7 +65,7 @@ export function MoreInfos({ navigation, route }: any) {
     price: string,
   ) => {
     price = price.replace(',', '.')
-    console.log(price)
+    // console.log(price)
 
     setActivityOrganizationDate(date)
     navigation.push('askAddress', {
@@ -179,7 +180,8 @@ export function MoreInfos({ navigation, route }: any) {
           </CustomText>
           <TextInput
             placeholder="Insira o preço"
-            keyboardType="numeric"
+            returnKeyType={Platform.OS === 'ios' ? 'done' : 'next'}
+            keyboardType={'numeric'}
             onChangeText={(newPrice) => setPrice(newPrice)}
             value={price}
           />

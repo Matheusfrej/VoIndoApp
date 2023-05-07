@@ -3,9 +3,7 @@ import { CustomButton } from '../../components/CustomButton'
 import { CustomText } from '../../components/CustomText'
 import { Container, Avatar, TextContainer, Buttons } from './styles'
 import { useEffect, useState } from 'react'
-import api from '../../services/api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
 
 export function Home2({ navigation }: any) {
   const [id, setId] = useState(0)
