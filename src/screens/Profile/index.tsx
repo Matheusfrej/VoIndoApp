@@ -22,7 +22,6 @@ import { useEffect, useState } from 'react'
 import { TagType } from '../../contexts/ActivitiesContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-
 interface ProfileProps {
   navigation: any
   route: any
@@ -63,7 +62,7 @@ export function Profile({ navigation, route }: ProfileProps) {
   const getProfileInfos = async () => {
     try {
       const response = await api.get(`api/users/detail/${id}`)
-      console.log(response.data)
+      // console.log(response.data)
 
       setInfos(response.data)
     } catch (error) {

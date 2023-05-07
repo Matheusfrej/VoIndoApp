@@ -30,7 +30,7 @@ export function AvaliationCard({
     const getProfileInfos = async () => {
       try {
         const response = await api.get(`api/users/detail/${idOfWhoDid}`)
-        console.log(response.data)
+        // console.log(response.data)
 
         setName(response.data.nickname || response.data.first_name)
       } catch (error) {

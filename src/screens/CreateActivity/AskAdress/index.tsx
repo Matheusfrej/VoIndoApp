@@ -69,7 +69,7 @@ export function AskAdress({ navigation, route }: any) {
       setNoResult(false)
       // console.log('veio até essa parte')
 
-      console.log('veio até aqui')
+      // console.log('veio até aqui')
       let lat = 0
       let lon = 0
       if (local._j === null) {
@@ -84,7 +84,7 @@ export function AskAdress({ navigation, route }: any) {
       const response = await api.get('/api/address/', {
         params: { lat, lon, address: adr },
       })
-      console.log(response.data)
+      // console.log(response.data)
       if (typeof response.data === 'object' && response.data.length > 0) {
         // console.log('entrou no if')
 
