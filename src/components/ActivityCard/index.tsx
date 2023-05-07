@@ -6,6 +6,7 @@ import {
   CardFooterContainer,
   CardFooterSectionContainer,
   CardSectionContainer,
+  Metros,
   MoneyAndQuantity,
   OrganizedBy,
   ProfessionalText,
@@ -88,9 +89,12 @@ export function ActivityCard({
             )}
 
             {distance < 1 && (
+              <Metros>
               <CustomText type="body">
-                {Math.round(distance * 1000)}m de distância
+                {Math.round(distance * 1000)}m de
               </CustomText>
+              <CustomText type="body">distância</CustomText>
+              </Metros>
             )}
           </CardFooterSectionContainer>
           {profissional && (

@@ -54,3 +54,6 @@ export const MoneyAndQuantity = styled.View`
   justify-content: flex-end;
   padding-right: 16px;
 `
+export const Metros = styled.View`
+
+`
