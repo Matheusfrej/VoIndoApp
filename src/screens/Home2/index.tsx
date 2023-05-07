@@ -4,12 +4,14 @@ import { CustomText } from '../../components/CustomText'
 import { Container, Avatar, TextContainer, Buttons } from './styles'
 import { useEffect, useState } from 'react'
 import api from '../../services/api'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 export function Home2({ navigation }: any) {
   const [id, setId] = useState(0)
 
   const goToPreferences = () => {
-    navigation.push('preferences', { id })
+    navigation.push('preferences')
   }
 
   const goToNeedProf = () => {
@@ -18,8 +20,8 @@ export function Home2({ navigation }: any) {
 
   const getUserId = async () => {
     try {
-      const response = await api.get('/api/users/get-my-id/')
-      setId(response.data.id)
+      const id = await AsyncStorage.getItem('myid')
+      setId(parseInt(id!))
     } catch (error) {
       console.log(error)
     }

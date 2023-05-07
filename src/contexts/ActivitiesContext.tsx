@@ -177,6 +177,8 @@ export function ActivitiesContextProvider({
           headers,
         })
         AsyncStorage.setItem('token', response.data.token)
+        AsyncStorage.setItem('myid', response.data.id.toString())
+        console.log(response.data.id)
         setIsLogged(true)
       } catch (error) {
         console.error(error)

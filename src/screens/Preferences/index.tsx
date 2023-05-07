@@ -17,28 +17,39 @@ import { BackButton } from '../../components/BackButton'
 import { UserInfo } from '../Profile'
 import { useEffect, useState } from 'react'
 import api from '../../services/api'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-export function Preferences({ navigation, route }: any) {
-  const { id } = route.params
+
+export function Preferences({ navigation }: any) {
+
   const [infos, setInfos] = useState<UserInfo>()
 
   const navigateToActivitiesList = (ordered: boolean) => {
     navigation.push('activitiesList', { ordered })
   }
 
-  useEffect(() => {
-    const getProfileInfos = async () => {
-      try {
-        const response = await api.get(`api/users/detail/${id}`)
-        setInfos(response.data)
-      } catch (error) {
-        console.log(error)
-      }
+  const getUserId = async () => {
+    try {
+      const id = await AsyncStorage.getItem('myid')
+      getProfileInfos(parseInt(id!))
+    } catch (error) {
+      console.log(error)
     }
+  }
 
-    getProfileInfos()
+  const getProfileInfos = async (id:number) => {
+    try {
+      const response = await api.get(`api/users/detail/${id}`)
+      setInfos(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+
+    getUserId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [infos])
+  }, [])
 
   return (
     <PreferencesContainer>
@@ -63,7 +74,7 @@ export function Preferences({ navigation, route }: any) {
               text="Editar"
               color="blue"
               textSize={16}
-              onPress={() => navigation.push('editProfile', { infos })}
+              onPress={() => {if(infos !== undefined) navigation.push('editProfile', { infos })}}
             ></CustomButton>
           </InterestsHeader>
 

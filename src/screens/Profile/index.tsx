@@ -20,6 +20,8 @@ import { useTheme } from 'styled-components'
 import api from '../../services/api'
 import { useEffect, useState } from 'react'
 import { TagType } from '../../contexts/ActivitiesContext'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 interface ProfileProps {
   navigation: any
@@ -51,8 +53,8 @@ export function Profile({ navigation, route }: ProfileProps) {
 
   const getUserId = async () => {
     try {
-      const response = await api.get('/api/users/get-my-id/')
-      if (id === response.data.id) setMine(true)
+      const myId = await AsyncStorage.getItem('myid')
+      if (id === parseInt(myId!)) setMine(true)
     } catch (error) {
       console.log(error)
     }

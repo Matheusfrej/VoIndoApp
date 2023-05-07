@@ -26,6 +26,8 @@ import { useActivities } from '../../contexts/ActivitiesContext'
 import { CustomSnackBar } from '../../components/CustomSnackBar'
 import { useTheme } from 'styled-components'
 import { NoResult } from '../MyActivities/styles'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 interface DetailedActivityProps {
   route: any
@@ -52,9 +54,8 @@ export function DetailedActivity({ route, navigation }: DetailedActivityProps) {
 
     const getUserId = async (idCreator: number) => {
       try {
-        const response = await api.get('/api/users/get-my-id/')
-
-        if (idCreator === response.data.id) {
+        let id = await AsyncStorage.getItem('myid') || '' 
+        if (id !== '' && idCreator === parseInt(id)) {
           setIsUserOrganizer(true)
         }
       } catch (error) {
