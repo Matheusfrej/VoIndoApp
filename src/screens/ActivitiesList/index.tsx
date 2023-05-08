@@ -56,7 +56,8 @@ export function ActivitiesList({ navigation, route }: any) {
         <TextAndLink>
           <Title>
             <CustomText type="h2" centered={true}>
-              Buscando atividades sugeridas para você
+              {!ordered && 'Atividades sugeridas para você'}
+              {ordered && 'Todas as atividades disponíveis'}
             </CustomText>
           </Title>
         </TextAndLink>
